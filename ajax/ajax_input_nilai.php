@@ -3,7 +3,7 @@ include '../config.php';
 
 $tanda = $_POST['tanda'];
 
-if ($tanda == 'status_dosen') {
+if ($tanda == 'status_dosen'){
     $nama_mhs = $_POST['nama_mhs'];
     $nama_dosen = $_POST['nama_dosen'];
     $sql = "SELECT * FROM data_mahasiswa WHERE mahasiswa LIKE '%$nama_mhs%' AND ketua_penguji LIKE '%$nama_dosen%'";
@@ -86,12 +86,15 @@ elseif($tanda == 'inputNilai'){
 
     $avg = number_format(floatval($totalSum / 7), 2);
 
+
     $sql ='SELECT * FROM `penilaian` WHERE mahasiswa = "'.$nama_mhs.' " ';
     $query = mysqli_query($conn, $sql);
     $row = mysqli_fetch_array($query);
     $response = array(
         'status' => 0,
-        'errorlog' => 'Nilai telah sukses di input'
+        'errorlog' => 'Nilai telah sukses di input',
+        'totalSum' => $totalSum,
+        'avg' => $avg
         
     );
     

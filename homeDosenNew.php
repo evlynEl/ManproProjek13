@@ -81,7 +81,7 @@
 
     <body style="background-color:#0B6977">
         <div id="header1">
-            <h1>ANDA ADALAH KETUA PENGUJI</h1>
+            <h1>WELCOME NAMA DOSEN!</h1>
         </div>
 
         <center>
