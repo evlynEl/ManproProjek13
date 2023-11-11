@@ -499,6 +499,7 @@ $nama_dosen = $_SESSION['username'];
             console.log(ketuaPenguji);
 
             if (ketuaPenguji == "?"){
+                console.log("Bukan Ketua Penguji")
                 $('#notKetuaPengujiModal').modal('show');
             }
             else{
