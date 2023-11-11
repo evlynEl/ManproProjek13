@@ -72,28 +72,17 @@
         <div id="header1">
             <h1>WELCOME NAMA DOSEN!</h1>
         </div>
-        <center>
-            <div class="col-md-4" id="judul">
-                <label for="judul_skripsi"><h5>Judul Skripsi</h5></label>
-                <select class="form-select" aria-label="Default select example" name="judul_skripsi">
-                    <option selected>Select</option>
-                    <option value="judul1">Judul 1</option>
-                    <option value="judul2">Judul 2</option>
-                </select>
-            </div>
-        </center>
         
         <center>
             <div class="container" id="content">
-                <div class="col">
+                <div class="col" onclick="window.location.href = 'historySidang.php';">
                     <center>
-                        <div class="col-lg-3 md-6" id="riwayat_sidang" onclick="location.href='#'">
+                        <div class="col-lg-3 md-6" id="riwayat_sidang">
                             <div id="title_rsidang"><p>RIWAYAT SIDANG</p> 
                                 <div class="row md-3" id="file"><img src="asset/image/file.png"></div>
                             </div>
                         </div>
-                    </center>
-                    
+                    </center>   
                 </div> 
             </div>
         </center>
