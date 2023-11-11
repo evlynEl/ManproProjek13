@@ -18,6 +18,12 @@
         font-weight: 700;
         line-height: normal;
     }
+    #header1 {
+    height: 15vh;
+    display: flex;
+    justify-content: center; /* Center horizontally */
+    align-items: center; /* Center vertically */
+    }
 
     #content {
         display: flex;
