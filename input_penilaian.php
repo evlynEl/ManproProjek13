@@ -298,7 +298,7 @@ if (isset($_POST['cek'])){
                 $("#sum_result").text("Nilai Akhir: " + totalSum);
                 $("#result1").parent().show();
 
-                $("#sum_avg_result").text("Nilai Akhir(Averaged): " + avg);
+                $("#sum_avg_result").text("Nilai Akhir(Averaged): " + avgSum);
                 $("#result2").parent().show();
             })
             $('#input').on('click', function(){
@@ -329,14 +329,17 @@ if (isset($_POST['cek'])){
                     },
                     success:function(respond){
                         var response = JSON.parse(respond);
-                        var avg = response.avg;
-                        var totalSum = response.totalSum;
+                        var avg = response['avg'];
+                        var totalSum = response['totalSum'];
+                        console.log(response);
 
-                $("#sum_result").text("Nilai Akhir: " + totalSum);
-                $("#result1").parent().show();
+                        $("#sum_result").text("Nilai Akhir: " + totalSum);
+                        $("#result1").parent().show();
 
                         $("#sum_avg_result").text("Nilai Akhir(Averaged): " + avg);
                         $("#result2").parent().show();
+                        
+                        alert(response['errorlog']);
                     },
                     error:function(){
                         alert("gagal");
