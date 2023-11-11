@@ -1,39 +1,109 @@
-<?php
-    include 'config.php';
-    
-    if(!isset($_SESSION['login'])){
-        header("Location: login.php");
-        exit;
-    }
-
-    if(isset($_SESSION['login'])){
-        if ($_SESSION['usertype'] === 'dosen'){
-            header("Location: homeDosen.php");
-            exit();
-        }
-        elseif ($_SESSION['usertype'] === 'ketua'){
-            header("Location: homeKetuaPenguji.php");
-            exit();
-        }
-    }
-?>
-
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="UTF-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="stylesheet" href="style.css">
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
-        <title>Home Admin</title>
-    </head>
-    <body style="background-color:#0B6977">
-        <div class="head">
-            <h1>WELCOME ADMIN!</h1>
-        </div>
-        
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+    <title>Home Admin</title>
+</head>
+<style type="text/css">
+    h1 {
+        color: #FFF;
+        text-align: center;
+        font-size: 3rem;
+        font-style: normal;
+        font-weight: 700;
+        line-height: normal;
+    }
+
+    #content {
+        display: flex;
+        background-color: white;
+        border-radius: 50px;
+        padding: 30px;
+        margin: 20px;
+        width: fit-content;
+        height: fit-content;
+    }
+
+    #percent,
+    #news {
+        max-width: 250px;
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+        padding: 20px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .col-md-3 {
+        background-color: #FFD600B2;
+        border: 1px solid #ddd;
+        border-radius: 15px;
+        position: relative;
+        font-size: 30px;
+        font-weight: bold;
+        color: white;
+        text-align: center;
+        text-shadow: 2px 2px grey;
+        margin: auto;
+    }
+
+    .col-md-3:hover {
+        background-color: white;
+        color: #FFD600;
+        text-shadow: 2px 2px black;
+        border-color: #FFD600;
+        border-width: 3px;
+    }
+
+    .row-sm-4 {
+        display: inline-block;
+        width: 100%;
+        height: 45%;
+        background-color: #FFD600B2;
+        border: 1px solid #ddd;
+        border-radius: 15px;
+        position: relative;
+        font-size: 30px;
+        font-weight: bold;
+        color: white;
+        text-shadow: 2px 2px grey;
+    }
+
+    .row-sm-4:hover {
+        background-color: white;
+        color: #FFD600;
+        text-shadow: 2px 2px black;
+        border-color: #FFD600;
+        border-width: 3px;
+    }
+
+    #vakasi,
+    #datamhs {
+        margin-bottom: 15px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    #title_bobot,
+    #title_berita {
+        display: flex;
+        padding-top: 5px;
+    }
+</style>
+
+<body style="background-color:#0B6977">
+    <div id="header1">
+        <h1>WELCOME ADMIN!</h1>
+    </div>
+    <center>
         <div class="container" id="content">
             <div class="row">
                 <div class="col-md-4">
