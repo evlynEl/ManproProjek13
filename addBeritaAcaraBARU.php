@@ -367,7 +367,7 @@ include 'config.php';
                             </div>
 
                             <br>
-    
+                            
                             <label for="" style="margin-top: 7px;"><h5>Nilai CPL (Averaged)</h5></label>
                             <div class="col-sm-12">
                                 <div class="table-responsive" id="tabel_cpl">
@@ -381,9 +381,6 @@ include 'config.php';
                                                 <th scope="col">5</th>
                                                 <th scope="col">6</th>
                                                 <th scope="col">7</th>
-                                                <th scope="col">8</th>
-                                                <th scope="col">9</th>
-                                                <th scope="col">10</th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -399,9 +396,6 @@ include 'config.php';
                                                 <td><input type="number" name="cpl5" id="cpl5"></td>
                                                 <td><input type="number" name="cpl6" id="cpl6"></td>
                                                 <td><input type="number" name="cpl7" id="cpl7"></td>
-                                                <td><input type="number" name="cpl8" id="cpl8"></td>
-                                                <td><input type="number" name="cpl9" id="cpl9"></td>
-                                                <td><input type="number" name="cpl10" id="cpl10"></td>
                                             </tr>
                                         </tbody>
                                     </table>
@@ -570,6 +564,34 @@ include 'config.php';
                     success:function(respond){
                         console.log(respond);
                         $("#judul_skripsi").val(respond);
+                    },
+                    error:function(){
+                        alert("gagal");
+                    }
+                })
+            })
+
+            $('#nama_mhs').on('change', function(){
+                var nama_mhs = $(this).val();
+                $.ajax({
+                    url: "ajax/ajax_data_mahasiswa.php",
+                    type: "POST",
+                    data:{
+                        tanda: "cariNilai",
+                        nama_mhs:nama_mhs               
+                    },
+                    success:function(respond){
+                        var response = JSON.parse(respond);
+                        console.log(response);
+                        
+                        $("#cpl1").val(response['cp_9_judul_abstrak']);
+                        $("#cpl2").val(response['cp_9_bab_1_2']);
+                        $("#cpl3").val(response['cp_4_bab_3_4_infor']);
+                        $("#cpl4").val(response['cp_7_bab_3_4_sib']);
+                        $("#cpl5").val(response['cp_9_buku']);
+                        $("#cpl6").val(response['cp_8_bab_5_kesimpulan']);
+                        $("#cpl7").val(response['cp_5_program']);
+
                     },
                     error:function(){
                         alert("gagal");

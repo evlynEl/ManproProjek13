@@ -4,6 +4,9 @@ include 'config.php';
 $fetch_kriteria = "SELECT * FROM kriteria_penilaian";
 $result_kriteria = mysqli_query($conn, $fetch_kriteria);
 
+$fetch_penilaian = "SELECT * FROM penilaian";
+$result_penilaian = mysqli_query($conn, $fetch_penilaian);
+
 if (isset($_POST['cek'])){
     if (isset($_POST['bab'])){
         $id_bab = $_POST['bab'];
@@ -195,7 +198,8 @@ if (isset($_POST['cek'])){
                             <div class="input-group-prepend">
                                 <label class="input-group-text" style="background-color: #0B6977; color: whitesmoke; font-weight: 700;" for="judul_dan_abstrak">CP 9</label>
                             </div>
-                            <input type="number" name="judul_dan_abstrak" id="judul_dan_abstrak" class="form-control" placeholder="Nilai" min="0">
+                            <input type="number" name="judul_dan_abstrak" id="judul_dan_abstrak" class="form-control" placeholder="Nilai" min="0" max="100" required>
+
                         </div>
                     </div>
 
@@ -205,7 +209,7 @@ if (isset($_POST['cek'])){
                             <div class="input-group-prepend">
                                 <label class="input-group-text" style="background-color: #0B6977; color: whitesmoke; font-weight: 700;" for="bab_1_2">CP 9</label>
                             </div>
-                            <input type="number" name="bab_1_2" id="bab_1_2" class="form-control" placeholder="Nilai" min="0">
+                            <input type="number" name="bab_1_2" id="bab_1_2" class="form-control" placeholder="Nilai" min="0"max="100" required >
                         </div>
                     </div>
 
@@ -215,7 +219,7 @@ if (isset($_POST['cek'])){
                             <div class="input-group-prepend">
                                 <label class="input-group-text" style="background-color: #0B6977; color: whitesmoke; font-weight: 700;" for="bab_3_4_infor">CP 4</label>
                             </div>
-                            <input type="number" name="bab_3_4_infor" id="bab_3_4_infor" class="form-control" placeholder="Nilai" min="0">
+                            <input type="number" name="bab_3_4_infor" id="bab_3_4_infor" class="form-control" placeholder="Nilai" min="0" max="100" required>
                         </div>
                     </div>
                 </div>
@@ -227,7 +231,7 @@ if (isset($_POST['cek'])){
                             <div class="input-group-prepend">
                                 <label class="input-group-text" style="background-color: #0B6977; color: whitesmoke; font-weight: 700;" for="bab_3_4_sib">CP 7</label>
                             </div>
-                            <input type="number" name="bab_3_4_sib" id="bab_3_4_sib" class="form-control" placeholder="Nilai" min="0">
+                            <input type="number" name="bab_3_4_sib" id="bab_3_4_sib" class="form-control" placeholder="Nilai" min="0" max="100" required>
                         </div>
                     </div>
 
@@ -237,7 +241,7 @@ if (isset($_POST['cek'])){
                             <div class="input-group-prepend">
                                 <label class="input-group-text" style="background-color: #0B6977; color: whitesmoke; font-weight: 700;" for="buku">CP 9</label>
                             </div>
-                            <input type="number" name="buku" id="buku" class="form-control" placeholder="Nilai" min="0">
+                            <input type="number" name="buku" id="buku" class="form-control" placeholder="Nilai" min="0" max="100" required>
                         </div>
                     </div>
 
@@ -247,7 +251,7 @@ if (isset($_POST['cek'])){
                             <div class="input-group-prepend">
                                 <label class="input-group-text" style="background-color: #0B6977; color: whitesmoke; font-weight: 700;" for="bab_5_kesimpulan">CP 8</label>
                             </div>
-                            <input type="number" name="bab_5_kesimpulan" id="bab_5_kesimpulan" class="form-control" placeholder="Nilai" min="0">
+                            <input type="number" name="bab_5_kesimpulan" id="bab_5_kesimpulan" class="form-control" placeholder="Nilai" min="0" max="100" required>
                         </div>
                     </div>
                 </div>
@@ -259,7 +263,7 @@ if (isset($_POST['cek'])){
                             <div class="input-group-prepend">
                                 <label class="input-group-text" style="background-color: #0B6977; color: whitesmoke; font-weight: 700;" for="program">CP 5</label>
                             </div>
-                            <input type="number" name="program" id="program" class="form-control" placeholder="Nilai" min="0">
+                            <input type="number" name="program" id="program" class="form-control" placeholder="Nilai" min="0" max="100" required>
                         </div>
                     </div>
 
@@ -281,7 +285,7 @@ if (isset($_POST['cek'])){
                         <button type="button" class="btn btn-outline-ocean" name="hitung" id="hitung">Hitung</button>
                     </div>
                     <div class="col-lg-4">
-                        <button type="submit" class="btn btn-outline-ocean" name="input" id="input">Input</button>
+                        <button type="button" class="btn btn-outline-ocean" name="input" id="input">Input</button>
                     </div>
                 </div>
             </form>
@@ -346,6 +350,46 @@ if (isset($_POST['cek'])){
                         alert("gagal");
                     }
                 })
+            })
+            $('#input').on('click', function(){
+                const nama_mhs =$("#nama_mhs").val();
+                const judul_dan_abstrakValue = parseFloat($("#judul_dan_abstrak").val()) || 0;
+                const bab_1_2 = parseFloat($("#bab_1_2").val()) || 0;
+                const bab_3_4_sibValue = parseFloat($("#bab_3_4_sib").val()) || 0;
+                const bab_3_4_inforValue = parseFloat($("#bab_3_4_infor").val()) || 0;
+                const bukuValue = parseFloat($("#buku").val()) || 0;
+                const bab_5_kesimpulanValue = parseFloat($("#bab_5_kesimpulan").val()) || 0;
+                const programValue = parseFloat($("#program").val()) || 0;
+                const nama_dosen = $("#dosen_penilai").val();
+
+                $.ajax({
+                    url: "ajax/ajax_input_nilai.php",
+                    type: "POST",
+                    data:{
+                        tanda: "inputNilai",
+                        nama_mhs:nama_mhs,
+                        judul_dan_abstrakValue:judul_dan_abstrakValue,
+                        bab_1_2: bab_1_2,
+                        bab_3_4_sibValue:bab_3_4_sibValue,
+                        bab_3_4_inforValue:bab_3_4_inforValue,
+                        bukuValue:bukuValue,
+                        bab_5_kesimpulanValue:bab_5_kesimpulanValue,
+                        programValue:programValue,
+                        nama_dosen:nama_dosen
+                    },
+                    success:function(respond){
+                        var response = JSON.parse(respond);
+                        console.log(respond);
+                        alert(response['errorlog'])
+                        if(response['status'] == 0){
+                            window.location.reload();
+                        }
+                    },
+                    error:function(){
+                        alert("gagal");
+                    }
+                })
+            
             })
 
             $('#nama_mhs').on('change', function(){
