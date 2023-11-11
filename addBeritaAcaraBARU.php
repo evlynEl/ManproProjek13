@@ -8,9 +8,13 @@ include 'config.php';
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
-    <script src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
+   <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <!-- Bootstrap CSS and JavaScript -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js"></script>
+
     <title>Add Berita Acara</title>
     <style>
         .checkbox-lg .form-check-input{
@@ -139,10 +143,12 @@ include 'config.php';
                 </div>
             </div>
     
-            <form action="" method="POST">   
+            <form action="" method="POST" id="form-submit">   
                 <div class="row mt-5">
                     <div class="col-lg-6">
+
                         <div class="form-group">
+
                             <div class="row">
                                 <div class="col-lg-10">
                                     <label for="ketuaPenguji"><h5>Ketua Penguji</h5></label>
@@ -298,16 +304,16 @@ include 'config.php';
                         </div>
                     </div>
                     
-                    </select>
                     <!-- table kanan -->
                     <div class="col-lg-6">
+
                         <div class="form-group">
+
                             <div class="row">
                                 <label for="nama_mhs"><h5>Mahasiswa</h5></label>
-                                    <select class="form-select" aria-label="Default select example" name="nama_mhs" id="nama_mhs">
-                                        <option>Pilih Mahasiswa</option>
-                                    </select>
-                    
+                                <select class="form-select" aria-label="Default select example" name="nama_mhs" id="nama_mhs">
+                                    <option value="Pilih Mahasiswa">Pilih Mahasiswa</option>
+                                </select>
                             </div>
                                 
                             <br>
@@ -427,6 +433,42 @@ include 'config.php';
                     </div>
                 </div>
             </form>
+            
+            <div class="modal fade" id="emptyField" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="staticBackdropLabel">Masih ada field yang kosong!</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <form action="" method="POST" enctype="multipart/form-data">
+                        <div class="modal-body ">
+                            <h5>Silakan isi field yang kosong!</h5>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-outline-red" data-bs-dismiss="modal">Close</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <div class="modal fade" id="successModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="staticBackdropLabel">Success!</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <form action="" method="POST" enctype="multipart/form-data">
+                        <div class="modal-body ">
+                            <h5>Berhasil Add Data!</h5>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-outline-red" data-bs-dismiss="modal">Close</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
         </div>
     </div>
 
@@ -503,7 +545,7 @@ include 'config.php';
                     type: "POST",
                     data:{
                         tanda: "Pembimbing_2",
-                        id:nama_mhs               
+                        id:nama_mhs
                     },
                     success:function(respond){
                         console.log(respond);
@@ -535,12 +577,7 @@ include 'config.php';
                 })
             })
 
-            $('#tanggalSidang').on('click', function(){
-                var tanggalSidang = $(this).val();
-                console.log(tanggalSidang);
-            })
-
-            $("#add").on("click", function() {
+            $("#add").on("click", function(event) {               
                 var judulSkripsi = $("#judul_skripsi").val();
                 var namaMhs = $("#nama_mhs").val();
                 var ketuaPenguji = $("#ketuaPenguji").val();
@@ -557,9 +594,12 @@ include 'config.php';
                 var status_pembimbing1 = "";
                 var status_pembimbing2 = "";
 
+                event.preventDefault();
+
                 if (konsentrasi == "Konsentrasi Skripsi" || ruangSidang == "Select" || namaMhs == "Pilih Mahasiswa"){
-                    event.preventDefault();
-                    alert("Mohon isi field yang kosong!");
+                    $("#emptyField").modal('show');
+                    return;
+                    // alert("Mohon isi field yang kosong!");
                 }
                 else{
                     if ($('#kehadiranKetuaPenguji').is(':checked')) {
@@ -600,16 +640,19 @@ include 'config.php';
                             catatanSidang: catatanSidang,
                             tanda: "Insert"
                         },
-                        success: function(respond) {
-                            $("#add").html(respond)
-                            console.log(respond);
+                        success: function(respond) {                           
+                            // console.log(respond);
                             var trim_respond = respond.trim();
+
                             if (trim_respond == "Berhasil Add!") {
-                                alert("Data added successfully!");
-                                // You can also perform other actions or redirect here if needed
-                            } else if (trim_respond == "bentrok") {
+                                console.log(trim_respond);
+                                $("#successModal").modal('show');
+                                // alert(respond);
+                            } 
+                            else if (trim_respond == "bentrok") {
                                 alert("Tanggal Sidang dan Ruang Sidang bertabrakan!.");
-                            } else {
+                            }
+                            else {
                                 alert("An unknown response was received: " + trim_respond);
                             }
                         },

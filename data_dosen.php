@@ -28,7 +28,7 @@ else{
 
     <style>
         #rectangle {
-        position: fixed;
+        /* position: fixed; */
         width: 100%;
         height: 100%;
         flex-shrink: 0;

@@ -68,8 +68,6 @@ elseif ($tanda == 'Insert'){
     $waktuSidang = $_POST['waktuSidang'];
     $pembimbing1 = trim($_POST['pembimbing1']);
     $pembimbing2 = trim($_POST['pembimbing2']);
-    // $timestamp = strtotime(str_replace('/', '-', $tanggalSidang));
-    // $newTime = date('Y-m-d', $timestamp);
     $concateTime = $tanggalSidang . ' ' . $waktuSidang;
     $formattedTime = date('Y-m-d H:i', strtotime($concateTime));
     $ruangSidang = $_POST['ruangSidang'];

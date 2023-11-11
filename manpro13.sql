@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 03 Nov 2023 pada 22.18
+-- Waktu pembuatan: 10 Nov 2023 pada 11.54
 -- Versi server: 10.4.25-MariaDB
 -- Versi PHP: 8.1.10
 
@@ -48,9 +48,7 @@ CREATE TABLE `berita_acara` (
 --
 
 INSERT INTO `berita_acara` (`id`, `nama_nrp`, `judul_skripsi`, `konsentrasi`, `tanggal_sidang`, `ruang_sidang`, `ketua_penguji`, `anggota_penguji`, `pembimbing_1`, `pembimbing_2`, `catatan`, `nilai_akhir`, `hasil_sidang`) VALUES
-(1, 'C14190054 FELICIA LAKSANA PUTRI', 'Aplikasi ARTPro Berbasis Android Dengan Menggunakan Metode Design Thinking untuk Membantu Mencari Asisten Rumah Tangga', 'AI', '2023-11-02 08:30:00.000000', 'P309', 'SILVIA ROSTIANINGSIH, S.Kom., M.MT.', 'ADI WIBOWO, S.T., M.T., Ph.D.', 'Dr. ANDREAS HANDOJO, S.T., M.MT.', 'ANITA NATHANIA PURBOWO, S.KOM.,M.MT.', '', NULL, NULL),
-(2, 'C14180127 TEDDY GHATSUNAGA', 'Perancangan E-Report System Pada PT Deus Digital Transformasi Universal.', 'Cyber Security', '2023-11-02 07:30:00.000000', 'P309', 'ADI WIBOWO, S.T., M.T., Ph.D.', 'STEPHANUS A. ANANDA, S.T., M.Sc. Ph.D.', 'ALEXANDER SETIAWAN, S.Kom., M.T.', 'LILY PUSPA DEWI, S.T., M.Kom.', '', NULL, NULL),
-(3, 'C14180197 FERDINANT PANGESTU', 'Aplikasi Sistem Informasi Manajemen Proyek Berbasis Website Pada PT. Sumur Batu', 'Game Development', '2023-11-02 07:00:00.000000', 'P309', 'SILVIA ROSTIANINGSIH, S.Kom., M.MT.', 'STEPHANUS A. ANANDA, S.T., M.Sc. Ph.D.', 'ALEXANDER SETIAWAN, S.Kom., M.T.', '-', '', NULL, NULL);
+(1, 'C14190008 RYAN JONATHAN SUGIHARTO', 'Project Management Mobile Application untuk meningkatkan Efisiensi dan Monitoring pegawai di PT. Indoserako Sejahtera', 'Mobile Application Development', '2023-11-22 16:00:00.000000', 'P308', 'SILVIA ROSTIANINGSIH, S.Kom., M.MT.', 'Dr. ANDREAS HANDOJO, S.T., M.MT.', 'JUSTINUS ANDJARWIRAWAN, S.T.,M.Eng.', 'ALVIN NATHANIEL TJONDROWIGUNO, S.Kom., M.T.', '', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -347,7 +345,9 @@ INSERT INTO `vakasi` (`nomor_vakasi`, `nip`, `dosen`, `tanggal_sidang`, `nama_mh
 (5, 1, 'ADI WIBOWO, S.T., M.T., Ph.D.', '2023-11-02 07:30:00.000000', 'C14180127 TEDDY GHATSUNAGA', 'Ketua Penguji'),
 (6, 6, 'STEPHANUS A. ANANDA, S.T., M.Sc. Ph.D.', '2023-11-02 07:30:00.000000', 'C14180127 TEDDY GHATSUNAGA', 'Anggota Penguji'),
 (8, 4, 'LILY PUSPA DEWI, S.T., M.Kom.', '2023-11-02 07:30:00.000000', 'C14180127 TEDDY GHATSUNAGA', 'Pembimbing 2'),
-(9, 2, 'SILVIA ROSTIANINGSIH, S.Kom., M.MT.', '2023-11-02 07:00:00.000000', 'C14180197 FERDINANT PANGESTU', 'Ketua Penguji');
+(9, 2, 'SILVIA ROSTIANINGSIH, S.Kom., M.MT.', '2023-11-02 07:00:00.000000', 'C14180197 FERDINANT PANGESTU', 'Ketua Penguji'),
+(11, 7, 'Ir. KARTIKA GUNADI, M.T.', '2023-12-07 17:00:00.000000', 'C14180028 BINTANG ARTOMORO WINARTO', 'Pembimbing 1'),
+(12, 29, 'LILIANA, S.T., M.Eng., Ph.D.', '2023-12-07 17:00:00.000000', 'C14180028 BINTANG ARTOMORO WINARTO', 'Pembimbing 2');
 
 --
 -- Indexes for dumped tables
@@ -397,7 +397,7 @@ ALTER TABLE `vakasi`
 -- AUTO_INCREMENT untuk tabel `berita_acara`
 --
 ALTER TABLE `berita_acara`
-  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT untuk tabel `data_mahasiswa`
@@ -421,7 +421,7 @@ ALTER TABLE `penilaian`
 -- AUTO_INCREMENT untuk tabel `vakasi`
 --
 ALTER TABLE `vakasi`
-  MODIFY `nomor_vakasi` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `nomor_vakasi` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

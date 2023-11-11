@@ -1,89 +1,24 @@
 <?php
-$servername = "localhost";
-$username = "root";
-$password = "";
-$database = "manpro13";
+include 'config.php';
 
-$connection = mysqli_connect($servername, $username, $password, $database);
-
-if (isset($_POST["add_berita_acara"])) {
-    // Get data from the form
-    $nrp = $_POST['nrp'];
-    $namaMhs = $_POST['namaMhs'];
-    $judulSkripsi = $_POST['judulSkripsi'];
-    $konsentrasi = $_POST['konsentrasi'];
-    $tanggalSidang = $_POST['tanggalSidang'];
-    $nilai = 'A'; // Fixed value
-    $hasilSidang = 'Lulus'; // Fixed value
-    $ketuaPenguji = $_POST['ketuaPenguji'];
-    $kehadiranKetuaPenguji = isset($_POST['kehadiranKetuaPenguji']) ? 1 : 0;
-    $dosenPenguji = $_POST['dosenPenguji'];
-    $kehadiranDosenPenguji = isset($_POST['kehadiranDosenPenguji']) ? 1 : 0;
-    $dosenPembimbing1 = $_POST['dosenPembimbing1'];
-    $kehadiranPembimbing1 = isset($_POST['kehadiranPembimbing1']) ? 1 : 0;
-    $dosenPembimbing2 = $_POST['dosenPembimbing2'];
-    $kehadiranPembimbing2 = isset($_POST['kehadiranPembimbing2']) ? 1 : 0;
-    $catatan= $_POST['catatansidang'];
-
-    /*
-    // Handle the radio button for tugas
-    $tugas = isset($_POST['tugas']) ? $_POST['tugas'] : '';
-
-    // Handle the file upload for tugas_tambahan (tugas_tambahan)
-    $tugasTambahan = '';
-
-    if (isset($_FILES['tugas_tambahan']) && $_FILES['tugas_tambahan']['error'] === 0) {
-        $upload_dir = 'uploads/'; // Create an 'uploads' directory in your project
-        $file_name = $_FILES['tugas_tambahan']['name'];
-        $file_path = $upload_dir . $file_name;
-
-        if (move_uploaded_file($_FILES['tugas_tambahan']['tmp_name'], $file_path)) {
-            $tugasTambahan = $file_path;
-        }
-    }
-    */
-
-    // Handle other fields like cpmk1, cpmk2, etc.
-    $cpmk1 = $_POST['cpmk1'];
-    $cpmk2 = $_POST['cpmk2'];
-    $cpmk3 = $_POST['cpmk3'];
-    $cpl1 = $_POST['cpl1'];
-    $cpl2 = $_POST['cpl2'];
-    $cpl3 = $_POST['cpl3'];
-    $cpl4 = $_POST['cpl4'];
-    $cpl5 = $_POST['cpl5'];
-    $cpl6 = $_POST['cpl6'];
-    $cpl7 = $_POST['cpl7'];
-    $cpl8 = $_POST['cpl8'];
-    $cpl9 = $_POST['cpl9'];
-    $cpl10 = $_POST['cpl10'];
-
-    $query = "INSERT INTO berita_acara (nrp, nama, judul_skripsi, konsentrasi, tanggal, nilai, ketua_penguji, ketua_penguji_hadir, dosen_penguji, dosen_penguji_hadir, dospem_1, dospem_1_hadir, dospem_2, dospem_2_hadir, tugas, tugas_tambahan, cpmk1, cpmk2, cpmk3, cpl1, cpl2, cpl3, cpl4, cpl5, cpl6, cpl7, cpl8, cpl9, cpl10, hasil_sidang, catatan) 
-          VALUES ('$nrp', '$namaMhs', '$judulSkripsi', '$konsentrasi', '$tanggalSidang', '$nilai', '$ketuaPenguji', $kehadiranKetuaPenguji, '$dosenPenguji', $kehadiranDosenPenguji, '$dosenPembimbing1', $kehadiranPembimbing1, '$dosenPembimbing2', $kehadiranPembimbing2, '', '', '$cpmk1', '$cpmk2', '$cpmk3', '$cpl1', '$cpl2', '$cpl3', '$cpl4', '$cpl5', '$cpl6', '$cpl7', '$cpl8', '$cpl9', '$cpl10', '$hasilSidang', '$catatan')";
-
-    if (mysqli_query($connection, $query)) {
-        mysqli_close($connection);
-        echo "<script>alert('Berita Acara added successfully.'); window.location = 'addBeritaAcara.php';</script>";
-        exit; // This is important to prevent further execution of the PHP script
-    } else {
-        echo "<script>alert('Error: " . mysqli_error($connection) . "');</script>";
-    }
-
-    // Close the database connection
-    mysqli_close($connection);
+if(!isset($_SESSION['login'])){
+    header("Location: login.php");
+    exit;
 }
+
+$nama_dosen = $_SESSION['username'];
+
 ?>
-
-
 
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
-    <script src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
+    <script src="jquery-3.7.1.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
     <title>Add Berita Acara</title>
     <style>
         .checkbox-lg .form-check-input{
@@ -120,140 +55,120 @@ if (isset($_POST["add_berita_acara"])) {
         padding-bottom: 2rem;
         }
 
-        #tabel_cpl{
-        text-align: center ;
+        
+        .form-control[type="time"] {
+        width: 100%; 
+        padding: 10px; 
+        font-size: 16px; 
+        border: 1px solid #ccc; 
+        border-radius: 5px; 
+        background-color: #fff; 
+        color: #333; 
         }
 
-        #tabel_cpl input{
-        background-color: white;
-        border-color: white;
-        width: 40px;
-        text-align: center ;
+       
+        .form-control[type="time"]:focus {
+        border-color: #007bff; 
+        box-shadow: 0 0 10px rgba(0, 123, 255, 0.5); 
         }
 
-        /* ilangin arrow unk input number */
-        input[type="number"]{
-            -moz-appearance: textfield;
-            outline: none;
+        .btn.btn-outline-ocean {
+        color: #fff; 
+        background-color: #0B6977; 
+        border: 3px solid #0B6977; 
+        padding: 8px 16px; 
+        font-weight: 500;
+        border-radius: 5px; 
+        text-decoration: none; 
+        display: inline-block; 
+        font-size: 16px; 
+        text-align: center; 
+        cursor: pointer; 
+        transition: background-color 0.3s, color 0.3s, border-color 0.3s; 
         }
-        input[type="number"]::-webkit-outer-spin-button,
-        input[type="number"]::-webkit-inner-spin-button{
-        -webkit-appearance: none;
+   
+        .btn.btn-outline-ocean:hover {
+            color: #0B6977; 
+            background-color: #fff; 
+            border-color: #0B6977; 
         }
 
-        #discard, #add{
-            max-width: 100px;
-            width: 100%;
-            margin: 10px 0;
+        .btn.btn-outline-red {
+        color: #fff; 
+        background-color: #952323; 
+        border: 3px solid #952323; 
+        padding: 8px 16px; 
+        font-weight: 500;
+        border-radius: 5px; 
+        text-decoration: none; 
+        display: inline-block; 
+        font-size: 16px; 
+        text-align: center; 
+        cursor: pointer; 
+        transition: background-color 0.3s, color 0.3s, border-color 0.3s; 
+        }
+   
+        .btn.btn-outline-red:hover {
+            color: #952323; 
+            background-color: #fff; 
+            border-color: #952323; 
         }
 
 
+        .input-selectTime {
+        width: 100%;
+        padding: 0.375rem 0.75rem;
+        font-size: 1rem;
+        line-height: 1.5;
+        color: #495057;
+        background-color: #fff;
+        background-clip: padding-box;
+        border: 1px solid #ced4da;
+        border-radius: 0.25rem;
+        transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-inout;
+        }
+
+        .input-selectTime:hover, .input-selectTime:focus {
+        border-color: #007BFF;
+        outline: 0;
+        box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+        }
     </style>
 </head>
 <body style="background-color: #0B6977;">
     <div id="rectangle">
-
         <div class="container"> <!--<div class="container my-5">-->
             <div class="row">
                 <div class="col-lg-12">
-                    <div>
-                        <h1 style="text-align: center; color: #0B6977" class="text-uppercase">Tambah Berita</h1>
-                    </div>
+                    <h1 style="text-align: center; color: #0B6977" class="text-uppercase">Tambah Berita Acara</h1>
                 </div>
             </div>
     
-            <form action="addBeritaAcara.php" method="post" enctype="multipart/form-data">
+            <form action="" method="POST" id="form-submit">   
                 <div class="row mt-5">
-                    <!-- table kiri -->
                     <div class="col-lg-6">
-                        <div class="form-group">
-                            <label for="nrp"><h5>NRP</h5></label>
-                            <input type="text" class="form-control" name ="nrp" id="nrp" placeholder="Masukkan NRP">
-        
-                            <br>
-        
-                            <label for="namaMhs"><h5>Nama</h5></label>
-                            <input type="text" name="namaMhs" id="namaMhs" class="form-control" placeholder="Masukkan Nama">
-        
-                            <br>
-        
-                            <label for="judulSkripsi"><h5>Judul Skripsi</h5></label>
-                            <input type="text" name="judulSkripsi" id="judulSkripsi" class="form-control" placeholder="Judul Skripsi">
-        
-                            <br>
-        
-                            <label for="konsentrasi"><h5>Konsenstrasi Skripsi</h5></label>
-                            <select class="form-select" aria-label="Default select example" name="konsentrasi">
-                                <option selected>Konsentrasi Skripsi</option>
-                                <option value="AI">AI</option>
-                                <option value="cyber">Cyber Security</option>
-                                <option value="game">Game Development</option>
-                                <option value="mobdev">Mobile Application Development</option>
-                                <option value="enterprise">Enterprise Information System</option>
-                                <option value="BI">Business Intelligence</option>
-                            </select>
 
-                            <br>
-        
-                            <br>
-                            
-                            <label for="tanggalSidang"><h5>Tanggal Sidang</h5></label>
-                            <input type="date" name="tanggalSidang" id="tanggalSidang" class="form-control">
-        
-                            <br>
-        
-                            <label><h5>Nilai Sidang</h5></label>
-                            <div class="row">
-                                <div class="col-4">
-                                    <div class="input-group mb-3">
-                                        <div class="input-group-prepend">
-                                            <label class="input-group-text" for="cpmk1">CPMK 1</label>
-                                        </div>
-                                        <input type="number" name="cpmk1" id="cpmk1" class="form-control" placeholder="Nilai">
-                                    </div>
-                                </div>
-                                <div class="col-4">
-                                    <div class="input-group mb-3">
-                                        <div class="input-group-prepend">
-                                            <label class="input-group-text" for="cpmk2">CPMK 2</label>
-                                        </div>
-                                        <input type="number" name="cpmk2" id="cpmk2" class="form-control" placeholder="Nilai">
-                                    </div>
-                                </div>
-                                <div class="col-4">
-                                    <div class="input-group">
-                                        <div class="input-group-prepend">
-                                            <label class="input-group-text" for="cpmk3">CPMK 3</label>
-                                        </div>
-                                        <input type="number" name="cpmk3" id="cpmk3" class="form-control" placeholder="Nilai">
-                                    </div>
-                                </div>
-                            </div>
-                            <label for="catatanSidang" style="margin-top: 5px;"><h5>Catatan Sidang</h5></label>
-                            <textarea class="form-control" name="catatansidang" id="catatanSidang" rows="6" placeholder="Catatan"></textarea>
-                            
-                        </div>
-                    </div>
-                    
-                    <!-- table kanan -->
-                    <div class="col-lg-6">
                         <div class="form-group">
+
                             <div class="row">
-                                <div class="col-md-10">
+                                <div class="col-lg-10">
                                     <label for="ketuaPenguji"><h5>Ketua Penguji</h5></label>
-                                    <select class="form-select" aria-label="Default select example" name="ketuaPenguji">
-                                        <option selected>Select</option>
-                                        <option value="1">Silvia</option>
-                                        <option value="2">Henry</option>
-                                        <option value="3">Agus</option>
-                                        <option value="4">Stephanus</option>
-                                        <option value="5">Adi</option>
-                                        <option value="6">Djoni</option>
-                                        <option value="7">Liliana</option>
-                                    </select>
+                                        <?php
+                                            $sql_dosen = "SELECT * FROM data_dosen WHERE nama LIKE '%$nama_dosen%'";
+                                            $result_dosen = mysqli_query($conn, $sql_dosen);
+
+                                            if(mysqli_num_rows($result_dosen) > 0){
+                                                $row = mysqli_fetch_assoc($result_dosen);
+                                                $ketua_penguji = $row['nama'];
+                                            }
+                                            else{
+                                                $ketua_penguji = "?";
+                                            }
+                                        ?>
+                                    <input type="text" name="ketuaPenguji" id="ketuaPenguji" value="<?php echo $ketua_penguji; ?>" style="background-color: white;" class="form-control" placeholder="Dosen Penilai" readonly>
                                 </div>
-    
-                                <div class="col-md-2">
+                
+                                <div class="col-lg-2">
                                     <div class="form-check checkbox-lg" style="margin-top: 40px;">
                                         <input class="form-check-input" type="checkbox" value="" id="kehadiranKetuaPenguji" name="kehadiranKetuaPenguji">
                                         <label class="form-check-label" for="flexCheckDefault" style="margin-top: -40px;">Hadir</label>
@@ -262,21 +177,12 @@ if (isset($_POST["add_berita_acara"])) {
                             </div>
                             
                             <div class="row" style="margin-top: 24px;">
-                                <div class="col-md-10">
+                                <div class="col-lg-10">
                                     <label  for="dosenPenguji"><h5>Dosen Penguji</h5></label>
-                                    <select class="form-select" aria-label="Default select example" name="dosenPenguji">
-                                        <option selected>Select</option>
-                                        <option value="1">Silvia</option>
-                                        <option value="2">Henry</option>
-                                        <option value="3">Agus</option>
-                                        <option value="4">Stephanus</option>
-                                        <option value="5">Adi</option>
-                                        <option value="6">Djoni</option>
-                                        <option value="7">Liliana</option>
-                                    </select>
+                                    <input type="text" name="dosenPenguji" id="dosenPenguji" style="background-color: white;" class="form-control" placeholder="Dosen Penguji" readonly>
                                 </div>
     
-                                <div class="col-md-2">
+                                <div class="col-lg-2">
                                     <div class="form-check checkbox-lg" style="margin-top: 40px;">
                                         <input class="form-check-input" type="checkbox" value="" id="kehadiranDosenPenguji" name="kehadiranDosenPenguji">
                                         <label class="form-check-label" for="flexCheckDefault" style="margin-top: -40px;">Hadir</label>
@@ -285,21 +191,12 @@ if (isset($_POST["add_berita_acara"])) {
                             </div>
     
                             <div class="row" style="margin-top: 24px;">
-                                <div class="col-md-10">
-                                    <label for="dosenPembimbing1"><h5>Dosen Pembimbing 1</h5></label>
-                                    <select class="form-select" aria-label="Default select example" name="dosenPembimbing1">
-                                        <option selected>Select</option>
-                                        <option value="1">Silvia</option>
-                                        <option value="2">Henry</option>
-                                        <option value="3">Agus</option>
-                                        <option value="4">Stephanus</option>
-                                        <option value="5">Adi</option>
-                                        <option value="6">Djoni</option>
-                                        <option value="7">Liliana</option>
-                                    </select>
+                                <div class="col-lg-10">
+                                    <label for="pembimbing1"><h5>Dosen Pembimbing 1</h5></label>
+                                    <input type="text" name="pembimbing1" id="pembimbing1" class="form-control" style="background-color: white;" placeholder="Dosen Pembimbing 1" readonly>
                                 </div>
     
-                                <div class="col-md-2">
+                                <div class="col-lg-2">
                                     <div class="form-check checkbox-lg" style="margin-top: 40px;">
                                         <input class="form-check-input" type="checkbox" value="" id="kehadiranPembimbing1" name="kehadiranPembimbing1">
                                         <label class="form-check-label" for="flexCheckDefault" style="margin-top: -40px;">Hadir</label>
@@ -308,54 +205,171 @@ if (isset($_POST["add_berita_acara"])) {
                             </div>
     
                             <div class="row" style="margin-top: 24px;">
-                                <div class="col-md-10">
-                                    <label for="dosenPembimbing2"><h5>Dosen Pembimbing 2</h5></label>
-                                    <select class="form-select" aria-label="Default select example" name="dosenPembimbing2">
-                                        <option selected>Select</option>
-                                        <option value="1">Silvia</option>
-                                        <option value="2">Henry</option>
-                                        <option value="3">Agus</option>
-                                        <option value="4">Stephanus</option>
-                                        <option value="5">Adi</option>
-                                        <option value="6">Djoni</option>
-                                        <option value="7">Liliana</option>
-                                    </select>
+                                <div class="col-lg-10">
+                                    <label for="pembimbing2"><h5>Dosen Pembimbing 2</h5></label>
+                                    <input type="text" name="pembimbing2" id="pembimbing2" class="form-control" style="background-color: white;" placeholder="Dosen Pembimbing 2" readonly>
                                 </div>
-                                <div class="col-md-2">
+
+                                <div class="col-lg-2">
                                     <div class="form-check checkbox-lg" style="margin-top: 40px;">
                                         <input class="form-check-input" type="checkbox" value="" id="kehadiranPembimbing2" name="kehadiranPembimbing2">
                                         <label class="form-check-label" for="flexCheckDefault" style="margin-top: -40px;">Hadir</label>
                                     </div>
                                 </div>
                             </div>
-                    
+
+                            <br>
+
+                            <div class="row">
+                                <div class="col-lg-6">
+                                    <label for="tanggalSidang"><h5>Tanggal Sidang</h5></label>
+                                    <input type="date" name="tanggalSidang" id="tanggalSidang" class="form-control">
+                                </div>
+                                <div class="col-lg-6">
+                                    <label for="waktuSidang"><h5>Waktu Sidang</h5></label>
+                                    <select class="input-selectTime" id="waktuSidang" name="waktuSidang">
+                                        <option value="07:00">07:00</option>
+                                        <option value="07:30">07:30</option>
+                                        <option value="08:00">08:00</option>
+                                        <option value="08:30">08:30</option>
+                                        <option value="09:00">09:00</option>
+                                        <option value="09:30">09:30</option>
+                                        <option value="10:00">10:00</option>
+                                        <option value="10:30">10:30</option>
+                                        <option value="11:00">11:00</option>
+                                        <option value="11:30">11:30</option>
+                                        <option value="12:00">12:00</option>
+                                        <option value="12:30">12:30</option>
+                                        <option value="13:00">13:00</option>
+                                        <option value="13:30">13:30</option>
+                                        <option value="14:00">14:00</option>
+                                        <option value="14:30">14:30</option>
+                                        <option value="15:00">15:00</option>
+                                        <option value="15:30">15:30</option>
+                                        <option value="16:00">16:00</option>
+                                        <option value="16:30">16:30</option>
+                                        <option value="17:00">17:00</option>
+                                        <option value="17:30">17:30</option>
+                                        <option value="18:00">18:00</option>
+                                    </select>
+                                </div>
+                            </div>
+        
+                            <br>
+
+                            <label for="ruangSidang"><h5>Ruang Sidang</h5></label>
+                            <br>
+                                <select class="form-select" aria-label="Default select example" name="ruangSidang" id="ruangSidang">
+                                    <option selected>Select</option>
+                                    <option value="1">P308</option>
+                                    <option value="2">P309</option>
+                                    <option value="3">P307</option>
+                                    <option value="4">P318</option>
+                                    <option value="5">Lab MM</option>
+                                    <option value="6">Lab PG</option>
+                                    <option value="7">Lab Studio</option>
+                                </select>
+                            
                             <br>
                             
-                            <label for="tugastambahan"><h5>Tugas Tambahan</h5></label>
-                            <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="radio" name="tugas" id="poster" value="poster">
-                                <label class="form-check-label" for="poster">Poster</label>
+                            <!-- <label><h5>Nilai Sidang</h5></label>
+                            <div class="row">
+                                <div class="col-4">
+                                    <div class="input-group mb-3">
+                                        <div class="input-group-prepend">
+                                            <label class="input-group-text" style="background-color: #0B6977; color: whitesmoke; font-weight: 700;" for="cpmk1">CPMK 1</label>
+                                        </div>
+                                        <input type="number" name="cpmk1" id="cpmk1" class="form-control" placeholder="Nilai">
+                                    </div>
+                                </div>
+                                <div class="col-4">
+                                    <div class="input-group mb-3">
+                                        <div class="input-group-prepend">
+                                            <label class="input-group-text" style="background-color: #0B6977; color: whitesmoke; font-weight: 700;" for="cpmk2">CPMK 2</label>
+                                        </div>
+                                        <input type="number" name="cpmk2" id="cpmk2" class="form-control" placeholder="Nilai">
+                                    </div>
+                                </div>
+                                <div class="col-4">
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <label class="input-group-text" style="background-color: #0B6977; color: whitesmoke; font-weight: 700;" for="cpmk3">CPMK 3</label>
+                                        </div>
+                                        <input type="number" name="cpmk3" id="cpmk3" class="form-control" placeholder="Nilai">
+                                    </div>
+                                </div>
+                            </div> -->
+                            <label for="catatanSidang" style="margin-top: 5px;"><h5>Catatan Sidang</h5></label>
+                            <textarea class="form-control" name="catatanSidang" id="catatanSidang" rows="3" placeholder="Catatan"></textarea>
+                            
+                        </div>
+                    </div>
+                    
+                    <!-- table kanan -->
+                    <div class="col-lg-6">
+
+                        <div class="form-group">
+
+                            <div class="row">
+                                <label for="nama_mhs"><h5>Mahasiswa</h5></label>
+                                <select class="form-select" aria-label="Default select example" name="nama_mhs" id="nama_mhs">
+                                    <option value="Pilih Mahasiswa">Pilih Mahasiswa</option>
+                                </select>
                             </div>
-                            <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="radio" name="tugas" id="video" value="video">
-                                <label class="form-check-label" for="video">Video</label>
+                                
+                            <br>
+
+                            <div class="row">
+                                <label for="judul_skripsi"><h5>Judul Skripsi</h5></label>
+                                <input type="text" name="judul_skripsi" id="judul_skripsi" style="background-color: white;" class="form-control" placeholder="Judul Skripsi" readonly>
                             </div>
-                            <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="radio" name="tugas" id="penelitian" value="penelitian">
-                                <label class="form-check-label" for="penelitian">Laporan Penelitian</label>
-                            </div>
-                            <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="radio" name="tugas" id="jurnal" value="jurnal">
-                                <label class="form-check-label" for="jurnal">Jurnal</label>
+            
+                            <br>
+                            
+                            <div class="row">
+                                <label for="konsentrasi"><h5>Konsenstrasi Skripsi</h5></label>
+                                <select class="form-select" aria-label="Default select example" name="konsentrasi" id="konsentrasi">
+                                    <option selected>Konsentrasi Skripsi</option>
+                                    <option value="1">AI</option>
+                                    <option value="2">Cyber Security</option>
+                                    <option value="3">Game Development</option>
+                                    <option value="4">Mobile Application Development</option>
+                                    <option value="5">Enterprise Information System</option>
+                                    <option value="6">Business Intelligence</option>
+                                </select>
                             </div>
     
                             <br>
+
+                            <div class="row">
+                                <label for="" style="margin-top: -1px;"><h5>Tugas Tambahan</h5></label>
+                            </div>
+                            
+                            <div style="margin-top: 5px;">
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="checkbox" id="poster" value="option1">
+                                    <label class="form-check-label" for="poster">Poster</label>
+                                </div>
     
-                            <label class="form-label" for="customFile" style="margin-top: 18px;"><h5>Input Tugas</h5></label>
-                            <input type="file" class="form-control" id="customFile" name="tugas_tambahan">
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="checkbox" id="video" value="option2">
+                                    <label class="form-check-label" for="video">Video</label>
+                                </div>
     
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="checkbox" id="penelitian" value="option3">
+                                    <label class="form-check-label" for="penelitian">Laporan Penelitian</label>
+                                </div>
+                                
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="checkbox" id="jurnal" value="option4">
+                                    <label class="form-check-label" for="jurnal">Jurnal</label>
+                                </div>
+                            </div>
+
                             <br>
-                            <label for=""><h5>Nilai CPL (Averaged)</h5></label>
+    
+                            <label for="" style="margin-top: 7px;"><h5>Nilai CPL (Averaged)</h5></label>
                             <div class="col-sm-12">
                                 <div class="table-responsive" id="tabel_cpl">
                                     <table class="table table-bordered">
@@ -398,28 +412,281 @@ if (isset($_POST["add_berita_acara"])) {
                             <br>
     
                             <div class="row">
-                                <div class="col-md-6">
-                                    <h5>Nilai Akhir: </h5><h5 id="hasil_akhir"></h5>
+                                <div class="col-lg-6">
+                                    <h5>Nilai Akhir: A</h5>
                                 </div>
-                                <div class="col-md-6">
-                                    <h5>Hasil Sidang: </h5><h5 id="hasil_sidang"></h5>
+                                <div class="col-lg-6">
+                                    <h5 style="margin-left: 40px" >Hasil Sidang: Lulus</h5>
+                                </div>
+                            </div>
+
+                            <br>
+
+                            <div class="row" style="margin-top: 5px;">
+                                <div class="col-lg-2">
+                                    <button class="btn btn-outline-red" style="float: left;">Discard</button>
+                                </div>
+                                <div class="col-lg-6">
+                                    <button class="btn btn-outline-ocean" name="add" id="add">Add</button>
                                 </div>
                             </div>
                         </div>
-                        <br>
-                    </div>
-                </div>
-    
-                <div class="row justify-content-end" style="margin-top: 5px;">
-                    <div class="col-md-2">
-                        <button name="disc_berita_acara" class="btn btn-danger" id="discard" onclick="location.href='#'">Discard</button>
-                    </div>
-                    <div class="col-md-2">
-                        <button name="add_berita_acara" class="btn btn-primary" id="add">Add</button>
                     </div>
                 </div>
             </form>
+
+            <div class="modal fade" id="notKetuaPengujiModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered" role="document">
+                    <div class="modal-content">
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="exampleModalCenterTitle">Anda bukan Ketua Penguji!</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <form action="" method="POST" enctype="multipart/form-data">
+                        <div class="modal-body ">
+                            <h5>Tidak ada mahasiswa yang mempunyai anda sebagai ketua penguji!</h5>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-outline-red" data-bs-dismiss="modal">Close</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            
+            <div class="modal fade" id="emptyField" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="staticBackdropLabel">Masih ada field yang kosong!</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <form action="" method="POST" enctype="multipart/form-data">
+                        <div class="modal-body ">
+                            <h5>Silakan isi field yang kosong!</h5>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-outline-red" data-bs-dismiss="modal">Close</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <div class="modal fade" id="successModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="staticBackdropLabel">Success!</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <form action="" method="POST" enctype="multipart/form-data">
+                        <div class="modal-body ">
+                            <h5>Berhasil Add Data!</h5>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-outline-red" data-bs-dismiss="modal">Close</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
         </div>
     </div>
+
+
+    <script>
+        $(document).ready(function(){
+            // ketua penguji
+            var ketuaPenguji = $('#ketuaPenguji').val();
+            console.log(ketuaPenguji);
+
+            if (ketuaPenguji == "?"){
+                console.log("Bukan Ketua Penguji")
+                $('#notKetuaPengujiModal').modal('show');
+            }
+            else{
+                $.ajax({
+                    url: "ajax_berita_acara.php",
+                    type: "POST",
+                    data:{
+                        tanda: "Mahasiswa",
+                        id:ketuaPenguji
+                    },
+                    success:function(respond){
+                        $("#nama_mhs").html(respond);
+                    },
+                    error:function(){
+                        alert("gagal");
+                    }
+                })
+            }
+            
+            // dosen penguji
+            $('#nama_mhs').on('change', function(){
+                var nama_mhs = $(this).val();
+                console.log(nama_mhs);
+                $.ajax({
+                    url: "ajax_berita_acara.php",
+                    type: "POST",
+                    data:{
+                        tanda: "Penguji",
+                        id:nama_mhs               
+                    },
+                    success:function(respond){
+                        console.log(respond);
+                        $("#dosenPenguji").val(respond);
+                    },
+                    error:function(){
+                        alert("gagal");
+                    }
+                })
+            })
+            
+            // dosen pembimbing 1
+            $('#nama_mhs').on('change', function(){
+                var nama_mhs = $(this).val();
+                $.ajax({
+                    url: "ajax_berita_acara.php",
+                    type: "POST",
+                    data:{
+                        tanda: "Pembimbing_1",
+                        id:nama_mhs               
+                    },
+                    success:function(respond){
+                        console.log(respond);
+                        $("#pembimbing1").val(respond);
+                    },
+                    error:function(){
+                        alert("gagal");
+                    }
+                })
+            })
+
+            // dosen pembimbing 2
+            $('#nama_mhs').on('change', function(){
+                var nama_mhs = $(this).val();
+                $.ajax({
+                    url: "ajax_berita_acara.php",
+                    type: "POST",
+                    data:{
+                        tanda: "Pembimbing_2",
+                        id:nama_mhs
+                    },
+                    success:function(respond){
+                        console.log(respond);
+                        $("#pembimbing2").val(respond);
+                    },
+                    error:function(){
+                        alert("gagal");
+                    }
+                })
+            })
+
+            // judul skripsi
+            $('#nama_mhs').on('change', function(){
+                var nama_mhs = $(this).val();
+                $.ajax({
+                    url: "ajax_berita_acara.php",
+                    type: "POST",
+                    data:{
+                        tanda: "Judul",
+                        id:nama_mhs               
+                    },
+                    success:function(respond){
+                        console.log(respond);
+                        $("#judul_skripsi").val(respond);
+                    },
+                    error:function(){
+                        alert("gagal");
+                    }
+                })
+            })
+
+            $("#add").on("click", function(event) {               
+                var judulSkripsi = $("#judul_skripsi").val();
+                var namaMhs = $("#nama_mhs").val();
+                var ketuaPenguji = $("#ketuaPenguji").val();
+                var dosenPenguji = $("#dosenPenguji").val();
+                var pembimbing1 = $("#pembimbing1").val();
+                var pembimbing2 = $("#pembimbing2").val();
+                var tanggalSidang = $("#tanggalSidang").val();
+                var waktuSidang = $("#waktuSidang").val(); 
+                var ruangSidang = $("#ruangSidang").val();
+                var konsentrasi = $("#konsentrasi").val();
+                var catatanSidang = $("#catatanSidang").val();
+                var status_ketua = "";
+                var status_penguji = "";
+                var status_pembimbing1 = "";
+                var status_pembimbing2 = "";
+
+                event.preventDefault();
+
+                if (konsentrasi == "Konsentrasi Skripsi" || ruangSidang == "Select" || namaMhs == "Pilih Mahasiswa"){
+                    $("#emptyField").modal('show');
+                    return;
+                    // alert("Mohon isi field yang kosong!");
+                }
+                else{
+                    if ($('#kehadiranKetuaPenguji').is(':checked')) {
+                        status_ketua = "Ketua Penguji";
+                        //alert('Checkbox is checked');
+                    }
+                    if ($('#kehadiranDosenPenguji').is(':checked')) {
+                        status_penguji = "Anggota Penguji";
+                        //alert('Checkbox is checked');
+                    }
+                    if ($('#kehadiranPembimbing1').is(':checked')) {
+                        status_pembimbing1 = "Pembimbing 1";
+                        //alert('Checkbox is checked');
+                    }
+                    if ($('#kehadiranPembimbing2').is(':checked')) {
+                        status_pembimbing2 = "Pembimbing 2";
+                        //alert('Checkbox is checked');
+                    }
+                    
+                    $.ajax({
+                        url: "ajax_berita_acara.php",
+                        method: "POST",
+                        data: {
+                            judulSkripsi: judulSkripsi,
+                            namaMhs: namaMhs,
+                            ketuaPenguji: ketuaPenguji,
+                            dosenPenguji: dosenPenguji,
+                            pembimbing1: pembimbing1,
+                            pembimbing2: pembimbing2,
+                            tanggalSidang: tanggalSidang,
+                            waktuSidang: waktuSidang,
+                            ruangSidang: ruangSidang,
+                            status_ketua: status_ketua,
+                            status_penguji: status_penguji,
+                            status_pembimbing1: status_pembimbing1,
+                            status_pembimbing2: status_pembimbing2,
+                            konsentrasi: konsentrasi,
+                            catatanSidang: catatanSidang,
+                            tanda: "Insert"
+                        },
+                        success: function(respond) {                           
+                            // console.log(respond);
+                            var trim_respond = respond.trim();
+
+                            if (trim_respond == "Berhasil Add!") {
+                                console.log(trim_respond);
+                                $("#successModal").modal('show');
+                                // alert(respond);
+                            } 
+                            else if (trim_respond == "bentrok") {
+                                alert("Tanggal Sidang dan Ruang Sidang bertabrakan!.");
+                            }
+                            else {
+                                alert("An unknown response was received: " + trim_respond);
+                            }
+                        },
+                        error: function() {
+                            alert("An error occurred during the insertion.");
+                        }
+                    });
+                }
+            });
+
+        });
+    </script>
 </body>
 </html>
