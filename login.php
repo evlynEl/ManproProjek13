@@ -10,7 +10,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 
     $username = $_POST['username'];
-    $password = $_POST['password'];
+    $password = $_POST['inputPassword'];
 
     $query = "SELECT username, password, type FROM user WHERE username = ?";
     $stmt = $db->prepare($query);
@@ -101,7 +101,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                                     <div class="form-group" style="width: 360px;">
                                         <label for="username"><p style="font-weight: 500; font-size: 20px; margin-bottom: 3px; color: #0B6977;">Username</p></label>
                                         <div class="class input-group mb-3">
-                                            <input type="email" class="form-control" id="username" name="username" aria-describedby="emailHelp" placeholder="Enter email" required>
+                                            <input type="input" class="form-control" id="username" name="username" aria-describedby="emailHelp" placeholder="Enter email" required>
                                         </div>
                                     </div>
                                     <div class="form-group mb-2">

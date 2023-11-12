@@ -185,9 +185,9 @@ if (isset($_POST['cek'])){
                         <label for=""><h5>Penilaian Judul dan Abstrak Bab 1 dan 2</h5></label>
                         <div class="input-group">
                             <div class="input-group-prepend">
-                                <label class="input-group-text" style="background-color: #0B6977; color: whitesmoke; font-weight: 700;" for="judul_dan_abstrak">CP 9</label>
+                                <label class="input-group-text" style="background-color: #0B6977; color: whitesmoke; font-weight: 700;" for="cp1">CP 9</label>
                             </div>
-                            <input type="number" name="judul_dan_abstrak" id="judul_dan_abstrak" class="form-control" placeholder="Nilai" min="0" max="100" required>
+                            <input type="number" name="cp1" id="cp1" class="form-control" placeholder="Nilai" min="0" max="100" required>
 
                         </div>
                     </div>
@@ -196,9 +196,9 @@ if (isset($_POST['cek'])){
                         <label for=""><h5>Penilaian Bab 1 dan 2</h5></label>
                         <div class="input-group">
                             <div class="input-group-prepend">
-                                <label class="input-group-text" style="background-color: #0B6977; color: whitesmoke; font-weight: 700;" for="bab_1_2">CP 9</label>
+                                <label class="input-group-text" style="background-color: #0B6977; color: whitesmoke; font-weight: 700;" for="cp2">CP 9</label>
                             </div>
-                            <input type="number" name="bab_1_2" id="bab_1_2" class="form-control" placeholder="Nilai" min="0"max="100" required >
+                            <input type="number" name="cp2" id="cp2" class="form-control" placeholder="Nilai" min="0"max="100" required >
                         </div>
                     </div>
 
@@ -206,9 +206,9 @@ if (isset($_POST['cek'])){
                         <label for=""><h5>Penilaian Bab 3 dan 4 (Infor)</h5></label>
                         <div class="input-group">
                             <div class="input-group-prepend">
-                                <label class="input-group-text" style="background-color: #0B6977; color: whitesmoke; font-weight: 700;" for="bab_3_4_infor">CP 4</label>
+                                <label class="input-group-text" style="background-color: #0B6977; color: whitesmoke; font-weight: 700;" for="cp4">CP 4</label>
                             </div>
-                            <input type="number" name="bab_3_4_infor" id="bab_3_4_infor" class="form-control" placeholder="Nilai" min="0" max="100" required>
+                            <input type="number" name="cp4" id="cp4" class="form-control" placeholder="Nilai" min="0" max="100" required>
                         </div>
                     </div>
                 </div>
@@ -218,19 +218,19 @@ if (isset($_POST['cek'])){
                         <label for=""><h5>Penilaian Bab 3 dan 4 (SIB)</h5></label>
                         <div class="input-group">
                             <div class="input-group-prepend">
-                                <label class="input-group-text" style="background-color: #0B6977; color: whitesmoke; font-weight: 700;" for="bab_3_4_sib">CP 7</label>
+                                <label class="input-group-text" style="background-color: #0B6977; color: whitesmoke; font-weight: 700;" for="cp3">CP 7</label>
                             </div>
-                            <input type="number" name="bab_3_4_sib" id="bab_3_4_sib" class="form-control" placeholder="Nilai" min="0" max="100" required>
+                            <input type="number" name="cp3" id="cp3" class="form-control" placeholder="Nilai" min="0" max="100" required>
                         </div>
                     </div>
 
                     <div class="col-lg-4">
-                        <label for=""><h5>Penilaian BUKU</h5></label>
+                        <label for=""><h5>Penilaian cp5</h5></label>
                         <div class="input-group">
                             <div class="input-group-prepend">
-                                <label class="input-group-text" style="background-color: #0B6977; color: whitesmoke; font-weight: 700;" for="buku">CP 9</label>
+                                <label class="input-group-text" style="background-color: #0B6977; color: whitesmoke; font-weight: 700;" for="cp5">CP 9</label>
                             </div>
-                            <input type="number" name="buku" id="buku" class="form-control" placeholder="Nilai" min="0" max="100" required>
+                            <input type="number" name="cp5" id="cp5" class="form-control" placeholder="Nilai" min="0" max="100" required>
                         </div>
                     </div>
 
@@ -238,21 +238,21 @@ if (isset($_POST['cek'])){
                         <label for=""><h5>Penilaian 5 dan KESIMPULAN</h5></label>
                         <div class="input-group">
                             <div class="input-group-prepend">
-                                <label class="input-group-text" style="background-color: #0B6977; color: whitesmoke; font-weight: 700;" for="bab_5_kesimpulan">CP 8</label>
+                                <label class="input-group-text" style="background-color: #0B6977; color: whitesmoke; font-weight: 700;" for="cp6">CP 8</label>
                             </div>
-                            <input type="number" name="bab_5_kesimpulan" id="bab_5_kesimpulan" class="form-control" placeholder="Nilai" min="0" max="100" required>
+                            <input type="number" name="cp6" id="cp6" class="form-control" placeholder="Nilai" min="0" max="100" required>
                         </div>
                     </div>
                 </div>
 
                 <div class="row mt-3">
                     <div class="col-lg-4">
-                        <label for=""><h5>Penilaian PROGRAM</h5></label>
+                        <label for=""><h5>Penilaian cp7</h5></label>
                         <div class="input-group">
                             <div class="input-group-prepend">
-                                <label class="input-group-text" style="background-color: #0B6977; color: whitesmoke; font-weight: 700;" for="program">CP 5</label>
+                                <label class="input-group-text" style="background-color: #0B6977; color: whitesmoke; font-weight: 700;" for="cp7">CP 5</label>
                             </div>
-                            <input type="number" name="program" id="program" class="form-control" placeholder="Nilai" min="0" max="100" required>
+                            <input type="number" name="cp7" id="cp7" class="form-control" placeholder="Nilai" min="0" max="100" required>
                         </div>
                     </div>
 
@@ -262,11 +262,11 @@ if (isset($_POST['cek'])){
                         </div>
                     </div>
 
-                    <div class="col-lg-4" style="margin-top: 32px; display: none;">
+                    <!-- <div class="col-lg-4" style="margin-top: 32px; display: none;">
                         <div id="result2" >
                             <h3 id="sum_avg_result">Nilai Akhir (Averaged): </h3>
                         </div>
-                    </div>
+                    </div> -->
                 </div>
                 
                 <div class="row mt-4">
@@ -284,32 +284,32 @@ if (isset($_POST['cek'])){
     <script>
        $(document).ready(function () {
             $('#hitung').on('click', function () {
-                const judul_dan_abstrakValue = parseFloat($("#judul_dan_abstrak").val()) || 0;
-                const bab_1_2 = parseFloat($("#bab_1_2").val()) || 0;
-                const bab_3_4_sibValue = parseFloat($("#bab_3_4_sib").val()) || 0;
-                const bab_3_4_inforValue = parseFloat($("#bab_3_4_infor").val()) || 0;
-                const bukuValue = parseFloat($("#buku").val()) || 0;
-                const bab_5_kesimpulanValue = parseFloat($("#bab_5_kesimpulan").val()) || 0;
-                const programValue = parseFloat($("#program").val()) || 0;
+                const cp1 = parseFloat($("#cp1").val()) || 0;
+                const cp2 = parseFloat($("#cp2").val()) || 0;
+                const cp3Value = parseFloat($("#cp3").val()) || 0;
+                const cp4Value = parseFloat($("#cp4").val()) || 0;
+                const cp5Value = parseFloat($("#cp5").val()) || 0;
+                const cp6Value = parseFloat($("#cp6").val()) || 0;
+                const cp7Value = parseFloat($("#cp7").val()) || 0;
 
-                const totalSum = judul_dan_abstrakValue + bab_1_2 + bab_3_4_sibValue + bab_3_4_inforValue + bukuValue + bab_5_kesimpulanValue + programValue;
-                const avgSum = parseFloat(totalSum / 7).toFixed(2);
+                const totalSum = (cp1*0.05) + (cp2*0.05) + (cp3Value*0.2) + (cp4Value*0.2) + (cp5Value*0.1) + (cp6Value*0.2) + (cp7Value*0.2);
+                //const avgSum = parseFloat(totalSum / 7).toFixed(2);
 
                 $("#sum_result").text("Nilai Akhir: " + totalSum);
                 $("#result1").parent().show();
 
-                $("#sum_avg_result").text("Nilai Akhir(Averaged): " + avgSum);
+                //$("#sum_avg_result").text("Nilai Akhir(Averaged): " + avgSum);
                 $("#result2").parent().show();
             })
             $('#input').on('click', function(){
                 const nama_mhs =$("#nama_mhs").val();
-                const judul_dan_abstrakValue = parseFloat($("#judul_dan_abstrak").val()) || 0;
-                const bab_1_2 = parseFloat($("#bab_1_2").val()) || 0;
-                const bab_3_4_sibValue = parseFloat($("#bab_3_4_sib").val()) || 0;
-                const bab_3_4_inforValue = parseFloat($("#bab_3_4_infor").val()) || 0;
-                const bukuValue = parseFloat($("#buku").val()) || 0;
-                const bab_5_kesimpulanValue = parseFloat($("#bab_5_kesimpulan").val()) || 0;
-                const programValue = parseFloat($("#program").val()) || 0;
+                const cp1Value = parseFloat($("#cp1").val()) || 0;
+                const cp2 = parseFloat($("#cp2").val()) || 0;
+                const cp3Value = parseFloat($("#cp3").val()) || 0;
+                const cp4Value = parseFloat($("#cp4").val()) || 0;
+                const cp5Value = parseFloat($("#cp5").val()) || 0;
+                const cp6Value = parseFloat($("#cp6").val()) || 0;
+                const cp7Value = parseFloat($("#cp7").val()) || 0;
                 const nama_dosen = $("#dosen_penilai").val();
 
                 $.ajax({
@@ -318,13 +318,13 @@ if (isset($_POST['cek'])){
                     data:{
                         tanda: "inputNilai",
                         nama_mhs:nama_mhs,
-                        judul_dan_abstrakValue:judul_dan_abstrakValue,
-                        bab_1_2: bab_1_2,
-                        bab_3_4_sibValue:bab_3_4_sibValue,
-                        bab_3_4_inforValue:bab_3_4_inforValue,
-                        bukuValue:bukuValue,
-                        bab_5_kesimpulanValue:bab_5_kesimpulanValue,
-                        programValue:programValue,
+                        cp1Value:cp1Value,
+                        cp2: cp2,
+                        cp3Value:cp3Value,
+                        cp4Value:cp4Value,
+                        cp5Value:cp5Value,
+                        cp6Value:cp6Value,
+                        cp7Value:cp7Value,
                         nama_dosen:nama_dosen
                     },
                     success:function(respond){
@@ -336,8 +336,8 @@ if (isset($_POST['cek'])){
                         $("#sum_result").text("Nilai Akhir: " + totalSum);
                         $("#result1").parent().show();
 
-                        $("#sum_avg_result").text("Nilai Akhir(Averaged): " + avg);
-                        $("#result2").parent().show();
+                        //$("#sum_avg_result").text("Nilai Akhir(Averaged): " + avg);
+                       // $("#result2").parent().show();
                         
                         alert(response['errorlog']);
                     },

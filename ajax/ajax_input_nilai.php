@@ -48,16 +48,16 @@ if ($tanda == 'status_dosen'){
 }
 
 elseif($tanda == 'hitungNilai'){
-    $judul_dan_abstrakValue = floatval($_POST['judul_dan_abstrakValue']);
-    $bab_1_2 = floatval($_POST['bab_1_2']);
-    $bab_3_4_sibValue = floatval($_POST['bab_3_4_sibValue']);
-    $bab_3_4_inforValue = floatval($_POST['bab_3_4_inforValue']);
-    $bukuValue = floatval($_POST['bukuValue']);
-    $bab_5_kesimpulanValue = floatval($_POST['bab_5_kesimpulanValue']);
-    $programValue = floatval($_POST['programValue']);
+    $cp1Value = floatval($_POST['cp1Value']);
+    $cp2 = floatval($_POST['cp2']);
+    $cp3 = floatval($_POST['cp3']);
+    $cp4 = floatval($_POST['cp4']);
+    $cp5 = floatval($_POST['cp5']);
+    $cp6 = floatval($_POST['cp6']);
+    $cp7 = floatval($_POST['cp7']);
 
-    $totalSum = $judul_dan_abstrakValue + $bab_1_2 + $bab_3_4_sibValue + $bab_3_4_inforValue + $bukuValue + $bab_5_kesimpulanValue
-    + $programValue;
+    $totalSum = $cp1Value + $cp2 + $cp3 + $cp4 + $cp5 + $cp6
+    + $cp7;
 
     $avg = number_format(floatval($totalSum / 7), 2);
 
@@ -72,17 +72,17 @@ elseif($tanda == 'hitungNilai'){
 }
 elseif($tanda == 'inputNilai'){
     $nama_mhs = $_POST['nama_mhs'];
-    $judul_dan_abstrakValue = floatval($_POST['judul_dan_abstrakValue']);
-    $bab_1_2 = floatval($_POST['bab_1_2']);
-    $bab_3_4_sibValue = floatval($_POST['bab_3_4_sibValue']);
-    $bab_3_4_inforValue = floatval($_POST['bab_3_4_inforValue']);
-    $bukuValue = floatval($_POST['bukuValue']);
-    $bab_5_kesimpulanValue = floatval($_POST['bab_5_kesimpulanValue']);
-    $programValue = floatval($_POST['programValue']);
+    $cp1Value = floatval($_POST['cp1Value']);
+    $cp2 = floatval($_POST['cp2']);
+    $cp3 = floatval($_POST['cp3']);
+    $cp4 = floatval($_POST['cp4']);
+    $cp5 = floatval($_POST['cp5']);
+    $cp6 = floatval($_POST['cp6']);
+    $cp7 = floatval($_POST['cp7']);
     $nama_dosen = $_POST['nama_dosen'];
 
-    $totalSum = $judul_dan_abstrakValue + $bab_1_2 + $bab_3_4_sibValue + $bab_3_4_inforValue + $bukuValue + $bab_5_kesimpulanValue
-    + $programValue;
+    $totalSum = $cp1Value + $cp2 + $cp3 + $cp4 + $cp5 + $cp6
+    + $cp7;
 
     $avg = number_format(floatval($totalSum / 7), 2);
 
@@ -106,7 +106,7 @@ elseif($tanda == 'inputNilai'){
         );
     }
     else{
-        $sql = "INSERT INTO `penilaian` (`id_penilaian`, `mahasiswa`, `cp_9_judul_abstrak`, `cp_9_bab_1_2`, `cp_4_bab_3_4_infor`,`cp_7_bab_3_4_sib`, `cp_9_buku`, `cp_8_bab_5_kesimpulan`, `cp_5_program`, `nilai_akhir`, `avg_nilai_akhir`, `dosen`) VALUES (NULL, '$nama_mhs', '$judul_dan_abstrakValue', '$bab_1_2', '$bab_3_4_inforValue', '$bab_3_4_sibValue', '$bukuValue', '$bab_5_kesimpulanValue', '$programValue', '$totalSum', '$avg', '$nama_dosen')";
+        $sql = "INSERT INTO `penilaian` (`id_penilaian`, `mahasiswa`, `cp1`, `cp2`, `cp3`,`cp4`, `cp5`, `cp6`, `cp7`, `nilai_akhir`, `avg_nilai_akhir`, `dosen`) VALUES (NULL, '$nama_mhs', '$cp1Value', '$cp2', '$cp4', '$cp3', '$cp5', '$cp6', '$cp7', '$totalSum', '$avg', '$nama_dosen')";
         $query = mysqli_query($conn, $sql);
     }
 
