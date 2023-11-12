@@ -75,4 +75,14 @@ if ($tanda == "cariMahasiswa"){
         echo '<h3 style="text-align: center;" >Tidak ada data</h3>';
     }
 }
+
+elseif ($tanda =='cariNilai'){
+    $nama_mhs = $_POST['nama_mhs'];
+    $sql ='SELECT * FROM `penilaian` WHERE mahasiswa = "'.$nama_mhs.' " ';
+    $query = mysqli_query($conn, $sql);
+    $row = mysqli_fetch_array($query);
+
+    echo json_encode($row);
+    exit;
+}
 ?>
