@@ -36,12 +36,12 @@
         border-radius: 50px;
         padding: 30px;
         margin: 20px;
-        width: 100%;
-        max-width: 700px;
+        max-width: 1050px;
         height: fit-content;
+        justify-content: center;
         }
 
-        .col-6{
+        .col-4{
         background-color:#FFD600B2;
         border: 1px solid #ddd;
         border-radius: 15px;
@@ -54,11 +54,10 @@
         color: white;
         text-align: center;
         text-shadow: 2px 2px grey ;
-        margin: auto;
         margin: 0 10px;
         }
 
-        .col-6:hover{
+        .col-4:hover{
         background-color:white;
         color: #FFD600;
         text-shadow: 2px 2px black ;
@@ -66,13 +65,21 @@
         border-width: 3px;
         }
 
-        #news, #file{
-        margin: 10px 0;
+        #score{
         max-width: 200px;
         width: 100%;
         }
 
+        #news{
+        margin: 10px 0;
+        max-width: 170px;
+        width: 100%; 
+        }
+
         #file{
+        margin: 10px 0;
+        max-width: 190px;
+        width: 100%;
         padding-top: 20px;
         }
 
@@ -86,7 +93,17 @@
 
         <center>
             <div class="container" id="content">
-                <div class="col-6">
+                <div class="col-4">
+                    <center>
+                        <div class="row-lg-3" id="riwayat_sidang" onclick="window.location.href = 'input_penilaian.php';">
+                            <p>INPUT NILAI</p> 
+                            <center>
+                                <div class="row md-3" id="score"><img src="asset/image/score.png"></div>
+                            </center>
+                        </div>
+                    </center>
+                </div> 
+                <div class="col-4">
                     <center>
                         <div class="row-lg-3" id="riwayat_sidang" onclick="window.location.href = 'addBeritaAcara.php';">
                             <p>TAMBAH BERITA ACARA</p> 
@@ -96,7 +113,7 @@
                         </div>
                     </center>
                 </div>
-                <div class="col-6">
+                <div class="col-4">
                     <center>
                         <div class="row-lg-3" id="riwayat_sidang" onclick="window.location.href = 'historySidang.php';">
                             <p>RIWAYAT SIDANG</p> 
@@ -109,7 +126,7 @@
             </div>
         </center>
         <div class="logout_btn">
-            <form action="logout.php" method="post" style="float:right; margin-right:30%;">
+            <form action="logout.php" method="post" style="float:right; margin-right:20%;">
                 <input class="btn btn-warning btn-lg" type="submit" value="Log Out">
             </form>
         </div>
