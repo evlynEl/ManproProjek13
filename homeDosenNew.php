@@ -95,7 +95,7 @@
             <div class="container" id="content">
                 <div class="col-4">
                     <center>
-                        <div class="row-lg-3" id="riwayat_sidang" onclick="window.location.href = 'input_penilaian.php';">
+                        <div class="row-lg-3" id="input_nilai" onclick="window.location.href = 'input_penilaian.php';">
                             <p>INPUT NILAI</p> 
                             <center>
                                 <div class="row md-3" id="score"><img src="asset/image/score.png"></div>
