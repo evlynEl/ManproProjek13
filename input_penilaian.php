@@ -246,16 +246,6 @@ if (isset($_POST['cek'])){
                 </div>
 
                 <div class="row mt-3">
-                    <div class="col-lg-4">
-                        <label for=""><h5>Penilaian cp7</h5></label>
-                        <div class="input-group">
-                            <div class="input-group-prepend">
-                                <label class="input-group-text" style="background-color: #0B6977; color: whitesmoke; font-weight: 700;" for="cp7">CP 5</label>
-                            </div>
-                            <input type="number" name="cp7" id="cp7" class="form-control" placeholder="Nilai" min="0" max="100" required>
-                        </div>
-                    </div>
-
                     <div class="col-lg-3" style="margin-top: 32px; display: none;">
                         <div id="result1">
                             <h3 id="sum_result">Nilai Akhir: </h3>
@@ -286,13 +276,13 @@ if (isset($_POST['cek'])){
             $('#hitung').on('click', function () {
                 const cp1 = parseFloat($("#cp1").val()) || 0;
                 const cp2 = parseFloat($("#cp2").val()) || 0;
-                const cp3Value = parseFloat($("#cp3").val()) || 0;
-                const cp4Value = parseFloat($("#cp4").val()) || 0;
-                const cp5Value = parseFloat($("#cp5").val()) || 0;
-                const cp6Value = parseFloat($("#cp6").val()) || 0;
-                const cp7Value = parseFloat($("#cp7").val()) || 0;
+                const cp3 = parseFloat($("#cp3").val()) || 0;
+                const cp4 = parseFloat($("#cp4").val()) || 0;
+                const cp5 = parseFloat($("#cp5").val()) || 0;
+                const cp6 = parseFloat($("#cp6").val()) || 0;
+                
 
-                const totalSum = (cp1*0.05) + (cp2*0.05) + (cp3Value*0.2) + (cp4Value*0.2) + (cp5Value*0.1) + (cp6Value*0.2) + (cp7Value*0.2);
+                const totalSum = (cp1*0.05) + (cp2*0.1) + (cp3*0.25) + (cp4*0.1) + (cp5*0.25) + (cp6*0.25);
                 //const avgSum = parseFloat(totalSum / 7).toFixed(2);
 
                 $("#sum_result").text("Nilai Akhir: " + totalSum);
@@ -303,13 +293,12 @@ if (isset($_POST['cek'])){
             })
             $('#input').on('click', function(){
                 const nama_mhs =$("#nama_mhs").val();
-                const cp1Value = parseFloat($("#cp1").val()) || 0;
+                const cp1 = parseFloat($("#cp1").val()) || 0;
                 const cp2 = parseFloat($("#cp2").val()) || 0;
-                const cp3Value = parseFloat($("#cp3").val()) || 0;
-                const cp4Value = parseFloat($("#cp4").val()) || 0;
-                const cp5Value = parseFloat($("#cp5").val()) || 0;
-                const cp6Value = parseFloat($("#cp6").val()) || 0;
-                const cp7Value = parseFloat($("#cp7").val()) || 0;
+                const cp3 = parseFloat($("#cp3").val()) || 0;
+                const cp4 = parseFloat($("#cp4").val()) || 0;
+                const cp5 = parseFloat($("#cp5").val()) || 0;
+                const cp6 = parseFloat($("#cp6").val()) || 0;
                 const nama_dosen = $("#dosen_penilai").val();
 
                 $.ajax({
@@ -318,26 +307,21 @@ if (isset($_POST['cek'])){
                     data:{
                         tanda: "inputNilai",
                         nama_mhs:nama_mhs,
-                        cp1Value:cp1Value,
+                        cp1:cp1,
                         cp2: cp2,
-                        cp3Value:cp3Value,
-                        cp4Value:cp4Value,
-                        cp5Value:cp5Value,
-                        cp6Value:cp6Value,
-                        cp7Value:cp7Value,
+                        cp3:cp3,
+                        cp4:cp4,
+                        cp5:cp5,
+                        cp6:cp6,
                         nama_dosen:nama_dosen
                     },
                     success:function(respond){
                         var response = JSON.parse(respond);
-                        var avg = response['avg'];
                         var totalSum = response['totalSum'];
                         console.log(response);
 
                         $("#sum_result").text("Nilai Akhir: " + totalSum);
                         $("#result1").parent().show();
-
-                        //$("#sum_avg_result").text("Nilai Akhir(Averaged): " + avg);
-                       // $("#result2").parent().show();
                         
                         alert(response['errorlog']);
                     },

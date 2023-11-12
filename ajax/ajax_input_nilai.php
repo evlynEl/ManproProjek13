@@ -48,21 +48,17 @@ if ($tanda == 'status_dosen'){
 }
 
 elseif($tanda == 'hitungNilai'){
-    $cp1Value = floatval($_POST['cp1Value']);
+    $cp1 = floatval($_POST['cp1']);
     $cp2 = floatval($_POST['cp2']);
     $cp3 = floatval($_POST['cp3']);
     $cp4 = floatval($_POST['cp4']);
     $cp5 = floatval($_POST['cp5']);
     $cp6 = floatval($_POST['cp6']);
-    $cp7 = floatval($_POST['cp7']);
 
-    $totalSum = $cp1Value + $cp2 + $cp3 + $cp4 + $cp5 + $cp6
-    + $cp7;
+    $totalSum = ($cp1*0.05) + ($cp2*0.1) + ($cp3*0.25) + ($cp4*0.1) + ($cp5*0.25) + ($cp6*0.25);
 
-    $avg = number_format(floatval($totalSum / 7), 2);
 
     $response = array(
-        'avg' => $avg,
         'totalSum' => $totalSum
     );
 
@@ -72,20 +68,15 @@ elseif($tanda == 'hitungNilai'){
 }
 elseif($tanda == 'inputNilai'){
     $nama_mhs = $_POST['nama_mhs'];
-    $cp1Value = floatval($_POST['cp1Value']);
+    $cp1 = floatval($_POST['cp1']);
     $cp2 = floatval($_POST['cp2']);
     $cp3 = floatval($_POST['cp3']);
     $cp4 = floatval($_POST['cp4']);
     $cp5 = floatval($_POST['cp5']);
     $cp6 = floatval($_POST['cp6']);
-    $cp7 = floatval($_POST['cp7']);
     $nama_dosen = $_POST['nama_dosen'];
 
-    $totalSum = $cp1Value + $cp2 + $cp3 + $cp4 + $cp5 + $cp6
-    + $cp7;
-
-    $avg = number_format(floatval($totalSum / 7), 2);
-
+    $totalSum = ($cp1*0.05) + ($cp2*0.1) + ($cp3*0.25) + ($cp4*0.1) + ($cp5*0.25) + ($cp6*0.25);
 
     $sql ='SELECT * FROM `penilaian` WHERE mahasiswa = "'.$nama_mhs.' " ';
     $query = mysqli_query($conn, $sql);
@@ -93,9 +84,7 @@ elseif($tanda == 'inputNilai'){
     $response = array(
         'status' => 0,
         'errorlog' => 'Nilai telah sukses di input',
-        'totalSum' => $totalSum,
-        'avg' => $avg
-        
+        'totalSum' => $totalSum
     );
     
     
@@ -106,7 +95,7 @@ elseif($tanda == 'inputNilai'){
         );
     }
     else{
-        $sql = "INSERT INTO `penilaian` (`id_penilaian`, `mahasiswa`, `cp1`, `cp2`, `cp3`,`cp4`, `cp5`, `cp6`, `cp7`, `nilai_akhir`, `avg_nilai_akhir`, `dosen`) VALUES (NULL, '$nama_mhs', '$cp1Value', '$cp2', '$cp4', '$cp3', '$cp5', '$cp6', '$cp7', '$totalSum', '$avg', '$nama_dosen')";
+        $sql = "INSERT INTO `penilaian` (`id_penilaian`, `mahasiswa`, `cp1`, `cp2`, `cp3`,`cp4`, `cp5`, `cp6`, `nilai_akhir`, `dosen`) VALUES (NULL, '$nama_mhs', '$cp1', '$cp2', '$cp4', '$cp3', '$cp5', '$cp6', '$totalSum', '$nama_dosen')";
         $query = mysqli_query($conn, $sql);
     }
 
