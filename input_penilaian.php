@@ -235,7 +235,7 @@ $result = $stmt->get_result();
 
                 <div class="row mt-3">
                     <div class="col-lg-4 mb-4">
-                        <label for=""><h5>Penilaian Bab 3 & 4 (SIB)</h5></label>
+                        <label for=""><h5>Penilaian Bab 3 & 4</h5></label>
                         <div class="input-group">
                             <div class="input-group-prepend">
                                 <label class="input-group-text" style="background-color: #0B6977; color: whitesmoke; font-weight: 700;" for="cp3">CP 7</label>
