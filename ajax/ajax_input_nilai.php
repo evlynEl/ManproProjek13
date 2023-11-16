@@ -65,14 +65,12 @@ elseif($tanda == 'hitungNilai'){
 
     $totalSum = floatval(($cp1 * 0.05) + ($cp2 * 0.1) + ($cp3 * 0.25) + ($cp4 * 0.1) + ($cp5 * 0.25) + ($cp6 * 0.25));
 
-    $sql = "INSERT INTO `penilaian` (`id_penilaian`, `mahasiswa`, `cp1`, `cp2`, `cp3`,`cp4`, `cp5`, `cp6`, `cp7`, `nilai_akhir`, `avg_nilai_akhir`, `dosen`) VALUES (NULL, '$nama_mhs', '$cp1Value', '$cp2', '$cp4', '$cp3', '$cp5', '$cp6', '$cp7', '$totalSum', '$avg', '$nama_dosen')";
-    $query = mysqli_query($conn, $sql);
 
     $response = array(
         'totalSum' => $totalSum
     );
 
-    $sql = "INSERT INTO `penilaian` (`id_penilaian`, `mahasiswa`, `cp1`, `cp2`, `cp3`,`cp4`, `cp5`, `cp6`, `cp7`, `nilai_akhir`, `avg_nilai_akhir`, `dosen`) VALUES (NULL, '$nama_mhs', '$cp1Value', '$cp2', '$cp4', '$cp3', '$cp5', '$cp6', '$cp7', '$totalSum', '$avg', '$nama_dosen')";
+    $sql = "INSERT INTO `penilaian` (`id_penilaian`, `mahasiswa`, `cp1`, `cp2`, `cp3`,`cp4`, `cp5`, `cp6`, `nilai_akhir`, `dosen`) VALUES (NULL, '$nama_mhs', '$cp1Value', '$cp2', '$cp4', '$cp3', '$cp5', '$cp6', '$totalSum', '$nama_dosen')";
     $query = mysqli_query($conn, $sql);
 
     // Send the response as JSON
