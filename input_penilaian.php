@@ -351,6 +351,7 @@ $result = $stmt->get_result();
 
             $('#nama_mhs').on('change', function(){
                 var nama_mhs = $(this).val();
+                var nama_dosen = "SILVIA ROSTIANINGSIH, S.Kom., M.MT.";
                 var nama_dosen = $('#dosen_penilai').val();
                 console.log(nama_mhs);
                 console.log(nama_dosen);
@@ -375,25 +376,30 @@ $result = $stmt->get_result();
                 })
             })
 
-            $('#hitung').on('click', function(){
+            $('#input').on('click', function(){
+
+                const nama_mhs =$("#nama_mhs").val();
                 const cp1 = parseFloat($("#cp1").val()) || 0;
                 const cp2 = parseFloat($("#cp2").val()) || 0;
                 const cp3 = parseFloat($("#cp3").val()) || 0;
                 const cp4 = parseFloat($("#cp4").val()) || 0;
                 const cp5 = parseFloat($("#cp5").val()) || 0;
                 const cp6 = parseFloat($("#cp6").val()) || 0;
+                const nama_dosen = $("#dosen_penilai").val();
 
                 $.ajax({
                     url: "ajax/ajax_input_nilai.php",
                     type: "POST",
                     data:{
-                        tanda: "hitungNilai",
+                        tanda: "inputNilai",
+                        nama_mhs:nama_mhs,
                         cp1:cp1,
                         cp2: cp2,
                         cp3:cp3,
                         cp4:cp4,
                         cp5:cp5,
-                        cp6:cp6
+                        cp6:cp6,
+                        nama_dosen:nama_dosen
                     },
                     success:function(respond){
                         var response = JSON.parse(respond);
