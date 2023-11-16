@@ -231,15 +231,6 @@ $result = $stmt->get_result();
                         </div>
                     </div>
 
-                    <div class="col-lg-4">
-                        <label for=""><h5>Penilaian Bab 3 & 4 (Infor)</h5></label>
-                        <div class="input-group">
-                            <div class="input-group-prepend">
-                                <label class="input-group-text" style="background-color: #0B6977; color: whitesmoke; font-weight: 700;" for="bab_3_4_infor">CP 4</label>
-                            </div>
-                            <input type="number" name="bab_3_4_infor" id="bab_3_4_infor" class="form-control" placeholder="Nilai" min="0">
-                        </div>
-                    </div>
                 </div>
 
                 <div class="row mt-3">
