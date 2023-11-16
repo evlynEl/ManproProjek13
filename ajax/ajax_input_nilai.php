@@ -56,16 +56,14 @@ if ($tanda == 'status_dosen') {
 }
 
 elseif($tanda == 'hitungNilai'){
-    $judul_dan_abstrakValue = floatval($_POST['judul_dan_abstrakValue']);
-    $bab_1_2 = floatval($_POST['bab_1_2']);
-    $bab_3_4_sibValue = floatval($_POST['bab_3_4_sibValue']);
-    $bab_3_4_inforValue = floatval($_POST['bab_3_4_inforValue']);
-    $bukuValue = floatval($_POST['bukuValue']);
-    $bab_5_kesimpulanValue = floatval($_POST['bab_5_kesimpulanValue']);
-    $programValue = floatval($_POST['programValue']);
+    $cp1 = floatval($_POST['cp1']);
+    $cp2 = floatval($_POST['cp2']);
+    $cp3 = floatval($_POST['cp3']);
+    $cp4 = floatval($_POST['cp4']);
+    $cp5 = floatval($_POST['cp5']);
+    $cp6 = floatval($_POST['cp6']);
 
-    $totalSum = floatval(($judul_dan_abstrakValue * 0.05) + ($bab_1_2 * 0.1) + ($bab_3_4_sibValue * 0.25) + ($bab_3_4_inforValue * 0.25) + ($bukuValue * 0.1) + 
-    ($bab_5_kesimpulanValue * 0.25) + ($programValue * 0.25));
+    $totalSum = floatval(($cp1 * 0.05) + ($cp2 * 0.1) + ($cp3 * 0.25) + ($cp4 * 0.1) + ($cp5 * 0.25) + ($cp6 * 0.25));
 
 
     $response = array(

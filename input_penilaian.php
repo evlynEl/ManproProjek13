@@ -215,9 +215,9 @@ $result = $stmt->get_result();
                         <label for=""><h5>Penilaian Judul dan Abstrak Bab 1 & 2</h5></label>
                         <div class="input-group">
                             <div class="input-group-prepend">
-                                <label class="input-group-text" style="background-color: #0B6977; color: whitesmoke; font-weight: 700;" for="judul_dan_abstrak">CP 9</label>
+                                <label class="input-group-text" style="background-color: #0B6977; color: whitesmoke; font-weight: 700;" for="cp1">CP 9</label>
                             </div>
-                            <input type="number" name="judul_dan_abstrak" id="judul_dan_abstrak" class="form-control" placeholder="Nilai" min="0">
+                            <input type="number" name="cp1" id="cp1" class="form-control" placeholder="Nilai" min="0">
                         </div>
                     </div>
 
@@ -225,9 +225,9 @@ $result = $stmt->get_result();
                         <label for=""><h5>Penilaian Bab 1 & 2</h5></label>
                         <div class="input-group">
                             <div class="input-group-prepend">
-                                <label class="input-group-text" style="background-color: #0B6977; color: whitesmoke; font-weight: 700;" for="bab_1_2">CP 9</label>
+                                <label class="input-group-text" style="background-color: #0B6977; color: whitesmoke; font-weight: 700;" for="cp2">CP 9</label>
                             </div>
-                            <input type="number" name="bab_1_2" id="bab_1_2" class="form-control" placeholder="Nilai" min="0">
+                            <input type="number" name="cp2" id="cp2" class="form-control" placeholder="Nilai" min="0">
                         </div>
                     </div>
 
@@ -247,19 +247,19 @@ $result = $stmt->get_result();
                         <label for=""><h5>Penilaian Bab 3 & 4 (SIB)</h5></label>
                         <div class="input-group">
                             <div class="input-group-prepend">
-                                <label class="input-group-text" style="background-color: #0B6977; color: whitesmoke; font-weight: 700;" for="bab_3_4_sib">CP 7</label>
+                                <label class="input-group-text" style="background-color: #0B6977; color: whitesmoke; font-weight: 700;" for="cp3">CP 7</label>
                             </div>
-                            <input type="number" name="bab_3_4_sib" id="bab_3_4_sib" class="form-control" placeholder="Nilai" min="0">
+                            <input type="number" name="cp3" id="cp3" class="form-control" placeholder="Nilai" min="0">
                         </div>
                     </div>
 
                     <div class="col-lg-4">
-                        <label for=""><h5>Penilaian BUKU</h5></label>
+                        <label for=""><h5>Penilaian cp4</h5></label>
                         <div class="input-group">
                             <div class="input-group-prepend">
-                                <label class="input-group-text" style="background-color: #0B6977; color: whitesmoke; font-weight: 700;" for="buku">CP 9</label>
+                                <label class="input-group-text" style="background-color: #0B6977; color: whitesmoke; font-weight: 700;" for="cp4">CP 9</label>
                             </div>
-                            <input type="number" name="buku" id="buku" class="form-control" placeholder="Nilai" min="0">
+                            <input type="number" name="cp4" id="cp4" class="form-control" placeholder="Nilai" min="0">
                         </div>
                     </div>
 
@@ -267,21 +267,21 @@ $result = $stmt->get_result();
                         <label for=""><h5>Penilaian 5 dan KESIMPULAN</h5></label>
                         <div class="input-group">
                             <div class="input-group-prepend">
-                                <label class="input-group-text" style="background-color: #0B6977; color: whitesmoke; font-weight: 700;" for="bab_5_kesimpulan">CP 8</label>
+                                <label class="input-group-text" style="background-color: #0B6977; color: whitesmoke; font-weight: 700;" for="cp5">CP 8</label>
                             </div>
-                            <input type="number" name="bab_5_kesimpulan" id="bab_5_kesimpulan" class="form-control" placeholder="Nilai" min="0">
+                            <input type="number" name="cp5" id="cp5" class="form-control" placeholder="Nilai" min="0">
                         </div>
                     </div>
                 </div>
 
                 <div class="row mt-3">
                     <div class="col-lg-4">
-                        <label for=""><h5>Penilaian PROGRAM</h5></label>
+                        <label for=""><h5>Penilaian cp6</h5></label>
                         <div class="input-group">
                             <div class="input-group-prepend">
-                                <label class="input-group-text" style="background-color: #0B6977; color: whitesmoke; font-weight: 700;" for="program">CP 5</label>
+                                <label class="input-group-text" style="background-color: #0B6977; color: whitesmoke; font-weight: 700;" for="cp6">CP 5</label>
                             </div>
-                            <input type="number" name="program" id="program" class="form-control" placeholder="Nilai" min="0">
+                            <input type="number" name="cp6" id="cp6" class="form-control" placeholder="Nilai" min="0">
                         </div>
                     </div>
 
@@ -385,26 +385,24 @@ $result = $stmt->get_result();
             })
 
             $('#hitung').on('click', function(){
-                const judul_dan_abstrakValue = parseFloat($("#judul_dan_abstrak").val()) || 0;
-                const bab_1_2 = parseFloat($("#bab_1_2").val()) || 0;
-                const bab_3_4_sibValue = parseFloat($("#bab_3_4_sib").val()) || 0;
-                const bab_3_4_inforValue = parseFloat($("#bab_3_4_infor").val()) || 0;
-                const bukuValue = parseFloat($("#buku").val()) || 0;
-                const bab_5_kesimpulanValue = parseFloat($("#bab_5_kesimpulan").val()) || 0;
-                const programValue = parseFloat($("#program").val()) || 0;
+                const cp1 = parseFloat($("#cp1").val()) || 0;
+                const cp2 = parseFloat($("#cp2").val()) || 0;
+                const cp3 = parseFloat($("#cp3").val()) || 0;
+                const cp4 = parseFloat($("#cp4").val()) || 0;
+                const cp5 = parseFloat($("#cp5").val()) || 0;
+                const cp6 = parseFloat($("#cp6").val()) || 0;
 
                 $.ajax({
                     url: "ajax/ajax_input_nilai.php",
                     type: "POST",
                     data:{
                         tanda: "hitungNilai",
-                        judul_dan_abstrakValue:judul_dan_abstrakValue,
-                        bab_1_2: bab_1_2,
-                        bab_3_4_sibValue:bab_3_4_sibValue,
-                        bab_3_4_inforValue:bab_3_4_inforValue,
-                        bukuValue:bukuValue,
-                        bab_5_kesimpulanValue:bab_5_kesimpulanValue,
-                        programValue:programValue
+                        cp1:cp1,
+                        cp2: cp2,
+                        cp3:cp3,
+                        cp4:cp4,
+                        cp5:cp5,
+                        cp6:cp6
                     },
                     success:function(respond){
                         var response = JSON.parse(respond);
