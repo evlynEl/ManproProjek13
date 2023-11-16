@@ -327,11 +327,13 @@
 
                             <div class="row">
                                 <label for="nama_mhs"><h5>Mahasiswa</h5></label>
-                                <select class="form-select" aria-label="Default select example" name="nama_mhs" id="nama_mhs">
-                                    <option value="Pilih Mahasiswa">Pilih Mahasiswa</option>
+                                <select class="form-select" aria-label="Default select example" name="nama_mhs" id="nama_mhs" type="nama_mhs">
+                                    <option value="">Pilih Mahasiswa</option>
                                 </select>
+                                <input type="hidden" name="hidden_nama_mhs" id="hidden_nama_mhs" value="">
                                 <div class="error-message" id="errorNamaMhs"></div>
                             </div>
+                
                                 
                             <br>
 
@@ -432,13 +434,78 @@
                             </div> -->
     
                             <!-- <br> -->
-    
+    <!-- 
                             <div class="row">
                                 <div class="col-lg-6">
                                     <h5>Nilai Akhir: A</h5>
                                 </div>
                                 <div class="col-lg-6">
-                                    <h5 style="margin-left: 5px;" >Hasil Sidang: Lulus</h5>
+                                    -->
+
+<?php
+$nama_mhs = isset($_GET['hidden_nama_mhs']) ? $_GET['hidden_nama_mhs'] : '';
+
+error_log('Nama_Mhs: ' . $nama_mhs);
+echo $nama_mhs;
+    if (!empty($nama_mhs)) {
+        $sql_nilai = "SELECT * FROM penilaian WHERE mahasiswa LIKE '%$nama_mhs%'";
+        $result_nilai = mysqli_query($conn, $sql_nilai);
+
+        if(mysqli_num_rows($result_nilai) > 0){
+            $sum_nilai_akhir = 0;
+            $count_nilai = 0;
+
+            while($row = mysqli_fetch_assoc($result_nilai)) {
+                $nilai_akhir = $row['nilai_akhir'];
+                $sum_nilai_akhir += $nilai_akhir;
+                $count_nilai++;
+            }
+    
+            $average_nilai_akhir = ($count_nilai > 0) ? $sum_nilai_akhir / $count_nilai : 0;
+            echo "<h5>Sum of nilai_akhir: " . $sum_nilai_akhir . "</h5><br>";
+            if($average_nilai_akhir>=85.5){
+                $nilai_alphabet="A";
+                $hasil_sidang="Lulus";
+               
+            }
+            elseif($average_nilai_akhir>= 75.5){
+                $nilai_alphabet="B+";
+                $hasil_sidang="Lulus";
+              
+            }
+            elseif($average_nilai_akhir>= 68.5){
+                $nilai_alphabet="B";
+                $hasil_sidang="Lulus";
+               
+            }
+            elseif($average_nilai_akhir>= 60.5){
+                $nilai_alphabet="C+";
+                $hasil_sidang="Lulus";
+                
+            }
+            elseif($average_nilai_akhir>= 55.5){
+                $nilai_alphabet="C";
+                $hasil_sidang="Lulus";
+               
+            }
+            elseif($average_nilai_akhir>= 40.5){
+                $nilai_alphabet="D";
+                $hasil_sidang="Tidak Lulus";
+               
+            }
+            else{
+                $nilai_alphabet="E";
+                $hasil_sidang="Tidak Lulus";
+            }
+            echo "<h5>Hasil Sidang: ". $nilai_alphabet . "  (". $hasil_sidang .")</h5>";
+        } else {
+            echo "No records found for the specified student.";
+        }
+    } else {
+        echo "Please select a valid student name.".$nama_mhs." ";
+    }
+?>
+
                                 </div>
                             </div>
                         </div>
@@ -455,6 +522,7 @@
         </div>
     </div>
 
+   
 
     <script>
         $(document).ready(function(){
@@ -474,23 +542,38 @@
                     }
                 });
             }
-            else{
-                $.ajax({
-                    url: "ajax/ajax_add_berita_acara.php",
-                    type: "POST",
-                    data:{
-                        tanda: "Mahasiswa",
-                        id:ketuaPenguji
-                    },
-                    success:function(respond){
-                        $("#nama_mhs").html(respond);
-                    },
-                    error:function(){
-                        alert("gagal");
-                    }
-                })
-            }
-            
+            else {
+    $.ajax({
+        url: "ajax/ajax_add_berita_acara.php",
+        type: "POST",
+        data: {
+            tanda: "Mahasiswa",
+            id: ketuaPenguji
+        },
+        success: function (respond) {
+            $("#nama_mhs").html(respond);
+
+            $('#nama_mhs').change(function () {
+                var selectedNamaMhs = $(this).val();
+               
+                $('input[name="hidden_nama_mhs"]').val(selectedNamaMhs);
+            });
+        },
+        error: function () {
+            alert("gagal");
+        }
+    });
+}
+$(document).on('change', '#nama_mhs', function () {
+    var selectedNamaMhs = $(this).val();
+    
+    $('input[name="hidden_nama_mhs"]').val(selectedNamaMhs);
+});
+$(document).on('change', '#hidden_nama_mhs', function () {
+    var selectedNamaMhs = $(this).val();
+    $('input[name="hidden_nama_mhs"]').val(selectedNamaMhs);
+});
+
             // dosen penguji
             $('#nama_mhs').on('change', function(){
                 var nama_mhs = $(this).val();
@@ -642,6 +725,9 @@
                 var ruangSidang = $("#ruangSidang").val();
                 var konsentrasi = $("#konsentrasi").val();
                 var catatanSidang = $("#catatanSidang").val();
+                var nilai_akhir = $("#nilai_akhir").val();
+                var nilai_alphabet = $("#nilai_alphabet").val();
+                var hasil_sidang = $("#hasil_sidang").val();
                 var status_ketua = "";
                 var status_penguji = "";
                 var status_pembimbing1 = "";
@@ -734,6 +820,9 @@
                             status_pembimbing2: status_pembimbing2,
                             konsentrasi: konsentrasi,
                             catatanSidang: catatanSidang,
+                            nilai_akhir: nilai_akhir,
+                            nilai_alphabet: nilai_alphabet,
+                            hasil_sidang: hasil_sidang,
                             tanda: "Insert"
                         },
                         success: function(respond) {                           

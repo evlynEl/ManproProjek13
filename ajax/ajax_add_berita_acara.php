@@ -69,20 +69,22 @@ elseif ($tanda == 'Pembimbing_2'){
     echo json_encode($response);
     exit;
 }
-elseif ($tanda == 'Mahasiswa'){
+elseif ($tanda == 'Mahasiswa') {
     $id = $_POST['id'];
     $sql = "SELECT * FROM data_mahasiswa WHERE ketua_penguji LIKE '%$id%'";
-    $result = mysqli_query($conn,$sql);
+    $result = mysqli_query($conn, $sql);
 
-    echo '<option>Pilih Mahasiswa</option>';
-    while ($row = mysqli_fetch_assoc($result)){
-        echo '<option value="' . $row['mahasiswa'] . '">' . $row['mahasiswa'] . '</option>';
+    $options = '<option value="">Pilih Mahasiswa</option>';
+    while ($row = mysqli_fetch_assoc($result)) {
+        $options .= '<option value="' . $row['mahasiswa'] . '">' . $row['mahasiswa'] . '</option>';
     }
+    echo $options;
 }
 
 elseif ($tanda == 'Insert'){
     $judulSkripsi = trim($_POST['judulSkripsi']);
     $namaMhs = $_POST['namaMhs'];
+    $_POST['nama_mhs']=$namaMhs;
     $ketuaPenguji = trim($_POST['ketuaPenguji']);
     $dosenPenguji = trim($_POST['dosenPenguji']);
     $tanggalSidang = $_POST['tanggalSidang'];
@@ -94,6 +96,9 @@ elseif ($tanda == 'Insert'){
     $ruangSidang = $_POST['ruangSidang'];
     $konsentrasi = $_POST['konsentrasi'];
     $catatanSidang = $_POST['catatanSidang'];
+    $nilaiakhir=$nilai_akhir;
+    $nilaialphabet=$nilai_alphabet;
+    $hasilsidang=$hasil_sidang;
 
     switch($ruangSidang){
         case 1:
@@ -146,8 +151,8 @@ elseif ($tanda == 'Insert'){
 
     if (mysqli_num_rows($result_kejadian) == 0) {
         // Tambahkan data jika tidak ada data yang sama
-        $sql = "INSERT INTO berita_acara (id, nama_nrp, judul_skripsi, konsentrasi, tanggal_sidang, ruang_sidang, ketua_penguji, anggota_penguji, pembimbing_1, pembimbing_2, catatan) 
-        VALUES (' ', '$namaMhs', '$judulSkripsi', '$konsentrasi', '$formattedTime', '$ruangSidang', '$ketuaPenguji', '$dosenPenguji', '$pembimbing1', '$pembimbing2', '$catatanSidang')";
+        $sql = "INSERT INTO berita_acara (id, nama_nrp, judul_skripsi, konsentrasi, tanggal_sidang, ruang_sidang, ketua_penguji, anggota_penguji, pembimbing_1, pembimbing_2, catatan, nilai_akhir, nilai_alphabet, hasil_sidang) 
+        VALUES (' ', '$namaMhs', '$judulSkripsi', '$konsentrasi', '$formattedTime', '$ruangSidang', '$ketuaPenguji', '$dosenPenguji', '$pembimbing1', '$pembimbing2', '$catatanSidang', '$nilaiakhir', '$nilaialphabet', '$hasilsidang')";
         $result = mysqli_query($conn, $sql);
 
         $status_ketua = $_POST['status_ketua'];
