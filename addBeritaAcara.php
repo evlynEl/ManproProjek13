@@ -330,7 +330,7 @@
                                 <select class="form-select" aria-label="Default select example" name="nama_mhs" id="nama_mhs" type="nama_mhs">
                                     <option value="">Pilih Mahasiswa</option>
                                 </select>
-                                <input type="hidden" name="hidden_nama_mhs" id="hidden_nama_mhs" value="">
+                                
                                 <div class="error-message" id="errorNamaMhs"></div>
                             </div>
                 
@@ -441,8 +441,9 @@
                                 </div>
                                 <div class="col-lg-6">
                                     -->
-
+                                    
 <?php
+echo "<input type='hidden' name='hidden_nama_mhs' id='hidden_nama_mhs' value=''></input>";
 $nama_mhs = isset($_GET['hidden_nama_mhs']) ? $_GET['hidden_nama_mhs'] : '';
 
 error_log('Nama_Mhs: ' . $nama_mhs);
@@ -506,6 +507,7 @@ echo $nama_mhs;
     }
 ?>
 
+
                                 </div>
                             </div>
                         </div>
@@ -552,11 +554,11 @@ echo $nama_mhs;
         },
         success: function (respond) {
             $("#nama_mhs").html(respond);
-
             $('#nama_mhs').change(function () {
+                var nama_mhs = $(this).val();
                 var selectedNamaMhs = $(this).val();
-               
-                $('input[name="hidden_nama_mhs"]').val(selectedNamaMhs);
+                console.log(selectedNamaMhs);
+                $('input[id="hidden_nama_mhs"]').val(selectedNamaMhs);
             });
         },
         error: function () {
@@ -566,12 +568,11 @@ echo $nama_mhs;
 }
 $(document).on('change', '#nama_mhs', function () {
     var selectedNamaMhs = $(this).val();
-    
-    $('input[name="hidden_nama_mhs"]').val(selectedNamaMhs);
+    $('input[id="hidden_nama_mhs"]').val(selectedNamaMhs);
 });
 $(document).on('change', '#hidden_nama_mhs', function () {
     var selectedNamaMhs = $(this).val();
-    $('input[name="hidden_nama_mhs"]').val(selectedNamaMhs);
+    $('input[id="hidden_nama_mhs"]').val(selectedNamaMhs);
 });
 
             // dosen penguji
