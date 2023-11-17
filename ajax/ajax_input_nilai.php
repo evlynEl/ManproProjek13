@@ -70,7 +70,7 @@ elseif($tanda == 'inputNilai'){
     $sql_check = "SELECT * FROM penilaian WHERE mahasiswa LIKE '%$nama_mhs%' AND dosen LIKE '%$nama_dosen%'";
     $query = mysqli_query($conn, $sql_check);
 
-    if (mysqli_num_rows($query) > 0){
+    if (mysqli_num_rows($query) < 1){
         $sql = "INSERT INTO `penilaian` (`id_penilaian`, `mahasiswa`, `cp1`, `cp2`, `cp3`,`cp4`, `cp5`, `cp6`, `nilai_akhir`, `dosen`) VALUES (NULL, '$nama_mhs', '$cp1', '$cp2', '$cp4', '$cp3', '$cp5', '$cp6', '$totalSum', '$nama_dosen')";
         $query = mysqli_query($conn, $sql);
         $pesan = "success";
