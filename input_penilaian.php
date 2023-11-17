@@ -376,6 +376,21 @@ $result = $stmt->get_result();
                 })
             })
 
+            $('#hitung').on('click', function () {
+                const cp1 = parseFloat($("#cp1").val()) || 0;
+                const cp2 = parseFloat($("#cp2").val()) || 0;
+                const cp3 = parseFloat($("#cp3").val()) || 0;
+                const cp4 = parseFloat($("#cp4").val()) || 0;
+                const cp5 = parseFloat($("#cp5").val()) || 0;
+                const cp6 = parseFloat($("#cp6").val()) || 0;
+                
+                const totalSum = (cp1*0.05) + (cp2*0.1) + (cp3*0.25) + (cp4*0.1) + (cp5*0.25) + (cp6*0.25);
+
+                $("#sum_result").text("Nilai Akhir: " + totalSum);
+                $("#result1").parent().show();
+
+            })
+
             $('#input').on('click', function(){
 
                 const nama_mhs =$("#nama_mhs").val();
@@ -403,7 +418,6 @@ $result = $stmt->get_result();
                     },
                     success:function(respond){
                         var response = JSON.parse(respond);
-                        var avg = response.avg;
                         var totalSum = response.totalSum;
                         var colorText = totalSum <= 50 ? 'red' : 'green';
                         $("#sum_result").html("Nilai Akhir: <span style='color: " + colorText + "'>" + totalSum + "</span>");
