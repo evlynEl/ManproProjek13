@@ -19,7 +19,6 @@ if ($tanda == "cariMahasiswa"){
         else{
             $result = mysqli_query($conn, $sql);
         }
-        var_dump($sql);
     }
 
     elseif (isset($_POST['periode']) && trim($_POST['periode']) !== "Semua"){
@@ -35,12 +34,10 @@ if ($tanda == "cariMahasiswa"){
         else{
             $result = mysqli_query($conn, $sql);
         }
-        var_dump($sql);
     }
     elseif (isset($_POST['keyword']) && trim($_POST['keyword']) == ' '){
         $sql .= " LIMIT 0, 10";
         $result = mysqli_query($conn, $sql);
-        var_dump($sql);
     }
     
     if(mysqli_num_rows($result) > 0){
