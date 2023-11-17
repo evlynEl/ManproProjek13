@@ -66,16 +66,23 @@ elseif($tanda == 'inputNilai'){
     $cp6 = floatval($_POST['cp6']);
 
     $totalSum = floatval(($cp1 * 0.05) + ($cp2 * 0.1) + ($cp3 * 0.25) + ($cp4 * 0.1) + ($cp5 * 0.25) + ($cp6 * 0.25));
-
-
-    $response = array(
-        'totalSum' => $totalSum
-    );
+    $pesan = "";
 
     $sql = "INSERT INTO `penilaian` (`id_penilaian`, `mahasiswa`, `cp1`, `cp2`, `cp3`,`cp4`, `cp5`, `cp6`, `nilai_akhir`, `dosen`) VALUES (NULL, '$nama_mhs', '$cp1', '$cp2', '$cp4', '$cp3', '$cp5', '$cp6', '$totalSum', '$nama_dosen')";
     $query = mysqli_query($conn, $sql);
 
-    echo "berhasil";
+    if($query){
+        $pesan = "success";
+    }
+    else{
+        $pesan = "gagal";
+    }
+
+    $response = array(
+        'totalSum' => $totalSum,
+        'pesan' => $pesan
+    );
+
 
     // Send the response as JSON
     echo json_encode($response);

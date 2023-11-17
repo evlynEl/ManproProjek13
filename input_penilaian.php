@@ -44,6 +44,7 @@ $result = $stmt->get_result();
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.3/dist/umd/popper.min.js" ></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/js/bootstrap.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/js/bootstrap-select.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <link rel="stylesheet" href="navbar.css">
     <title>Input Nilai</title>
 </head>
@@ -426,16 +427,25 @@ $result = $stmt->get_result();
                     success:function(respond){
                         var response = JSON.parse(respond);
                         var totalSum = response.totalSum;
+                        var pesan = response.pesan;
                         var colorText = totalSum <= 50 ? 'red' : 'green';
                         $("#sum_result").html("Nilai Akhir: <span style='color: " + colorText + "'>" + totalSum + "</span>");
                         $("#result1").parent().show();
 
-                        console.log(respond);
-                        Swal.fire({
-                            title: "Berhasil Input!",
-                            text: "Nilai sudah diinput!",
-                            icon: "success"
-                        });
+                        if (pesan == "success"){
+                            Swal.fire({
+                                title: "Berhasil Input!",
+                                text: "Nilai sudah diinput!",
+                                icon: "success"
+                            });
+                        }
+                        else{
+                            Swal.fire({
+                                title: "Gagal!",
+                                text: "Nilai gagal diinput!",
+                                icon: "error"
+                            });
+                        }
                     },
                     error:function(){
                         alert("gagal");
