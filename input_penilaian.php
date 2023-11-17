@@ -395,20 +395,23 @@ $result = $stmt->get_result();
                 
                 const totalSum = (cp1*0.05) + (cp2*0.1) + (cp3*0.25) + (cp4*0.1) + (cp5*0.25) + (cp6*0.25);
 
-                $("#sum_result").text("Nilai Akhir: " + totalSum);
+                var colorText = totalSum <= 50 ? 'red' : 'green';
+                $("#sum_result").html("Nilai Akhir: <span style='color: " + colorText + "'>" + totalSum + "</span>");
                 $("#result1").parent().show();
 
             })
 
             $('#input').on('click', function(){
-                const nama_mhs =$("#nama_mhs").val();
+                var nama_mhs = $('#nama_mhs').val();
+                var nama_dosen = $('#dosen_penilai').val();
                 const cp1 = parseFloat($("#cp1").val()) || 0;
                 const cp2 = parseFloat($("#cp2").val()) || 0;
                 const cp3 = parseFloat($("#cp3").val()) || 0;
                 const cp4 = parseFloat($("#cp4").val()) || 0;
                 const cp5 = parseFloat($("#cp5").val()) || 0;
                 const cp6 = parseFloat($("#cp6").val()) || 0;
-                const nama_dosen = $("#dosen_penilai").val();
+
+                event.preventDefault();
 
                 $.ajax({
                     url: "ajax/ajax_input_nilai.php",
@@ -416,22 +419,19 @@ $result = $stmt->get_result();
                     data:{
                         tanda: "inputNilai",
                         nama_mhs:nama_mhs,
+                        nama_dosen:nama_dosen,
                         cp1:cp1,
-                        cp2: cp2,
+                        cp2:cp2,
                         cp3:cp3,
                         cp4:cp4,
                         cp5:cp5,
-                        cp6:cp6,
-                        nama_dosen:nama_dosen
+                        cp6:cp6
                     },
                     success:function(respond){
                         var response = JSON.parse(respond);
                         var totalSum = response.totalSum;
                         var pesan = response.pesan;
-                        var colorText = totalSum <= 50 ? 'red' : 'green';
-                        $("#sum_result").html("Nilai Akhir: <span style='color: " + colorText + "'>" + totalSum + "</span>");
-                        $("#result1").parent().show();
-
+                
                         if (pesan == "success"){
                             Swal.fire({
                                 title: "Berhasil Input!",
