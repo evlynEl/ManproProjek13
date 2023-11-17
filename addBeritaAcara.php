@@ -391,129 +391,76 @@
                                 </div>
                             </div>
 
-                            <br>
-    
-                            <!-- <label for="" style="margin-top: 7px;"><h5>Nilai CPL (Averaged)</h5></label>
-                            <div class="col-sm-12">
-                                <div class="table-responsive" id="tabel_cpl">
-                                    <table class="table table-bordered">
-                                        <thead style="width: 10px;">
-                                            <tr>
-                                                <th scope="col" style="width: 5px;">1</th>
-                                                <th scope="col">2</th>
-                                                <th scope="col">3</th>
-                                                <th scope="col">4</th>
-                                                <th scope="col">5</th>
-                                                <th scope="col">6</th>
-                                                <th scope="col">7</th>
-                                                <th scope="col">8</th>
-                                                <th scope="col">9</th>
-                                                <th scope="col">10</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <tr>
-                                                <td>
-                                                    <div class="form-outline w-25">
-                                                        <input type="number" name="cpl1" id="cpl1">
-                                                    </div>
-                                                </td>
-                                                <td><input type="number" name="cpl2" id="cpl2"></td>
-                                                <td><input type="number" name="cpl3" id="cpl3"></td>
-                                                <td><input type="number" name="cpl4" id="cpl4"></td>
-                                                <td><input type="number" name="cpl5" id="cpl5"></td>
-                                                <td><input type="number" name="cpl6" id="cpl6"></td>
-                                                <td><input type="number" name="cpl7" id="cpl7"></td>
-                                                <td><input type="number" name="cpl8" id="cpl8"></td>
-                                                <td><input type="number" name="cpl9" id="cpl9"></td>
-                                                <td><input type="number" name="cpl10" id="cpl10"></td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </div> -->
-    
-                            <!-- <br> -->
-    <!-- 
-                            <div class="row">
-                                <div class="col-lg-6">
-                                    <h5>Nilai Akhir: A</h5>
-                                </div>
-                                <div class="col-lg-6">
-                                    -->
-                                    
-<?php
-echo "<input type='hidden' name='hidden_nama_mhs' id='hidden_nama_mhs' value=''></input>";
-$nama_mhs = isset($_GET['hidden_nama_mhs']) ? $_GET['hidden_nama_mhs'] : '';
+                            <br> 
+                            
+                            <?php
+                                echo "<input type='hidden' name='hidden_nama_mhs' id='hidden_nama_mhs' value=''></input>";
+                                $nama_mhs = isset($_GET['hidden_nama_mhs']) ? $_GET['hidden_nama_mhs'] : '';
 
-error_log('Nama_Mhs: ' . $nama_mhs);
-echo $nama_mhs;
-    if (!empty($nama_mhs)) {
-        $sql_nilai = "SELECT * FROM penilaian WHERE mahasiswa LIKE '%$nama_mhs%'";
-        $result_nilai = mysqli_query($conn, $sql_nilai);
+                                error_log('Nama_Mhs: ' . $nama_mhs);
+                                echo $nama_mhs;
 
-        if(mysqli_num_rows($result_nilai) > 0){
-            $sum_nilai_akhir = 0;
-            $count_nilai = 0;
+                                if (!empty($nama_mhs)) {
+                                    $sql_nilai = "SELECT * FROM penilaian WHERE mahasiswa LIKE '%$nama_mhs%'";
+                                    $result_nilai = mysqli_query($conn, $sql_nilai);
 
-            while($row = mysqli_fetch_assoc($result_nilai)) {
-                $nilai_akhir = $row['nilai_akhir'];
-                $sum_nilai_akhir += $nilai_akhir;
-                $count_nilai++;
-            }
-    
-            $average_nilai_akhir = ($count_nilai > 0) ? $sum_nilai_akhir / $count_nilai : 0;
-            echo "<h5>Sum of nilai_akhir: " . $sum_nilai_akhir . "</h5><br>";
-            if($average_nilai_akhir>=85.5){
-                $nilai_alphabet="A";
-                $hasil_sidang="Lulus";
-               
-            }
-            elseif($average_nilai_akhir>= 75.5){
-                $nilai_alphabet="B+";
-                $hasil_sidang="Lulus";
-              
-            }
-            elseif($average_nilai_akhir>= 68.5){
-                $nilai_alphabet="B";
-                $hasil_sidang="Lulus";
-               
-            }
-            elseif($average_nilai_akhir>= 60.5){
-                $nilai_alphabet="C+";
-                $hasil_sidang="Lulus";
-                
-            }
-            elseif($average_nilai_akhir>= 55.5){
-                $nilai_alphabet="C";
-                $hasil_sidang="Lulus";
-               
-            }
-            elseif($average_nilai_akhir>= 40.5){
-                $nilai_alphabet="D";
-                $hasil_sidang="Tidak Lulus";
-               
-            }
-            else{
-                $nilai_alphabet="E";
-                $hasil_sidang="Tidak Lulus";
-            }
-            echo "<h5>Hasil Sidang: ". $nilai_alphabet . "  (". $hasil_sidang .")</h5>";
-        } else {
-            echo "No records found for the specified student.";
-        }
-    } else {
-        echo "Please select a valid student name.".$nama_mhs." ";
-    }
-?>
+                                    if(mysqli_num_rows($result_nilai) > 0){
+                                        $sum_nilai_akhir = 0;
+                                        $count_nilai = 0;
 
-
-                                </div>
-                            </div>
+                                        while($row = mysqli_fetch_assoc($result_nilai)) {
+                                            $nilai_akhir = $row['nilai_akhir'];
+                                            $sum_nilai_akhir += $nilai_akhir;
+                                            $count_nilai++;
+                                        }
+                                
+                                        $average_nilai_akhir = ($count_nilai > 0) ? $sum_nilai_akhir / $count_nilai : 0;
+                                        echo "<h5>Sum of nilai_akhir: " . $sum_nilai_akhir . "</h5><br>";
+                                        if($average_nilai_akhir>=85.5){
+                                            $nilai_alphabet="A";
+                                            $hasil_sidang="Lulus";
+                                        
+                                        }
+                                        elseif($average_nilai_akhir>= 75.5){
+                                            $nilai_alphabet="B+";
+                                            $hasil_sidang="Lulus";
+                                        
+                                        }
+                                        elseif($average_nilai_akhir>= 68.5){
+                                            $nilai_alphabet="B";
+                                            $hasil_sidang="Lulus";
+                                        
+                                        }
+                                        elseif($average_nilai_akhir>= 60.5){
+                                            $nilai_alphabet="C+";
+                                            $hasil_sidang="Lulus";
+                                            
+                                        }
+                                        elseif($average_nilai_akhir>= 55.5){
+                                            $nilai_alphabet="C";
+                                            $hasil_sidang="Lulus";
+                                        
+                                        }
+                                        elseif($average_nilai_akhir>= 40.5){
+                                            $nilai_alphabet="D";
+                                            $hasil_sidang="Tidak Lulus";
+                                        
+                                        }
+                                        else{
+                                            $nilai_alphabet="E";
+                                            $hasil_sidang="Tidak Lulus";
+                                        }
+                                        echo "<h5>Hasil Sidang: ". $nilai_alphabet . "  (". $hasil_sidang .")</h5>";
+                                    } else {
+                                        echo "No records found for the specified student.";
+                                    }
+                                } else {
+                                    echo "Please select a valid student name.".$nama_mhs." ";
+                                }
+                            ?>
                         </div>
-                    </div>
+                    </div>    
                 </div>
-
                 <div class="row mt-3">
                     <div class="col-lg-12 d-flex flex-row justify-content-center mt-2">
                         <button class="btn btn-outline-red" style="margin-right: 7px;">Discard</button>
@@ -523,8 +470,6 @@ echo $nama_mhs;
             </form>
         </div>
     </div>
-
-   
 
     <script>
         $(document).ready(function(){

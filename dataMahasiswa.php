@@ -331,12 +331,9 @@ if (isset($_POST["import"])) {
             </div>
     
             <div class="row mt-2">
-                <div class="col-lg-6">
-                <a href="dataMahasiswa.php" style="color: white; text-decoration: none;"><button type="button" class="btn btn-outline-ocean">Back</button></a>
-                </div>
-                <div class="col-lg-6">
+                <div class="col-lg-12 d-flex justify-content-end">
                     <!-- Button trigger modal -->
-                    <button type="button" class="btn btn-outline-ocean" style="float: right;" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+                    <button type="button" class="btn btn-outline-ocean" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
                     Import
                     </button>
     
@@ -364,6 +361,7 @@ if (isset($_POST["import"])) {
                         </div>
                     </div>
                 </div>
+                
             </div>
         </div>
 </body>

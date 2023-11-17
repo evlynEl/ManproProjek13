@@ -231,6 +231,16 @@ $result = $stmt->get_result();
                         </div>
                     </div>
 
+                    <!-- <div class="col-lg-4 mb-4">
+                        <label for=""><h5>Penilaian Bab 3 & 4 (Infor)</h5></label>
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <label class="input-group-text" style="background-color: #0B6977; color: whitesmoke; font-weight: 700;" for="cp3">CP 7</label>
+                            </div>
+                            <input type="number" name="cp3" id="cp3" class="form-control" placeholder="Nilai" min="0">
+                        </div>
+                    </div> -->
+
                 </div>
 
                 <div class="row mt-3">
@@ -245,7 +255,7 @@ $result = $stmt->get_result();
                     </div>
 
                     <div class="col-lg-4">
-                        <label for=""><h5>Penilaian cp4</h5></label>
+                        <label for=""><h5>Penilaian BUKU</h5></label>
                         <div class="input-group">
                             <div class="input-group-prepend">
                                 <label class="input-group-text" style="background-color: #0B6977; color: whitesmoke; font-weight: 700;" for="cp4">CP 9</label>
@@ -255,7 +265,7 @@ $result = $stmt->get_result();
                     </div>
 
                     <div class="col-lg-4">
-                        <label for=""><h5>Penilaian 5 dan KESIMPULAN</h5></label>
+                        <label for=""><h5>Penilaian Bab 5 dan KESIMPULAN</h5></label>
                         <div class="input-group">
                             <div class="input-group-prepend">
                                 <label class="input-group-text" style="background-color: #0B6977; color: whitesmoke; font-weight: 700;" for="cp5">CP 8</label>
@@ -267,7 +277,7 @@ $result = $stmt->get_result();
 
                 <div class="row mt-3">
                     <div class="col-lg-4">
-                        <label for=""><h5>Penilaian cp6</h5></label>
+                        <label for=""><h5>Penilaian PROGRAM</h5></label>
                         <div class="input-group">
                             <div class="input-group-prepend">
                                 <label class="input-group-text" style="background-color: #0B6977; color: whitesmoke; font-weight: 700;" for="cp6">CP 5</label>
@@ -348,10 +358,8 @@ $result = $stmt->get_result();
 
     <script>
        $(document).ready(function () {
-
             $('#nama_mhs').on('change', function(){
                 var nama_mhs = $(this).val();
-                var nama_dosen = "SILVIA ROSTIANINGSIH, S.Kom., M.MT.";
                 var nama_dosen = $('#dosen_penilai').val();
                 console.log(nama_mhs);
                 console.log(nama_dosen);
@@ -360,7 +368,7 @@ $result = $stmt->get_result();
                     type: "POST",
                     data:{
                         tanda: "status_dosen",
-                        nama_mhs:nama_mhs,
+                        nama_mhs: nama_mhs,
                         nama_dosen: nama_dosen              
                     },
                     success:function(respond){
@@ -392,7 +400,6 @@ $result = $stmt->get_result();
             })
 
             $('#input').on('click', function(){
-
                 const nama_mhs =$("#nama_mhs").val();
                 const cp1 = parseFloat($("#cp1").val()) || 0;
                 const cp2 = parseFloat($("#cp2").val()) || 0;
@@ -422,6 +429,13 @@ $result = $stmt->get_result();
                         var colorText = totalSum <= 50 ? 'red' : 'green';
                         $("#sum_result").html("Nilai Akhir: <span style='color: " + colorText + "'>" + totalSum + "</span>");
                         $("#result1").parent().show();
+
+                        console.log(respond);
+                        Swal.fire({
+                            title: "Berhasil Input!",
+                            text: "Nilai sudah diinput!",
+                            icon: "success"
+                        });
                     },
                     error:function(){
                         alert("gagal");

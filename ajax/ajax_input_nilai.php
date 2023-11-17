@@ -57,6 +57,7 @@ if ($tanda == 'status_dosen') {
 
 elseif($tanda == 'inputNilai'){
     $nama_mhs = $_POST['nama_mhs'];
+    $nama_dosen = $_POST['nama_dosen'];
     $cp1 = floatval($_POST['cp1']);
     $cp2 = floatval($_POST['cp2']);
     $cp3 = floatval($_POST['cp3']);
@@ -73,6 +74,8 @@ elseif($tanda == 'inputNilai'){
 
     $sql = "INSERT INTO `penilaian` (`id_penilaian`, `mahasiswa`, `cp1`, `cp2`, `cp3`,`cp4`, `cp5`, `cp6`, `nilai_akhir`, `dosen`) VALUES (NULL, '$nama_mhs', '$cp1', '$cp2', '$cp4', '$cp3', '$cp5', '$cp6', '$totalSum', '$nama_dosen')";
     $query = mysqli_query($conn, $sql);
+
+    echo "berhasil";
 
     // Send the response as JSON
     echo json_encode($response);
