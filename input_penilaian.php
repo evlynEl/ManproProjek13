@@ -442,7 +442,7 @@ $result = $stmt->get_result();
                         else{
                             Swal.fire({
                                 title: "Gagal!",
-                                text: "Nilai gagal diinput!",
+                                text: "Anda sudah menginput nilai untuk mahasiswa ini!",
                                 icon: "error"
                             });
                         }
