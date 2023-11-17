@@ -115,12 +115,6 @@ if (isset($_POST["import"])) {
                         }
                         $temp = $temp + 1;
                     }
-
-                    // if (!empty($result_insert)) {
-                    //     echo "Data updated";
-                    // } else {
-                    //     echo "Problem in importing csv";
-                    // }
                 }
             }
         }   
@@ -151,7 +145,7 @@ if (isset($_POST["import"])) {
         padding-left: 5rem;
         padding-right: 5rem;
         padding-top: 2rem;
-        padding-bottom: 2rem;
+        padding-bottom: 500px;
         }
         .btn {
         display: inline-block;
@@ -379,6 +373,8 @@ if (isset($_POST["import"])) {
         $('#keyword').on('keyup', function(){
             var keyword = $('#keyword').val();
             console.log(keyword);
+            event.preventDefault();
+
             $.ajax({
                 url: "ajax/ajax_data_mahasiswa.php",
                 type: "POST",
@@ -400,6 +396,7 @@ if (isset($_POST["import"])) {
         $('#periode').on('change', function(){
             var periode = $('#periode').val();
             console.log(periode);
+            event.preventDefault();
             $.ajax({
                 url: "ajax/ajax_data_mahasiswa.php",
                 type: "POST",
