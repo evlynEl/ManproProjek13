@@ -583,9 +583,6 @@ $(document).on('change', '#nama_mhs', function () {
             $("#output-data-nilai").html(output)
         }
     })
-
-    
-    
 });
 //$(document).on('change', '#hidden_nama_mhs', function () {
 //    var selectedNamaMhs = $(this).val();
@@ -766,11 +763,11 @@ $(document).on('change', '#nama_mhs', function () {
 
                 
 
-                var sql_check_dosen = "SELECT * FROM penilaian WHERE mahasiswa LIKE ?";
-                var stmt_check_dosen = mysqli_prepare(conn, sql_check_dosen);
-                mysqli_stmt_bind_param(stmt_check_dosen, "s", "%" + namaMhs + "%");
-                mysqli_stmt_execute(stmt_check_dosen);
-                var result_check_dosen = mysqli_stmt_get_result(stmt_check_dosen);
+                // var sql_check_dosen = "SELECT * FROM penilaian WHERE mahasiswa LIKE ?";
+                // var stmt_check_dosen = mysqli_prepare(conn, sql_check_dosen);
+                // mysqli_stmt_bind_param(stmt_check_dosen, "s", "%" + namaMhs + "%");
+                // mysqli_stmt_execute(stmt_check_dosen);
+                // var result_check_dosen = mysqli_stmt_get_result(stmt_check_dosen);
 
                 event.preventDefault();
 
