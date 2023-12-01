@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.2.0
+-- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 10 Nov 2023 pada 11.54
--- Versi server: 10.4.25-MariaDB
--- Versi PHP: 8.1.10
+-- Waktu pembuatan: 01 Des 2023 pada 13.21
+-- Versi server: 10.4.28-MariaDB
+-- Versi PHP: 8.2.4
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -40,15 +40,17 @@ CREATE TABLE `berita_acara` (
   `pembimbing_2` varchar(200) DEFAULT NULL,
   `catatan` varchar(200) DEFAULT NULL,
   `nilai_akhir` int(10) DEFAULT NULL,
+  `nilai_alphabet` varchar(255) NOT NULL,
   `hasil_sidang` varchar(200) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data untuk tabel `berita_acara`
 --
 
-INSERT INTO `berita_acara` (`id`, `nama_nrp`, `judul_skripsi`, `konsentrasi`, `tanggal_sidang`, `ruang_sidang`, `ketua_penguji`, `anggota_penguji`, `pembimbing_1`, `pembimbing_2`, `catatan`, `nilai_akhir`, `hasil_sidang`) VALUES
-(1, 'C14190008 RYAN JONATHAN SUGIHARTO', 'Project Management Mobile Application untuk meningkatkan Efisiensi dan Monitoring pegawai di PT. Indoserako Sejahtera', 'Mobile Application Development', '2023-11-22 16:00:00.000000', 'P308', 'SILVIA ROSTIANINGSIH, S.Kom., M.MT.', 'Dr. ANDREAS HANDOJO, S.T., M.MT.', 'JUSTINUS ANDJARWIRAWAN, S.T.,M.Eng.', 'ALVIN NATHANIEL TJONDROWIGUNO, S.Kom., M.T.', '', NULL, NULL);
+INSERT INTO `berita_acara` (`id`, `nama_nrp`, `judul_skripsi`, `konsentrasi`, `tanggal_sidang`, `ruang_sidang`, `ketua_penguji`, `anggota_penguji`, `pembimbing_1`, `pembimbing_2`, `catatan`, `nilai_akhir`, `nilai_alphabet`, `hasil_sidang`) VALUES
+(13, 'C14190126 ALVIN WISANA', 'Sistem Informasi pada Laundry X', 'Cyber Security', '2023-11-11 14:30:00.000000', 'Lab MM', 'SILVIA ROSTIANINGSIH, S.Kom., M.MT.', 'HANS JUWIANTHO, S.Kom., M.Kom.', 'ALEXANDER SETIAWAN, S.Kom., M.T.', '-', '', 79, 'B+', 'Lulus'),
+(14, 'C14190126 ALVIN WISANA', 'Sistem Informasi pada Laundry X', 'Cyber Security', '2023-11-22 13:00:00.000000', 'P308', 'SILVIA ROSTIANINGSIH, S.Kom., M.MT.', 'HANS JUWIANTHO, S.Kom., M.Kom.', 'ALEXANDER SETIAWAN, S.Kom., M.T.', '-', '', 79, 'B+', 'Lulus');
 
 -- --------------------------------------------------------
 
@@ -61,7 +63,7 @@ CREATE TABLE `data_dosen` (
   `nama` varchar(100) NOT NULL,
   `jabatan` varchar(100) NOT NULL,
   `jurusan` varchar(100) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data untuk tabel `data_dosen`
@@ -115,7 +117,7 @@ CREATE TABLE `data_mahasiswa` (
   `anggota_penguji` varchar(200) NOT NULL,
   `pembimbing_1` varchar(200) NOT NULL,
   `pembimbing_2` varchar(200) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data untuk tabel `data_mahasiswa`
@@ -256,26 +258,27 @@ INSERT INTO `data_mahasiswa` (`id`, `tanggal_ruang`, `mahasiswa`, `team_penguji`
 
 CREATE TABLE `kriteria_penilaian` (
   `id_kriteria` int(10) NOT NULL,
+  `nama_mahasiswa` varchar(255) NOT NULL,
   `cpl` varchar(10) NOT NULL,
   `ik` float NOT NULL,
   `deskripsi_ik` varchar(200) NOT NULL,
   `bab` varchar(200) NOT NULL,
   `penilaian` varchar(200) NOT NULL,
   `bobot` float NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data untuk tabel `kriteria_penilaian`
 --
 
-INSERT INTO `kriteria_penilaian` (`id_kriteria`, `cpl`, `ik`, `deskripsi_ik`, `bab`, `penilaian`, `bobot`) VALUES
-(1, 'CP 9', 9.3, 'Menganalisis data secara logis, kritis, sistematis, dan inovatif', 'JUDUL dan ABSTRAK dan BAB 1-2', 'Memenuhi 3 kriteria metode, tujuan, obyek, dapat menyebutkan yang mana masing2. abstrak berisi  rangkuman problem, solusi dan kesimpulan', 0.05),
-(2, 'CP 9', 9.3, 'Menganalisis data secara logis, kritis, sistematis, dan inovatif', 'BAB 1-2', 'Latar belakang berisi detail problem, review singkat solusi dari peneliti sebelumnya, apa yang dikerjakan di skripsi ini; perumusan masalah berisi hipotesis; ruang lingkup selain apa yang dikerjakan, ', 0.1),
-(3, 'CP 4', 4.4, 'Mengkonstruksi algoritma dan/atau program yang efektif untuk menyelesaikan masalah', 'BAB 3 dan BAB 4', 'Infor : studi kelayakan, pengamatan awal, analisa masalah, kerangka pemikiran. penjabaran solusi yang diusulkan dan penjelasan mengapa solusi tersebut dianggap dapat menyelesaikan masalah. Bagaimana m', 0.25),
-(4, 'CP 7', 7.4, 'Membangun sistem informasi atau aplikasi bisnis untuk mendukung tercapainya tujuan organisasi', 'BAB 3 dan BAB 4', 'SIB : studi kelayakan, pengamatan awal, analisa masalah, kerangka pemikiran. Rancangan solusi dalam bentuk desain. Kesesuaian desain dengan kebutuhan proses bisnis yang nyata.', 0.25),
-(5, 'CP 9', 9.3, 'Menganalisis data secara logis, kritis, sistematis, dan inovatif', 'BUKU', 'penulisan buku laporan yang runut dan lengkap. Tata bahasa baku dengan gaya bahasa laporan ilmiah. Sejauh mana daftar pustaka sudah dicek bahwa semua item benar2 dikutip di bab2 sebelumnya, bukan seke', 0.1),
-(6, 'CP 8', 8.3, 'Menganalisis data secara logis, kritis, sistematis, dan inovatif', 'BAB 5 dan KESIMPULAN', '- merancang pengujian (bab 5). apakah langkah-langkah pengujian sistem serta hasil pengujian telah dijabarkan secara jelas lengkap (bilamana perlu dilengkapi dengan grafik, tabel, pembuktian. apakah l', 0.25),
-(7, 'CP 5', 5.3, 'Menentukan metodologi pengembangan perangkat lunak yang sesuai konteks keadaan dan kebutuhan', 'PROGRAM', 'efisiensi program, kesesuaian program dengan rumus/ protocol/ alur bisnis? Apakah rancangan program sudah sesuai teori? Flowchart jelas dan detil? Efisiensi desain DFD/ ERD/ UML', 0.25);
+INSERT INTO `kriteria_penilaian` (`id_kriteria`, `nama_mahasiswa`, `cpl`, `ik`, `deskripsi_ik`, `bab`, `penilaian`, `bobot`) VALUES
+(1, 'C14190080 KEVIN NATAN ARIYANTO', 'CP 9', 9.3, 'Menganalisis data secara logis, kritis, sistematis, dan inovatif', 'JUDUL dan ABSTRAK dan BAB 1-2', 'Memenuhi 3 kriteria metode, tujuan, obyek, dapat menyebutkan yang mana masing2. abstrak berisi  rangkuman problem, solusi dan kesimpulan', 0.05),
+(2, 'C14190080 KEVIN NATAN ARIYANTO', 'CP 9', 9.3, 'Menganalisis data secara logis, kritis, sistematis, dan inovatif', 'BAB 1-2', 'Latar belakang berisi detail problem, review singkat solusi dari peneliti sebelumnya, apa yang dikerjakan di skripsi ini; perumusan masalah berisi hipotesis; ruang lingkup selain apa yang dikerjakan, ', 1),
+(3, 'C14190080 KEVIN NATAN ARIYANTO', 'CP 4', 4.4, 'Mengkonstruksi algoritma dan/atau program yang efektif untuk menyelesaikan masalah', 'BAB 3 dan BAB 4', 'Infor : studi kelayakan, pengamatan awal, analisa masalah, kerangka pemikiran. penjabaran solusi yang diusulkan dan penjelasan mengapa solusi tersebut dianggap dapat menyelesaikan masalah. Bagaimana m', 0.25),
+(4, 'C14190080 KEVIN NATAN ARIYANTO', 'CP 7', 7.4, 'Membangun sistem informasi atau aplikasi bisnis untuk mendukung tercapainya tujuan organisasi', 'BAB 3 dan BAB 4', 'SIB : studi kelayakan, pengamatan awal, analisa masalah, kerangka pemikiran. Rancangan solusi dalam bentuk desain. Kesesuaian desain dengan kebutuhan proses bisnis yang nyata.', 0.2),
+(5, 'C14190080 KEVIN NATAN ARIYANTO', 'CP 9', 9.3, 'Menganalisis data secara logis, kritis, sistematis, dan inovatif', 'BUKU', 'penulisan buku laporan yang runut dan lengkap. Tata bahasa baku dengan gaya bahasa laporan ilmiah. Sejauh mana daftar pustaka sudah dicek bahwa semua item benar2 dikutip di bab2 sebelumnya, bukan seke', 0.1),
+(6, 'C14190080 KEVIN NATAN ARIYANTO', 'CP 8', 8.3, 'Menganalisis data secara logis, kritis, sistematis, dan inovatif', 'BAB 5 dan KESIMPULAN', '- merancang pengujian (bab 5). apakah langkah-langkah pengujian sistem serta hasil pengujian telah dijabarkan secara jelas lengkap (bilamana perlu dilengkapi dengan grafik, tabel, pembuktian. apakah l', 0.2),
+(7, 'C14190080 KEVIN NATAN ARIYANTO', 'CP 5', 5.3, 'Menentukan metodologi pengembangan perangkat lunak yang sesuai konteks keadaan dan kebutuhan', 'PROGRAM', 'efisiensi program, kesesuaian program dengan rumus/ protocol/ alur bisnis? Apakah rancangan program sudah sesuai teori? Flowchart jelas dan detil? Efisiensi desain DFD/ ERD/ UML', 0.2);
 
 -- --------------------------------------------------------
 
@@ -286,17 +289,24 @@ INSERT INTO `kriteria_penilaian` (`id_kriteria`, `cpl`, `ik`, `deskripsi_ik`, `b
 CREATE TABLE `penilaian` (
   `id_penilaian` int(11) NOT NULL,
   `mahasiswa` varchar(100) NOT NULL,
-  `cp_9_judul_abstrak` float NOT NULL,
-  `cp_9_bab_1_2` float NOT NULL,
-  `cp_4_bab_3_4_infor` float NOT NULL,
-  `cp_7_bab_3_4_sib` float NOT NULL,
-  `cp_9_buku` float NOT NULL,
-  `cp_8_bab_5_kesimpulan` float NOT NULL,
-  `cp_5_program` float NOT NULL,
+  `cp1` float NOT NULL,
+  `cp2` float NOT NULL,
+  `cp3` float NOT NULL,
+  `cp4` float NOT NULL,
+  `cp5` float NOT NULL,
+  `cp6` float NOT NULL,
   `nilai_akhir` float NOT NULL,
-  `avg_nilai_akhir` float NOT NULL,
   `dosen` varchar(100) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data untuk tabel `penilaian`
+--
+
+INSERT INTO `penilaian` (`id_penilaian`, `mahasiswa`, `cp1`, `cp2`, `cp3`, `cp4`, `cp5`, `cp6`, `nilai_akhir`, `dosen`) VALUES
+(1, 'C14180197 FERDINANT PANGESTU', 5, 5, 5, 5, 5, 5, 5, 'STEPHANUS A. ANANDA, S.T., M.Sc. Ph.D.'),
+(11, 'C14190126 ALVIN WISANA', 80, 90, 89, 79, 90, 58, 78.65, 'HANS JUWIANTHO, S.Kom., M.Kom.'),
+(12, 'C14190126 ALVIN WISANA', 70, 95, 86, 36, 56, 23, 80, 'ALEXANDER SETIAWAN, S.Kom., M.T.');
 
 -- --------------------------------------------------------
 
@@ -308,16 +318,18 @@ CREATE TABLE `user` (
   `username` varchar(100) NOT NULL,
   `type` varchar(100) NOT NULL,
   `password` varchar(255) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data untuk tabel `user`
 --
 
 INSERT INTO `user` (`username`, `type`, `password`) VALUES
+('billy', 'ketua', '$2y$10$yZzGan18wC16VBZEcMThl.i4v/L4yOftTj4IIsxrRfhwMTCbXtELS'),
 ('evelin', 'admin', '$2y$10$yZzGan18wC16VBZEcMThl.i4v/L4yOftTj4IIsxrRfhwMTCbXtELS'),
 ('okky', 'dosen', '$2y$10$yZzGan18wC16VBZEcMThl.i4v/L4yOftTj4IIsxrRfhwMTCbXtELS'),
-('billy', 'ketua', '$2y$10$yZzGan18wC16VBZEcMThl.i4v/L4yOftTj4IIsxrRfhwMTCbXtELS');
+('RUDY ADIPRANATA, S.T, M.Eng.', 'dosen', '$2y$10$yZzGan18wC16VBZEcMThl.i4v/L4yOftTj4IIsxrRfhwMTCbXtELS'),
+('SILVIA ROSTIANINGSIH, S.Kom., M.MT.', 'admin', '$2y$10$yZzGan18wC16VBZEcMThl.i4v/L4yOftTj4IIsxrRfhwMTCbXtELS');
 
 -- --------------------------------------------------------
 
@@ -332,7 +344,7 @@ CREATE TABLE `vakasi` (
   `tanggal_sidang` datetime(6) NOT NULL,
   `nama_mhs` varchar(100) NOT NULL,
   `anggota_penguji` varchar(100) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data untuk tabel `vakasi`
@@ -345,9 +357,7 @@ INSERT INTO `vakasi` (`nomor_vakasi`, `nip`, `dosen`, `tanggal_sidang`, `nama_mh
 (5, 1, 'ADI WIBOWO, S.T., M.T., Ph.D.', '2023-11-02 07:30:00.000000', 'C14180127 TEDDY GHATSUNAGA', 'Ketua Penguji'),
 (6, 6, 'STEPHANUS A. ANANDA, S.T., M.Sc. Ph.D.', '2023-11-02 07:30:00.000000', 'C14180127 TEDDY GHATSUNAGA', 'Anggota Penguji'),
 (8, 4, 'LILY PUSPA DEWI, S.T., M.Kom.', '2023-11-02 07:30:00.000000', 'C14180127 TEDDY GHATSUNAGA', 'Pembimbing 2'),
-(9, 2, 'SILVIA ROSTIANINGSIH, S.Kom., M.MT.', '2023-11-02 07:00:00.000000', 'C14180197 FERDINANT PANGESTU', 'Ketua Penguji'),
-(11, 7, 'Ir. KARTIKA GUNADI, M.T.', '2023-12-07 17:00:00.000000', 'C14180028 BINTANG ARTOMORO WINARTO', 'Pembimbing 1'),
-(12, 29, 'LILIANA, S.T., M.Eng., Ph.D.', '2023-12-07 17:00:00.000000', 'C14180028 BINTANG ARTOMORO WINARTO', 'Pembimbing 2');
+(9, 2, 'SILVIA ROSTIANINGSIH, S.Kom., M.MT.', '2023-11-02 07:00:00.000000', 'C14180197 FERDINANT PANGESTU', 'Ketua Penguji');
 
 --
 -- Indexes for dumped tables
@@ -384,6 +394,12 @@ ALTER TABLE `penilaian`
   ADD PRIMARY KEY (`id_penilaian`);
 
 --
+-- Indeks untuk tabel `user`
+--
+ALTER TABLE `user`
+  ADD PRIMARY KEY (`username`);
+
+--
 -- Indeks untuk tabel `vakasi`
 --
 ALTER TABLE `vakasi`
@@ -397,7 +413,7 @@ ALTER TABLE `vakasi`
 -- AUTO_INCREMENT untuk tabel `berita_acara`
 --
 ALTER TABLE `berita_acara`
-  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- AUTO_INCREMENT untuk tabel `data_mahasiswa`
@@ -415,13 +431,13 @@ ALTER TABLE `kriteria_penilaian`
 -- AUTO_INCREMENT untuk tabel `penilaian`
 --
 ALTER TABLE `penilaian`
-  MODIFY `id_penilaian` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_penilaian` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT untuk tabel `vakasi`
 --
 ALTER TABLE `vakasi`
-  MODIFY `nomor_vakasi` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `nomor_vakasi` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
