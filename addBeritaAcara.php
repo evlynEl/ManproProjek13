@@ -444,6 +444,7 @@
                                     
 <?php
 echo "<input type='hidden' name='hidden_nama_mhs' id='hidden_nama_mhs' value=''></input>";
+echo "<div name='showmhs' id='showmhs'></div>";
 $nama_mhs = isset($_GET['hidden_nama_mhs']) ? $_GET['hidden_nama_mhs'] : '';
 
 error_log('Nama_Mhs: ' . $nama_mhs);
@@ -503,9 +504,12 @@ echo $nama_mhs;
             echo "No records found for the specified student.";
         }
     } else {
-        echo "Please select a valid student name.".$nama_mhs." ";
+        // echo "Please select a valid student name.".$nama_mhs." ";
     }
 ?>
+
+
+    <div id="output-data-nilai"></div>
 
 
                                 </div>
@@ -554,6 +558,7 @@ echo $nama_mhs;
         },
         success: function (respond) {
             $("#nama_mhs").html(respond);
+
             $('#nama_mhs').change(function () {
                 var nama_mhs = $(this).val();
                 var selectedNamaMhs = $(this).val();
@@ -568,12 +573,25 @@ echo $nama_mhs;
 }
 $(document).on('change', '#nama_mhs', function () {
     var selectedNamaMhs = $(this).val();
-    $('input[id="hidden_nama_mhs"]').val(selectedNamaMhs);
+    // $('input[id="hidden_nama_mhs"]').html(selectedNamaMhs);
+
+    $.ajax({
+        url: 'ajax/ajax_coba_berita_acara.php',
+        type: "POST",
+        data: "nama_nrp="+selectedNamaMhs,
+        success: function(output) {
+            $("#output-data-nilai").html(output)
+        }
+    })
+
+    
+    
 });
-$(document).on('change', '#hidden_nama_mhs', function () {
-    var selectedNamaMhs = $(this).val();
-    $('input[id="hidden_nama_mhs"]').val(selectedNamaMhs);
-});
+//$(document).on('change', '#hidden_nama_mhs', function () {
+//    var selectedNamaMhs = $(this).val();
+//    $('input[id="hidden_nama_mhs"]').html(selectedNamaMhs);
+//    $("#showmhs").text('nama:'. selectedNamaMhs);
+//});
 
             // dosen penguji
             $('#nama_mhs').on('change', function(){
@@ -733,12 +751,66 @@ $(document).on('change', '#hidden_nama_mhs', function () {
                 var status_penguji = "";
                 var status_pembimbing1 = "";
                 var status_pembimbing2 = "";
+                
                 $('.error-message').text('');
-                $('.form-control').removeClass('is-invalid');  
+                $('.form-control').removeClass('is-invalid');
+
+                // var count_true = 0;
+                
+                // var conn = mysqli_connect("localhost", "root", "", "manpro13");
+                // alert('etstaf');
+                // if (!conn) {
+                //     console.error("Failed to connect to the database");
+                //     return;
+                // }
+
+                
+
+                var sql_check_dosen = "SELECT * FROM penilaian WHERE mahasiswa LIKE ?";
+                var stmt_check_dosen = mysqli_prepare(conn, sql_check_dosen);
+                mysqli_stmt_bind_param(stmt_check_dosen, "s", "%" + namaMhs + "%");
+                mysqli_stmt_execute(stmt_check_dosen);
+                var result_check_dosen = mysqli_stmt_get_result(stmt_check_dosen);
 
                 event.preventDefault();
 
+                // if (mysqli_num_rows(result_check_dosen) > 0) {
+                //     var row;
+                //     while (row = mysqli_fetch_assoc(result_check_dosen)) {
+                //         var daftar_dosen = row['dosen'];
+                //         if (dosenPenguji == daftar_dosen || pembimbing1 == daftar_dosen || pembimbing2 == daftar_dosen) {
+                //             count_true++;
+                //         }
+                //     }
+                //     if (dosenPenguji == '-') {
+                //         count_true++;
+                //     }
+                //     if (pembimbing1 == '-') {
+                //         count_true++;
+                //     }
+                //     if (pembimbing2 == '-') {
+                //         count_true++;
+                //     }
+                //     if (count_true < 3) {
+                //         alert("Semua Dosen Masih Belum Mengisi");
+                //         Swal.fire({
+                //             title: "Masih ada dosen yang belum mengisi!",
+                //             text: "Silakan mengecek kembali!",
+                //             icon: "error"
+                //         });
+                //     }
+                // } else {
+                //     alert("Semua Dosen Masih Belum Mengisi");
+                //     Swal.fire({
+                //         title: "Masih ada dosen yang belum mengisi!",
+                //         text: "Silakan mengecek kembali!",
+                //         icon: "error"
+                //     });
+                // }
+                                
+
                 if (!konsentrasiFilled || !ruangSidangFilled || !mahasiswaFilled || !waktuFilled){
+                    
                     if(konsentrasi == "Konsentrasi Skripsi"){
                         $("#errorKonsentrasi").text('Konsentrasi harus diisi.');
                         $("#konsentrasi").addClass('is-invalid');
@@ -782,6 +854,10 @@ $(document).on('change', '#hidden_nama_mhs', function () {
                             icon: "error"
                         });
                     }
+
+                    
+                    
+                    
                 }
 
                 else {
@@ -829,7 +905,7 @@ $(document).on('change', '#hidden_nama_mhs', function () {
                         success: function(respond) {                           
                             // console.log(respond);
                             var trim_respond = respond.trim();
-    
+
                             if (trim_respond == "Berhasil Add!") {
                                 console.log(trim_respond);
                                 Swal.fire({
