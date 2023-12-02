@@ -173,7 +173,6 @@ if (isset($_POST['keyword'])){
                                 <th>Hasil Sidang</th>
                             </tr>
                         </thead>
-                    
                         <tbody style="text-align: center;">
                             <?php if (mysqli_num_rows($result_berita_acara) > 0): ?>
                                 <?php while($row = mysqli_fetch_assoc($result_berita_acara)): ?>
@@ -199,7 +198,14 @@ if (isset($_POST['keyword'])){
                                 </tr>
                             <?php endif ?>
                         </tbody>
+
+                        
                     </table>
+                    <div class="row mt-3">
+            <div class="col-lg-12 d-flex flex-row justify-content-center mt-2" onclick="window.location.href = 'addBeritaAcara.php' ">
+                    <button class="btn btn-outline-ocean" name="add" id="add">Add</button>
+            </div>
+        </div>
                 </div>
             </div>
         </div>
