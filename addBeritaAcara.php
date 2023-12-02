@@ -578,7 +578,10 @@ $(document).on('change', '#nama_mhs', function () {
     $.ajax({
         url: 'ajax/ajax_coba_berita_acara.php',
         type: "POST",
-        data: "nama_nrp="+selectedNamaMhs,
+        data: {
+            nama_nrp: selectedNamaMhs,
+            tanda: "tampil_nilai"
+        },
         success: function(output) {
             $("#output-data-nilai").html(output)
         }
@@ -729,7 +732,7 @@ $(document).on('change', '#nama_mhs', function () {
                 }
             });
 
-            $("#add").on("click", function(event) {             
+            $("#add").on("click", function(event) {
                 var judulSkripsi = $("#judul_skripsi").val();
                 var namaMhs = $("#nama_mhs").val();
                 var ketuaPenguji = $("#ketuaPenguji").val();
@@ -748,65 +751,53 @@ $(document).on('change', '#nama_mhs', function () {
                 var status_penguji = "";
                 var status_pembimbing1 = "";
                 var status_pembimbing2 = "";
+                var checking_dosen=false;
+                var pengisian_nilai = "";
+                var pesan= "";
                 
                 $('.error-message').text('');
                 $('.form-control').removeClass('is-invalid');
 
-                // var count_true = 0;
-                
-                // var conn = mysqli_connect("localhost", "root", "", "manpro13");
-                // alert('etstaf');
-                // if (!conn) {
-                //     console.error("Failed to connect to the database");
-                //     return;
-                // }
-
-                
-
-                // var sql_check_dosen = "SELECT * FROM penilaian WHERE mahasiswa LIKE ?";
-                // var stmt_check_dosen = mysqli_prepare(conn, sql_check_dosen);
-                // mysqli_stmt_bind_param(stmt_check_dosen, "s", "%" + namaMhs + "%");
-                // mysqli_stmt_execute(stmt_check_dosen);
-                // var result_check_dosen = mysqli_stmt_get_result(stmt_check_dosen);
-
                 event.preventDefault();
 
-                // if (mysqli_num_rows(result_check_dosen) > 0) {
-                //     var row;
-                //     while (row = mysqli_fetch_assoc(result_check_dosen)) {
-                //         var daftar_dosen = row['dosen'];
-                //         if (dosenPenguji == daftar_dosen || pembimbing1 == daftar_dosen || pembimbing2 == daftar_dosen) {
-                //             count_true++;
-                //         }
-                //     }
-                //     if (dosenPenguji == '-') {
-                //         count_true++;
-                //     }
-                //     if (pembimbing1 == '-') {
-                //         count_true++;
-                //     }
-                //     if (pembimbing2 == '-') {
-                //         count_true++;
-                //     }
-                //     if (count_true < 3) {
-                //         alert("Semua Dosen Masih Belum Mengisi");
-                //         Swal.fire({
-                //             title: "Masih ada dosen yang belum mengisi!",
-                //             text: "Silakan mengecek kembali!",
-                //             icon: "error"
-                //         });
-                //     }
-                // } else {
-                //     alert("Semua Dosen Masih Belum Mengisi");
-                //     Swal.fire({
-                //         title: "Masih ada dosen yang belum mengisi!",
-                //         text: "Silakan mengecek kembali!",
-                //         icon: "error"
-                //     });
-                // }
-                                
-
-                if (!konsentrasiFilled || !ruangSidangFilled || !mahasiswaFilled || !waktuFilled){
+                $.ajax({
+                    url: 'ajax/ajax_coba_berita_acara.php',
+                    type: "POST",
+                    data: {
+                        tanda: 'add_click',
+                        nama_nrp:namaMhs,
+                        dosenPenguji:dosenPenguji,
+                        pembimbing1:pembimbing1,
+                        pembimbing2:pembimbing2,
+                    },
+                    dataType: 'json',
+                    success: function(response) {
+                        console.log(response);
+                        if(response.check){
+                            checking_dosen=true;
+                            pengisian_nilai='';                 
+                        }
+                        else{
+                            checking_dosen=false;
+                            pengisian_nilai=response.pengisian_nilai;
+                        }
+                        if (!konsentrasiFilled || !ruangSidangFilled || !mahasiswaFilled || !waktuFilled || !checking_dosen){
+                    if(pengisian_nilai=='perlu_isi'){
+                        Swal.fire({
+                            title: "Masih ada dosen yang belum mengisi!",
+                            text: "Dosen Belum Lengkap!",
+                            icon: "error"
+                        });
+                    }
+                    if(konsentrasi == "Konsentrasi Skripsi"){
+                        $("#add").text('Ada Dosen Yang Belum Mengisi!');
+                        $("#add").addClass('is-invalid');
+                        Swal.fire({
+                                title: "Masih ada desn yang belum mengisi!",
+                                text: "Silakan isi field yang kosong!",
+                                icon: "error"
+                            });
+                    }
                     
                     if(konsentrasi == "Konsentrasi Skripsi"){
                         $("#errorKonsentrasi").text('Konsentrasi harus diisi.');
@@ -851,9 +842,6 @@ $(document).on('change', '#nama_mhs', function () {
                             icon: "error"
                         });
                     }
-
-                    
-                    
                     
                 }
 
@@ -921,12 +909,18 @@ $(document).on('change', '#nama_mhs', function () {
                             else {
                                 alert("An unknown response was received: " + trim_respond);
                             }
+                            location.reload(true);
                         },
                         error: function(respond) {
                             alert(respond);
                         }
                     });
                 }
+                    },
+                    error:function(){
+                        alert("gagal");
+                    }
+                });
             });
         });
     </script>
