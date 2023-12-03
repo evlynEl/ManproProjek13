@@ -391,11 +391,61 @@
                                 </div>
                             </div>
 
-                            <br> 
-                            
-                            <?php
-                                echo "<input type='hidden' name='hidden_nama_mhs' id='hidden_nama_mhs' value=''></input>";
-                                $nama_mhs = isset($_GET['hidden_nama_mhs']) ? $_GET['hidden_nama_mhs'] : '';
+                            <br>
+    
+                            <!-- <label for="" style="margin-top: 7px;"><h5>Nilai CPL (Averaged)</h5></label>
+                            <div class="col-sm-12">
+                                <div class="table-responsive" id="tabel_cpl">
+                                    <table class="table table-bordered">
+                                        <thead style="width: 10px;">
+                                            <tr>
+                                                <th scope="col" style="width: 5px;">1</th>
+                                                <th scope="col">2</th>
+                                                <th scope="col">3</th>
+                                                <th scope="col">4</th>
+                                                <th scope="col">5</th>
+                                                <th scope="col">6</th>
+                                                <th scope="col">7</th>
+                                                <th scope="col">8</th>
+                                                <th scope="col">9</th>
+                                                <th scope="col">10</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>
+                                                    <div class="form-outline w-25">
+                                                        <input type="number" name="cpl1" id="cpl1">
+                                                    </div>
+                                                </td>
+                                                <td><input type="number" name="cpl2" id="cpl2"></td>
+                                                <td><input type="number" name="cpl3" id="cpl3"></td>
+                                                <td><input type="number" name="cpl4" id="cpl4"></td>
+                                                <td><input type="number" name="cpl5" id="cpl5"></td>
+                                                <td><input type="number" name="cpl6" id="cpl6"></td>
+                                                <td><input type="number" name="cpl7" id="cpl7"></td>
+                                                <td><input type="number" name="cpl8" id="cpl8"></td>
+                                                <td><input type="number" name="cpl9" id="cpl9"></td>
+                                                <td><input type="number" name="cpl10" id="cpl10"></td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div> -->
+    
+                            <!-- <br> -->
+    <!-- 
+                            <div class="row">
+                                <div class="col-lg-6">
+                                    <h5>Nilai Akhir: A</h5>
+                                </div>
+                                <div class="col-lg-6">
+                                    -->
+                                    
+<?php
+echo "<input type='hidden' name='hidden_nama_mhs' id='hidden_nama_mhs' value=''></input>";
+echo "<div name='showmhs' id='showmhs'></div>";
+$nama_mhs = isset($_GET['hidden_nama_mhs']) ? $_GET['hidden_nama_mhs'] : '';
 
                                 error_log('Nama_Mhs: ' . $nama_mhs);
                                 echo $nama_mhs;
@@ -408,56 +458,63 @@
                                         $sum_nilai_akhir = 0;
                                         $count_nilai = 0;
 
-                                        while($row = mysqli_fetch_assoc($result_nilai)) {
-                                            $nilai_akhir = $row['nilai_akhir'];
-                                            $sum_nilai_akhir += $nilai_akhir;
-                                            $count_nilai++;
-                                        }
-                                
-                                        $average_nilai_akhir = ($count_nilai > 0) ? $sum_nilai_akhir / $count_nilai : 0;
-                                        echo "<h5>Sum of nilai_akhir: " . $sum_nilai_akhir . "</h5><br>";
-                                        if($average_nilai_akhir>=85.5){
-                                            $nilai_alphabet="A";
-                                            $hasil_sidang="Lulus";
-                                        
-                                        }
-                                        elseif($average_nilai_akhir>= 75.5){
-                                            $nilai_alphabet="B+";
-                                            $hasil_sidang="Lulus";
-                                        
-                                        }
-                                        elseif($average_nilai_akhir>= 68.5){
-                                            $nilai_alphabet="B";
-                                            $hasil_sidang="Lulus";
-                                        
-                                        }
-                                        elseif($average_nilai_akhir>= 60.5){
-                                            $nilai_alphabet="C+";
-                                            $hasil_sidang="Lulus";
-                                            
-                                        }
-                                        elseif($average_nilai_akhir>= 55.5){
-                                            $nilai_alphabet="C";
-                                            $hasil_sidang="Lulus";
-                                        
-                                        }
-                                        elseif($average_nilai_akhir>= 40.5){
-                                            $nilai_alphabet="D";
-                                            $hasil_sidang="Tidak Lulus";
-                                        
-                                        }
-                                        else{
-                                            $nilai_alphabet="E";
-                                            $hasil_sidang="Tidak Lulus";
-                                        }
-                                        echo "<h5>Hasil Sidang: ". $nilai_alphabet . "  (". $hasil_sidang .")</h5>";
-                                    } else {
-                                        echo "No records found for the specified student.";
-                                    }
-                                } else {
-                                    echo "Please select a valid student name.".$nama_mhs." ";
-                                }
-                            ?>
+            while($row = mysqli_fetch_assoc($result_nilai)) {
+                $nilai_akhir = $row['nilai_akhir'];
+                $sum_nilai_akhir += $nilai_akhir;
+                $count_nilai++;
+            }
+    
+            $average_nilai_akhir = ($count_nilai > 0) ? $sum_nilai_akhir / $count_nilai : 0;
+            echo "<h5>Sum of nilai_akhir: " . $sum_nilai_akhir . "</h5><br>";
+            if($average_nilai_akhir>=85.5){
+                $nilai_alphabet="A";
+                $hasil_sidang="Lulus";
+               
+            }
+            elseif($average_nilai_akhir>= 75.5){
+                $nilai_alphabet="B+";
+                $hasil_sidang="Lulus";
+              
+            }
+            elseif($average_nilai_akhir>= 68.5){
+                $nilai_alphabet="B";
+                $hasil_sidang="Lulus";
+               
+            }
+            elseif($average_nilai_akhir>= 60.5){
+                $nilai_alphabet="C+";
+                $hasil_sidang="Lulus";
+                
+            }
+            elseif($average_nilai_akhir>= 55.5){
+                $nilai_alphabet="C";
+                $hasil_sidang="Lulus";
+               
+            }
+            elseif($average_nilai_akhir>= 40.5){
+                $nilai_alphabet="D";
+                $hasil_sidang="Tidak Lulus";
+               
+            }
+            else{
+                $nilai_alphabet="E";
+                $hasil_sidang="Tidak Lulus";
+            }
+            echo "<h5>Hasil Sidang: ". $nilai_alphabet . "  (". $hasil_sidang .")</h5>";
+        } else {
+            echo "No records found for the specified student.";
+        }
+    } else {
+        // echo "Please select a valid student name.".$nama_mhs." ";
+    }
+?>
+
+
+    <div id="output-data-nilai"></div>
+
+
+                                </div>
+                            </div>
                         </div>
                     </div>    
                 </div>
@@ -499,6 +556,7 @@
         },
         success: function (respond) {
             $("#nama_mhs").html(respond);
+
             $('#nama_mhs').change(function () {
                 var nama_mhs = $(this).val();
                 var selectedNamaMhs = $(this).val();
@@ -513,12 +571,25 @@
 }
 $(document).on('change', '#nama_mhs', function () {
     var selectedNamaMhs = $(this).val();
-    $('input[id="hidden_nama_mhs"]').val(selectedNamaMhs);
+    // $('input[id="hidden_nama_mhs"]').html(selectedNamaMhs);
+
+    $.ajax({
+        url: 'ajax/ajax_coba_berita_acara.php',
+        type: "POST",
+        data: {
+            nama_nrp: selectedNamaMhs,
+            tanda: "tampil_nilai"
+        },
+        success: function(output) {
+            $("#output-data-nilai").html(output)
+        }
+    })
 });
-$(document).on('change', '#hidden_nama_mhs', function () {
-    var selectedNamaMhs = $(this).val();
-    $('input[id="hidden_nama_mhs"]').val(selectedNamaMhs);
-});
+//$(document).on('change', '#hidden_nama_mhs', function () {
+//    var selectedNamaMhs = $(this).val();
+//    $('input[id="hidden_nama_mhs"]').html(selectedNamaMhs);
+//    $("#showmhs").text('nama:'. selectedNamaMhs);
+//});
 
             // dosen penguji
             $('#nama_mhs').on('change', function(){
@@ -659,7 +730,7 @@ $(document).on('change', '#hidden_nama_mhs', function () {
                 }
             });
 
-            $("#add").on("click", function(event) {             
+            $("#add").on("click", function(event) {
                 var judulSkripsi = $("#judul_skripsi").val();
                 var namaMhs = $("#nama_mhs").val();
                 var ketuaPenguji = $("#ketuaPenguji").val();
@@ -678,12 +749,54 @@ $(document).on('change', '#hidden_nama_mhs', function () {
                 var status_penguji = "";
                 var status_pembimbing1 = "";
                 var status_pembimbing2 = "";
+                var checking_dosen=false;
+                var pengisian_nilai = "";
+                var pesan= "";
+                
                 $('.error-message').text('');
-                $('.form-control').removeClass('is-invalid');  
+                $('.form-control').removeClass('is-invalid');
 
                 event.preventDefault();
 
-                if (!konsentrasiFilled || !ruangSidangFilled || !mahasiswaFilled || !waktuFilled){
+                $.ajax({
+                    url: 'ajax/ajax_coba_berita_acara.php',
+                    type: "POST",
+                    data: {
+                        tanda: 'add_click',
+                        nama_nrp:namaMhs,
+                        dosenPenguji:dosenPenguji,
+                        pembimbing1:pembimbing1,
+                        pembimbing2:pembimbing2,
+                    },
+                    dataType: 'json',
+                    success: function(response) {
+                        console.log(response);
+                        if(response.check){
+                            checking_dosen=true;
+                            pengisian_nilai='';                 
+                        }
+                        else{
+                            checking_dosen=false;
+                            pengisian_nilai=response.pengisian_nilai;
+                        }
+                        if (!konsentrasiFilled || !ruangSidangFilled || !mahasiswaFilled || !waktuFilled || !checking_dosen){
+                    if(pengisian_nilai=='perlu_isi'){
+                        Swal.fire({
+                            title: "Masih ada dosen yang belum mengisi!",
+                            text: "Dosen Belum Lengkap!",
+                            icon: "error"
+                        });
+                    }
+                    if(konsentrasi == "Konsentrasi Skripsi"){
+                        $("#add").text('Ada Dosen Yang Belum Mengisi!');
+                        $("#add").addClass('is-invalid');
+                        Swal.fire({
+                                title: "Masih ada desn yang belum mengisi!",
+                                text: "Silakan isi field yang kosong!",
+                                icon: "error"
+                            });
+                    }
+                    
                     if(konsentrasi == "Konsentrasi Skripsi"){
                         $("#errorKonsentrasi").text('Konsentrasi harus diisi.');
                         $("#konsentrasi").addClass('is-invalid');
@@ -727,6 +840,7 @@ $(document).on('change', '#hidden_nama_mhs', function () {
                             icon: "error"
                         });
                     }
+                    
                 }
 
                 else {
@@ -774,7 +888,7 @@ $(document).on('change', '#hidden_nama_mhs', function () {
                         success: function(respond) {                           
                             // console.log(respond);
                             var trim_respond = respond.trim();
-    
+
                             if (trim_respond == "Berhasil Add!") {
                                 console.log(trim_respond);
                                 Swal.fire({
@@ -793,12 +907,18 @@ $(document).on('change', '#hidden_nama_mhs', function () {
                             else {
                                 alert("An unknown response was received: " + trim_respond);
                             }
+                            location.reload(true);
                         },
                         error: function(respond) {
                             alert(respond);
                         }
                     });
                 }
+                    },
+                    error:function(){
+                        alert("gagal");
+                    }
+                });
             });
         });
     </script>
