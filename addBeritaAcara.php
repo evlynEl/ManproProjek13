@@ -357,11 +357,6 @@
                                 </select>
                                 <div class="error-message" id="errorKonsentrasi"></div>
                             </div>
-    
-                            <br>
-
-                            <label for="catatanSidang" style="margin-top: 5px;"><h5>Catatan Sidang</h5></label>
-                            <textarea class="form-control" name="catatanSidang" id="catatanSidang" rows="3" placeholder="Catatan"></textarea>
 
                             <br>
 
@@ -390,6 +385,11 @@
                                     <label class="form-check-label" for="jurnal">Jurnal</label>
                                 </div>
                             </div>
+
+                            <br>
+
+                            <label for="catatanSidang" style="margin-top: 5px;"><h5>Catatan Sidang</h5></label>
+                            <textarea class="form-control" name="catatanSidang" id="catatanSidang" rows="3" placeholder="Catatan"></textarea>
 
                             <br>
                                     
@@ -461,20 +461,15 @@
                                 }
                             ?>
 
-
-                    <div id="output-data-nilai"></div>
-
-
-                                </div>
-                            </div>
+                            <div id="output-data-nilai"></div>
+                        </div>
+                    </div>
+                    <div class="row mt-3">
+                        <div class="col-lg-12 d-flex flex-row justify-content-center mt-2">
+                            <button class="btn btn-outline-red" style="margin-right: 7px;">Discard</button>
+                            <button class="btn btn-outline-ocean" name="add" id="add">Add</button>
                         </div>
                     </div>    
-                </div>
-                <div class="row mt-3">
-                    <div class="col-lg-12 d-flex flex-row justify-content-center mt-2">
-                        <button class="btn btn-outline-red" style="margin-right: 7px;">Discard</button>
-                        <button class="btn btn-outline-ocean" name="add" id="add">Add</button>
-                    </div>
                 </div>
             </form>
         </div>
@@ -731,69 +726,70 @@
                             checking_dosen=false;
                             pengisian_nilai=response.pengisian_nilai;
                         }
-                        if (!konsentrasiFilled || !ruangSidangFilled || !mahasiswaFilled || !waktuFilled || !checking_dosen){
-                    if(pengisian_nilai=='perlu_isi'){
-                        Swal.fire({
-                            title: "Masih ada dosen yang belum mengisi!",
-                            text: "Dosen Belum Lengkap!",
-                            icon: "error"
-                        });
-                    }
-                    if(konsentrasi == "Konsentrasi Skripsi"){
-                        $("#add").text('Ada Dosen Yang Belum Mengisi!');
-                        $("#add").addClass('is-invalid');
-                        Swal.fire({
-                            title: "Masih ada desn yang belum mengisi!",
-                            text: "Silakan isi field yang kosong!",
-                            icon: "error"
-                        });
-                    }
-                    
-                    if(konsentrasi == "Konsentrasi Skripsi"){
-                        $("#errorKonsentrasi").text('Konsentrasi harus diisi.');
-                        $("#konsentrasi").addClass('is-invalid');
-    
-                        Swal.fire({
-                            title: "Masih ada field yang kosong!",
-                            text: "Silakan isi field yang kosong!",
-                            icon: "error"
-                        });
-                    }
-    
-                    if(ruangSidang == "Select"){
-                        $("#errorRuangSidang").text('Ruang Sidang harus diisi.');
-                        $("#ruangSidang").addClass('is-invalid');
-    
-                        Swal.fire({
-                            title: "Masih ada field yang kosong!",
-                            text: "Silakan isi field yang kosong!",
-                            icon: "error"
-                        });
-                    }
+                        
+                    if (!konsentrasiFilled || !ruangSidangFilled || !mahasiswaFilled || !waktuFilled || !checking_dosen){
+                        if(pengisian_nilai=='perlu_isi'){
+                            Swal.fire({
+                                title: "Masih ada dosen yang belum mengisi!",
+                                text: "Dosen Belum Lengkap!",
+                                icon: "error"
+                            });
+                        }
+                        if(konsentrasi == "Konsentrasi Skripsi"){
+                            $("#add").text('Ada Dosen Yang Belum Mengisi!');
+                            $("#add").addClass('is-invalid');
+                            Swal.fire({
+                                title: "Masih ada desn yang belum mengisi!",
+                                text: "Silakan isi field yang kosong!",
+                                icon: "error"
+                            });
+                        }
+                        
+                        if(konsentrasi == "Konsentrasi Skripsi"){
+                            $("#errorKonsentrasi").text('Konsentrasi harus diisi.');
+                            $("#konsentrasi").addClass('is-invalid');
+        
+                            Swal.fire({
+                                title: "Masih ada field yang kosong!",
+                                text: "Silakan isi field yang kosong!",
+                                icon: "error"
+                            });
+                        }
+        
+                        if(ruangSidang == "Select"){
+                            $("#errorRuangSidang").text('Ruang Sidang harus diisi.');
+                            $("#ruangSidang").addClass('is-invalid');
+        
+                            Swal.fire({
+                                title: "Masih ada field yang kosong!",
+                                text: "Silakan isi field yang kosong!",
+                                icon: "error"
+                            });
+                        }
 
-                    if(namaMhs == "Pilih Mahasiswa"){
-                        $("#errorNamaMhs").text('Mahasiswa harus dipilih.');
-                        $("#nama_mhs").addClass('is-invalid');
-    
-                        Swal.fire({
-                            title: "Masih ada field yang kosong!",
-                            text: "Silakan isi field yang kosong!",
-                            icon: "error"
-                        });
-                    }
+                        if(namaMhs == "Pilih Mahasiswa"){
+                            $("#errorNamaMhs").text('Mahasiswa harus dipilih.');
+                            $("#nama_mhs").addClass('is-invalid');
+        
+                            Swal.fire({
+                                title: "Masih ada field yang kosong!",
+                                text: "Silakan isi field yang kosong!",
+                                icon: "error"
+                            });
+                        }
 
-                    if(waktuSidang == "Pilih Jam"){
-                        $("#errorWaktu").text('Silakan pilih jam sidang.');
-                        $("#waktuSidang").addClass('is-invalid');
-    
-                        Swal.fire({
-                            title: "Masih ada field yang kosong!",
-                            text: "Silakan isi field yang kosong!",
-                            icon: "error"
-                        });
+                        if(waktuSidang == "Pilih Jam"){
+                            $("#errorWaktu").text('Silakan pilih jam sidang.');
+                            $("#waktuSidang").addClass('is-invalid');
+        
+                            Swal.fire({
+                                title: "Masih ada field yang kosong!",
+                                text: "Silakan isi field yang kosong!",
+                                icon: "error"
+                            });
+                        }
+                        
                     }
-                    
-                }
 
                 else {
                     if ($('#kehadiranKetuaPenguji').is(':checked')) {

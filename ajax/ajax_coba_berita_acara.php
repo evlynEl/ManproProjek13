@@ -82,38 +82,38 @@ include '../config.php';
         $count_true=0;
 
         if (mysqli_num_rows($result_check_dosen) > 0) {
-                    while ($row = mysqli_fetch_assoc($result_check_dosen)) {
-                        $daftar_dosen = $row['dosen'];
-                        if ($dosenpenguji == $daftar_dosen || $pembimbing1 == $daftar_dosen || $pembimbing2 == $daftar_dosen) {
-                            $count_true++;
-                        }
-                    }
-                    if ($dosenpenguji == '-') {
-                        $count_true++;
-                    }
-                    if ($pembimbing1 == '-') {
-                        $count_true++;
-                    }
-                    if ($pembimbing2 == '-') {
-                        $count_true++;
-                    }
-                    if ($count_true < 3) {
-                        $response['message'] = "Semua Dosen Masih Belum Mengisi";
-                        $response['pengisian_nilai'] = 'perlu_isi';
-                        $response['check'] = false;
-                        echo json_encode($response);
-
-                    }
-                    else{
-                        $response['message'] = "Berhasil";
-                        $response['check'] = true;
-                        echo json_encode($response);
-                    }
-                } else {
-                    $response['message'] = "Semua Dosen Masih Belum Mengisi";
-                    $response['pengisian_nilai'] = false;
-                    echo json_encode($response);
+            while ($row = mysqli_fetch_assoc($result_check_dosen)) {
+                $daftar_dosen = $row['dosen'];
+                if ($dosenpenguji == $daftar_dosen || $pembimbing1 == $daftar_dosen || $pembimbing2 == $daftar_dosen) {
+                    $count_true++;
                 }
-                
+            }
+            if ($dosenpenguji == '-') {
+                $count_true++;
+            }
+            if ($pembimbing1 == '-') {
+                $count_true++;
+            }
+            if ($pembimbing2 == '-') {
+                $count_true++;
+            }
+            if ($count_true < 3) {
+                $response['message'] = "Semua Dosen Masih Belum Mengisi";
+                $response['pengisian_nilai'] = 'perlu_isi';
+                $response['check'] = false;
+                echo json_encode($response);
+
+            }
+            else{
+                $response['message'] = "Berhasil";
+                $response['check'] = true;
+                echo json_encode($response);
+            }
+        } else {
+            $response['message'] = "Semua Dosen Masih Belum Mengisi";
+            $response['pengisian_nilai'] = false;
+            echo json_encode($response);
+        }
+        
 
     }
