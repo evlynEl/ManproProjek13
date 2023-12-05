@@ -69,6 +69,7 @@ $tanda = $_POST['tanda'];
     
     elseif($tanda == 'add_click'){
         $response=[];
+        $ketuapenguji = $_POST['ketuaPenguji'];
         $dosenpenguji = $_POST['dosenPenguji'];
         $pembimbing1 = $_POST['pembimbing1'];
         $pembimbing2 = $_POST['pembimbing2'];
@@ -77,14 +78,26 @@ $tanda = $_POST['tanda'];
         $result_check_dosen = mysqli_query($conn, $sql_check_dosen);
 
         $count_true=0;
+        $nilai_true=0;
 
         if (mysqli_num_rows($result_check_dosen) > 0) {
             while ($row = mysqli_fetch_assoc($result_check_dosen)) {
                 $daftar_dosen = $row['dosen'];
-                if ($dosenpenguji == $daftar_dosen || $pembimbing1 == $daftar_dosen || $pembimbing2 == $daftar_dosen) {
+                $nilai_akhir = $row['nilai_akhir'];
+                if ($ketuapenguji == $daftar_dosen || $dosenpenguji == $daftar_dosen || $pembimbing1 == $daftar_dosen || $pembimbing2 == $daftar_dosen) {
                     $count_true++;
                 }
+                if (!empty($nilai_akhir) && ($ketuapenguji == $daftar_dosen || $dosenpenguji == $daftar_dosen || $pembimbing1 == $daftar_dosen || $pembimbing2 == $daftar_dosen_)) {
+                    $nilai_true++;
+                }
             }
+            if ($nilai_true != $count_true) { //cek dosen yg blom input nilai
+                $response['message'] = "Masih Ada Dosen Yang Belum Mengisi";
+                $response['pengisian_nilai'] = 'lengkapi_isi';
+                $response['check'] = false;
+                echo json_encode($response);
+            }
+
             if ($dosenpenguji == '-') {
                 $count_true++;
             }
@@ -94,12 +107,11 @@ $tanda = $_POST['tanda'];
             if ($pembimbing2 == '-') {
                 $count_true++;
             }
-            if ($count_true < 3) {
+            if ($count_true < 4) {
                 $response['message'] = "Semua Dosen Masih Belum Mengisi";
                 $response['pengisian_nilai'] = 'perlu_isi';
                 $response['check'] = false;
                 echo json_encode($response);
-
             }
             else{
                 $response['message'] = "Berhasil";

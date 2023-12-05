@@ -711,6 +711,7 @@
                     data: {
                         tanda: 'add_click',
                         nama_nrp:namaMhs,
+                        ketuaPenguji: ketuaPenguji,
                         dosenPenguji:dosenPenguji,
                         pembimbing1:pembimbing1,
                         pembimbing2:pembimbing2,
@@ -730,16 +731,23 @@
                     if (!konsentrasiFilled || !ruangSidangFilled || !mahasiswaFilled || !waktuFilled || !checking_dosen){
                         if(pengisian_nilai=='perlu_isi'){
                             Swal.fire({
-                                title: "Masih ada dosen yang belum mengisi!",
-                                text: "Dosen Belum Lengkap!",
+                                title: "Masih ada dosen yang belum menginput nilai!",
+                                text: "Nilai Dosen Belum Lengkap!",
+                                icon: "error"
+                            });
+                        }
+                        if(pengisian_nilai=='lengkapi_isi'){
+                            Swal.fire({
+                                title: "Masih ada dosen yang belum menginput nilai!",
+                                text: "Nilai Dosen Belum Lengkap!",
                                 icon: "error"
                             });
                         }
                         if(konsentrasi == "Konsentrasi Skripsi"){
-                            $("#add").text('Ada Dosen Yang Belum Mengisi!');
+                            $("#add").text('Add');
                             $("#add").addClass('is-invalid');
                             Swal.fire({
-                                title: "Masih ada desn yang belum mengisi!",
+                                title: "Masih ada dosen yang belum mengisi!",
                                 text: "Silakan isi field yang kosong!",
                                 icon: "error"
                             });
