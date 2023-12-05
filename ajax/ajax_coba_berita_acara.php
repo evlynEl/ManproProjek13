@@ -2,13 +2,9 @@
 
 include '../config.php';
 
+$namaMhs = $_POST['nama_nrp'];
+$tanda = $_POST['tanda'];
 
-
-
-// if ($_SERVER['REQUEST_METHOD'] == 'POST')
-// {
-    $namaMhs = $_POST['nama_nrp'];
-    $tanda = $_POST['tanda'];
     if($tanda == 'tampil_nilai'){
         if (!empty($namaMhs)) {
             $sql_nilai = "SELECT * FROM penilaian WHERE mahasiswa LIKE '%$namaMhs%'";
@@ -70,6 +66,7 @@ include '../config.php';
             echo "Please select a valid student name.".$nama_mhs." ";
         }
     }
+    
     elseif($tanda == 'add_click'){
         $response=[];
         $dosenpenguji = $_POST['dosenPenguji'];
