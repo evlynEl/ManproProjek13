@@ -372,18 +372,19 @@ if (isset($_POST["import"])) {
         // keyword (nama atau nrp)
         $('#keyword').on('keyup', function(){
             var keyword = $('#keyword').val();
-            console.log(keyword);
-            event.preventDefault();
+            var periode = $('#periode').val();
 
+            console.log(keyword);
             $.ajax({
                 url: "ajax/ajax_data_mahasiswa.php",
                 type: "POST",
                 data: {
                     tanda: "cariMahasiswa",
                     keyword: keyword,
+                    periode: periode
                 },
                 success: function(respond) {
-                    console.log(respond);
+                    // console.log(respond);
                     $("#searchResult").html(respond);
                 },
                 error: function() {
@@ -393,19 +394,22 @@ if (isset($_POST["import"])) {
         });
 
         // periode
-        $('#periode').on('change', function(){
+        $('#periode').on('change', function()
+        {
             var periode = $('#periode').val();
+            var keyword = $('#keyword').val();
+
             console.log(periode);
-            event.preventDefault();
             $.ajax({
                 url: "ajax/ajax_data_mahasiswa.php",
                 type: "POST",
                 data: {
                     tanda: "cariMahasiswa",
                     periode: periode,
+                    keyword: keyword,
                 },
                 success: function(respond) {
-                    console.log(respond);
+                    // console.log(respond);
                     $("#searchResult").html(respond);
                 },
                 error: function() {
