@@ -5,11 +5,17 @@
         header("Location: login.php");
         exit;
     }
+    $username = $_SESSION['username'];
+    $sql_login = "SELECT * FROM data_dosen WHERE nip LIKE '%$username%'";
+    $result_login = mysqli_query($conn, $sql_login);
+    $row = mysqli_fetch_assoc($result_login);
+    $getnama = $row['nama'];
+    $username=$getnama;
 
-    $nama_dosen = $_SESSION['username'];
+    $nama_dosen = $getnama;
 ?>
 
-<!DOCTYPE html>
+<!DOCTYPE html
 <html lang="en">
 <head>
     <meta charset="UTF-8">
