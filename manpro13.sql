@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 14 Des 2023 pada 01.15
+-- Waktu pembuatan: 14 Des 2023 pada 01.41
 -- Versi server: 10.4.28-MariaDB
 -- Versi PHP: 8.2.4
 
@@ -317,11 +317,9 @@ CREATE TABLE `user` (
 --
 
 INSERT INTO `user` (`username`, `type`, `password`) VALUES
-('billy', 'ketua', '$2y$10$yZzGan18wC16VBZEcMThl.i4v/L4yOftTj4IIsxrRfhwMTCbXtELS'),
-('evelin', 'admin', '$2y$10$yZzGan18wC16VBZEcMThl.i4v/L4yOftTj4IIsxrRfhwMTCbXtELS'),
-('okky', 'dosen', '$2y$10$yZzGan18wC16VBZEcMThl.i4v/L4yOftTj4IIsxrRfhwMTCbXtELS'),
-('RUDY ADIPRANATA, S.T, M.Eng.', 'dosen', '$2y$10$yZzGan18wC16VBZEcMThl.i4v/L4yOftTj4IIsxrRfhwMTCbXtELS'),
-('SILVIA ROSTIANINGSIH, S.Kom., M.MT.', 'admin', '$2y$10$yZzGan18wC16VBZEcMThl.i4v/L4yOftTj4IIsxrRfhwMTCbXtELS');
+('16', 'dosen', '$2y$10$yZzGan18wC16VBZEcMThl.i4v/L4yOftTj4IIsxrRfhwMTCbXtELS'),
+('2', 'admin', '$2y$10$yZzGan18wC16VBZEcMThl.i4v/L4yOftTj4IIsxrRfhwMTCbXtELS'),
+('billy', 'ketua', '$2y$10$yZzGan18wC16VBZEcMThl.i4v/L4yOftTj4IIsxrRfhwMTCbXtELS');
 
 -- --------------------------------------------------------
 
