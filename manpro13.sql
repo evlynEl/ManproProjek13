@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 01 Des 2023 pada 13.21
+-- Waktu pembuatan: 14 Des 2023 pada 01.15
 -- Versi server: 10.4.28-MariaDB
 -- Versi PHP: 8.2.4
 
@@ -43,14 +43,6 @@ CREATE TABLE `berita_acara` (
   `nilai_alphabet` varchar(255) NOT NULL,
   `hasil_sidang` varchar(200) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data untuk tabel `berita_acara`
---
-
-INSERT INTO `berita_acara` (`id`, `nama_nrp`, `judul_skripsi`, `konsentrasi`, `tanggal_sidang`, `ruang_sidang`, `ketua_penguji`, `anggota_penguji`, `pembimbing_1`, `pembimbing_2`, `catatan`, `nilai_akhir`, `nilai_alphabet`, `hasil_sidang`) VALUES
-(13, 'C14190126 ALVIN WISANA', 'Sistem Informasi pada Laundry X', 'Cyber Security', '2023-11-11 14:30:00.000000', 'Lab MM', 'SILVIA ROSTIANINGSIH, S.Kom., M.MT.', 'HANS JUWIANTHO, S.Kom., M.Kom.', 'ALEXANDER SETIAWAN, S.Kom., M.T.', '-', '', 79, 'B+', 'Lulus'),
-(14, 'C14190126 ALVIN WISANA', 'Sistem Informasi pada Laundry X', 'Cyber Security', '2023-11-22 13:00:00.000000', 'P308', 'SILVIA ROSTIANINGSIH, S.Kom., M.MT.', 'HANS JUWIANTHO, S.Kom., M.Kom.', 'ALEXANDER SETIAWAN, S.Kom., M.T.', '-', '', 79, 'B+', 'Lulus');
 
 -- --------------------------------------------------------
 
@@ -342,6 +334,7 @@ CREATE TABLE `vakasi` (
   `nip` int(10) NOT NULL,
   `dosen` varchar(100) NOT NULL,
   `tanggal_sidang` datetime(6) NOT NULL,
+  `ruang_sidang` varchar(255) NOT NULL,
   `nama_mhs` varchar(100) NOT NULL,
   `anggota_penguji` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
@@ -350,14 +343,14 @@ CREATE TABLE `vakasi` (
 -- Dumping data untuk tabel `vakasi`
 --
 
-INSERT INTO `vakasi` (`nomor_vakasi`, `nip`, `dosen`, `tanggal_sidang`, `nama_mhs`, `anggota_penguji`) VALUES
-(1, 2, 'SILVIA ROSTIANINGSIH, S.Kom., M.MT.', '2023-11-02 08:30:00.000000', 'C14190054 FELICIA LAKSANA PUTRI', 'Ketua Penguji'),
-(2, 1, 'ADI WIBOWO, S.T., M.T., Ph.D.', '2023-11-02 08:30:00.000000', 'C14190054 FELICIA LAKSANA PUTRI', 'Anggota Penguji'),
-(3, 5, 'Dr. ANDREAS HANDOJO, S.T., M.MT.', '2023-11-02 08:30:00.000000', 'C14190054 FELICIA LAKSANA PUTRI', 'Pembimbing 1'),
-(5, 1, 'ADI WIBOWO, S.T., M.T., Ph.D.', '2023-11-02 07:30:00.000000', 'C14180127 TEDDY GHATSUNAGA', 'Ketua Penguji'),
-(6, 6, 'STEPHANUS A. ANANDA, S.T., M.Sc. Ph.D.', '2023-11-02 07:30:00.000000', 'C14180127 TEDDY GHATSUNAGA', 'Anggota Penguji'),
-(8, 4, 'LILY PUSPA DEWI, S.T., M.Kom.', '2023-11-02 07:30:00.000000', 'C14180127 TEDDY GHATSUNAGA', 'Pembimbing 2'),
-(9, 2, 'SILVIA ROSTIANINGSIH, S.Kom., M.MT.', '2023-11-02 07:00:00.000000', 'C14180197 FERDINANT PANGESTU', 'Ketua Penguji');
+INSERT INTO `vakasi` (`nomor_vakasi`, `nip`, `dosen`, `tanggal_sidang`, `ruang_sidang`, `nama_mhs`, `anggota_penguji`) VALUES
+(1, 2, 'SILVIA ROSTIANINGSIH, S.Kom., M.MT.', '2023-11-02 08:30:00.000000', '', 'C14190054 FELICIA LAKSANA PUTRI', 'Ketua Penguji'),
+(2, 1, 'ADI WIBOWO, S.T., M.T., Ph.D.', '2023-11-02 08:30:00.000000', '', 'C14190054 FELICIA LAKSANA PUTRI', 'Anggota Penguji'),
+(3, 5, 'Dr. ANDREAS HANDOJO, S.T., M.MT.', '2023-11-02 08:30:00.000000', '', 'C14190054 FELICIA LAKSANA PUTRI', 'Pembimbing 1'),
+(5, 1, 'ADI WIBOWO, S.T., M.T., Ph.D.', '2023-11-02 07:30:00.000000', '', 'C14180127 TEDDY GHATSUNAGA', 'Ketua Penguji'),
+(6, 6, 'STEPHANUS A. ANANDA, S.T., M.Sc. Ph.D.', '2023-11-02 07:30:00.000000', '', 'C14180127 TEDDY GHATSUNAGA', 'Anggota Penguji'),
+(8, 4, 'LILY PUSPA DEWI, S.T., M.Kom.', '2023-11-02 07:30:00.000000', '', 'C14180127 TEDDY GHATSUNAGA', 'Pembimbing 2'),
+(9, 2, 'SILVIA ROSTIANINGSIH, S.Kom., M.MT.', '2023-11-02 07:00:00.000000', '', 'C14180197 FERDINANT PANGESTU', 'Ketua Penguji');
 
 --
 -- Indexes for dumped tables
@@ -413,7 +406,7 @@ ALTER TABLE `vakasi`
 -- AUTO_INCREMENT untuk tabel `berita_acara`
 --
 ALTER TABLE `berita_acara`
-  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
 
 --
 -- AUTO_INCREMENT untuk tabel `data_mahasiswa`
