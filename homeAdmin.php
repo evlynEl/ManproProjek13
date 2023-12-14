@@ -72,10 +72,10 @@
                         </div>
                     </div>
                     <div class="col-md-3">
-                        <div class="row sm-1" id="title_bobot" onclick="window.location.href = '#';">
+                        <div class="row sm-1" id="title_bobot" onclick="window.location.href = 'input_penilaian.php';">
                             <p>ATUR BOBOT NILAI</p>
                             <div class="row md-3" id="percent">
-                                <img style="padding-top: 10px;" src="asset/image/percent.png">
+                                <img style="padding-top: 10px;" src="asset/image/score.png">
                         </div>
                         </div>
                        
