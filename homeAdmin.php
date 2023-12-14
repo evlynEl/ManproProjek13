@@ -12,8 +12,13 @@
             exit();
         }
     }
-
     $username = $_SESSION['username'];
+    $sql_login = "SELECT * FROM data_dosen WHERE nip LIKE '%$username%'";
+    $result_login = mysqli_query($conn, $sql_login);
+    $row = mysqli_fetch_assoc($result_login);
+    $getnama = $row['nama'];
+    $username=$getnama;
+    
 ?>
 
 <!DOCTYPE html>

@@ -14,18 +14,12 @@
     }
 
     $username = $_SESSION['username'];
-    $sql = "SELECT * FROM data_dosen WHERE nama LIKE '%$username%'";
-    $stmt = $conn->prepare($sql);
-    $stmt->execute();
-    $result = $stmt->get_result();
+    $sql_login = "SELECT * FROM data_dosen WHERE nip LIKE '%$username%'";
+    $result_login = mysqli_query($conn, $sql_login);
+    $row = mysqli_fetch_assoc($result_login);
+    $getnama = $row['nama'];
+    $username=$getnama;
 
-    if(mysqli_num_rows($result) > 0){
-        $row = mysqli_fetch_assoc($result);
-        $nama_dosen = $row['nama'];
-    }
-    else{
-        $nama_dosen = "?";
-    }
 ?>
 
 <!DOCTYPE html>
@@ -142,7 +136,7 @@
         <div class="container" style="position: fixed; top: 50%; left: 50%;  transform: translate(-50%, -50%);">
             <div id="header1">
                 <p><h1>Welcome,</h1></p>
-                <p><h3><?php echo $nama_dosen;?></h3></p>
+                <p><h3><?php echo $username;?></h3></p>
             </div>
 
             <center>
