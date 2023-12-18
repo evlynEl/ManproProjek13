@@ -98,6 +98,9 @@ $tanda = $_POST['tanda'];
                 echo json_encode($response);
             }
 
+            if ($ketuapenguji == '-') {
+                $count_true++;
+            }
             if ($dosenpenguji == '-') {
                 $count_true++;
             }
