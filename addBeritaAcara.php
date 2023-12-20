@@ -11,8 +11,8 @@
     $row = mysqli_fetch_assoc($result_login);
     $getnama = $row['nama'];
     $username=$getnama;
-
-    $nama_dosen = $username;
+    
+    $nama_dosen = $getnama;
 ?>
 
 <!DOCTYPE html
