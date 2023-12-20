@@ -12,6 +12,14 @@ $stmt = $conn->prepare($sql);
 $stmt->execute();
 $result = $stmt->get_result();
 
+$username = $_SESSION['username'];
+    $sql_login = "SELECT * FROM data_dosen WHERE nip LIKE '%$username%'";
+    $result_login = mysqli_query($conn, $sql_login);
+    $row = mysqli_fetch_assoc($result_login);
+    $getnama = $row['nama'];
+    $username=$getnama;
+
+$nama_dosenn = $username;
 ?>
 
 <!DOCTYPE html>
@@ -91,7 +99,7 @@ $result = $stmt->get_result();
                     <a class="text-decoration-none" aria-current="page" href="homeDosen.php">Home</a>
                 </li>
                 <li class="nav-link">
-                    <a class="text-decoration-none" href="addBeritaAcara.php">Add Berita Acara</a>
+                    <a class="text-decoration-none" href="addBeritaAcara.php">Tambah Berita Acara</a>
                 </li>
                 <li class="nav-link">
                     <a class="text-decoration-none" href="input_penilaian.php">Input Nilai</a>
@@ -104,7 +112,7 @@ $result = $stmt->get_result();
                 <li class="nav-item dropdown">
                     <a class="nav-item dropdown-toggle text-decoration-none" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                         <img src="Asset\image\user.png" alt="" id="profileUserImg">
-                        <span style="font-size: large; font-weight:500;"><?php echo $_SESSION['username'];?></span>
+                        <span style="font-size: large; font-weight:500;"><?php echo $nama_dosenn?></span>
                     </a>
                     <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                         <li>

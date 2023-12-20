@@ -119,7 +119,16 @@ if (isset($_POST["import"])) {
             }
         }   
     }
-}   
+}
+
+$username = $_SESSION['username'];
+    $sql_login = "SELECT * FROM data_dosen WHERE nip LIKE '%$username%'";
+    $result_login = mysqli_query($conn, $sql_login);
+    $row = mysqli_fetch_assoc($result_login);
+    $getnama = $row['nama'];
+    $username=$getnama;
+
+$nama_dosen = $username;
 ?>
 
 <!DOCTYPE html>
@@ -210,7 +219,7 @@ if (isset($_POST["import"])) {
                 <li class="nav-item dropdown">
                     <a class="nav-item dropdown-toggle text-decoration-none" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                         <img src="Asset\image\user.png" alt="" id="profileUserImg">
-                        <span style="font-size: large; font-weight:500;"><?php echo $_SESSION['username'];?></span>
+                        <span style="font-size: large; font-weight:500;"><?php echo $nama_dosen?></span>
                     </a>
                     <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                         <li>
