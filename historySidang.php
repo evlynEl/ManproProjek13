@@ -18,7 +18,7 @@ $username = $getnama;
 
 $nama_dosenn = $username;
 
-$sql = "SELECT * FROM vakasi WHERE dosen LIKE '%$nama_dosen%'";
+$sql = "SELECT * FROM vakasi WHERE dosen LIKE '%$username%'";
 $stmt = $conn->prepare($sql);
 $stmt->execute();
 $result = $stmt->get_result();
@@ -171,7 +171,9 @@ $result = $stmt->get_result();
                             </tr>
                         </thead>
                         <?php if (mysqli_num_rows($result) > 0): ?>
-                            <?php while ($row = mysqli_fetch_assoc($result)): ?>
+
+                            <?php
+                            while ($row = mysqli_fetch_assoc($result)): ?>
                                 <tbody style="text-align: center;">
                                     <tr>
                                         <td>
